@@ -32,6 +32,8 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/page_page.css" media="screen">
+
 
 <title>MWS Admin - Form Layouts</title>
 
@@ -231,24 +233,42 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-
                     <li class="active">
-                        <a href="#"><i class="icon-list"></i> Formsddddd</a>
+                        <a href="#"><i class="icon-picture"></i>广告管理</a>
                         <ul>
-                            <li><a href="form_layouts.html">Layouts</a></li>
-                            <li><a href="form_elements.html">Elements</a></li>
-                            <li><a href="form_wizard.html">Wizard</a></li>
+                            <li><a href="/admin/advertisements/create">添加广告</a></li>
+                            <li><a href="/admin/advertisements">浏览广告</a></li>
                         </ul>
                     </li>
-                    
-                  
+                </ul>
+            </div>
+            <div id="mws-navigation">
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <ul>
+                            <li><a href="/admin/cate/create">添加类别</a></li>
+                            <li><a href="/admin/cate">浏览类别</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
         
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-        
+            <!-- 提示信息 开始 -->
+            @if(session('success'))
+                <div class="mws-form-message success">
+                    {{session('success')}}
+                </div>
+            @endif
+            @if (session('error'))
+                <div class="mws-form-message warning">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <!-- 提示信息 结束 -->
             <!-- 内容开始 -->
             <div class="container">
              @section('content')
