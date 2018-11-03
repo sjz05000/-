@@ -102,3 +102,5 @@ Route::get('/admin', 'Admin\IndexController@index');
 Route::resource('/admin/cate','Admin\CateController');
 //	后台广告管理
 Route::resource('/admin/advertisements','Admin\AdvertisementsController');
+//  后台导航管理
+Route::resource('/admin/navigation','Admin\NavigationController');

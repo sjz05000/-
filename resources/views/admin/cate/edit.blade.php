@@ -38,7 +38,6 @@
                     		</div>
                     		<div class="mws-button-row">
                     			<input type="submit" value="修改" class="btn btn-danger">
-                    			<input type="reset" value="重置" class="btn ">
                     		</div>
                     	</form>
                     </div>

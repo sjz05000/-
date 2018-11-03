@@ -253,6 +253,17 @@
                     </li>
                 </ul>
             </div>
+            <div id="mws-navigation">
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="icon-tags"></i>导航管理</a>
+                        <ul>
+                            <li><a href="/admin/navigation/create">添加导航</a></li>
+                            <li><a href="/admin/navigation">浏览导航</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
         
         <!-- Main Container Start -->
