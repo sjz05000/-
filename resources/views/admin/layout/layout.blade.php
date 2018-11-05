@@ -231,17 +231,21 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-
                     <li class="active">
-                        <a href="#"><i class="icon-list"></i> Formsddddd</a>
-                        <ul>
-                            <li><a href="form_layouts.html">Layouts</a></li>
-                            <li><a href="form_elements.html">Elements</a></li>
-                            <li><a href="form_wizard.html">Wizard</a></li>
+                        <a href="#"><i class="icon-attachment"></i>友情链接管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/link/create">添加链接</a></li>
+                            <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
-                    
-                  
+
+                    <li class="active">
+                        <a href="#"><i class="icon-flickr"></i>轮播图管理</a>
+                        <ul class="closed">      
+                            <li><a href="/admin/banner/create">添加轮播图</a></li>
+                            <li><a href="/admin/banner">浏览轮播图</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -249,13 +253,39 @@
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
         
-            <!-- 内容开始 -->
-            <div class="container">
-             @section('content')
-
-             @show
+        <!-- 内容开始 -->       
+             <div class="container">
+                <!-- 显示验证信息 开始 -->
+            @if (count($errors) > 0)
+                <div class="mws-form-message error">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <!-- 显示验证信息 结束 -->
+            <!-- 读取提示信息 开始 -->
+            @if (session('success'))
+            <div class="mws-form-message success">
+                {{ session('success') }}
             </div>
-            <!-- 内容结束 -->
+            @endif
+
+            @if (session('error'))
+            <div class="mws-form-message error">
+                {{ session('error') }}
+            </div>
+             @endif
+            <!-- 读取提示信息 结束 -->
+
+
+         @section('content')
+
+         @show
+        </div>
+        <!-- 内容结束 -->
                        
             <!-- Footer -->
             <div id="mws-footer">

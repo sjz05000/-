@@ -17,3 +17,8 @@ Route::get('/', function () {
 
 //后台首页路由
 Route::get('/admin', 'Admin\IndexController@index');
+
+//后台友情管理
+Route::resource('/admin/link', 'Admin\LinkController');
+//后台轮播图管理
+Route::resource('/admin/banner', 'Admin\BannerController');
