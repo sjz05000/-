@@ -104,3 +104,5 @@ Route::resource('/admin/cate','Admin\CateController');
 Route::resource('/admin/advertisements','Admin\AdvertisementsController');
 //  后台导航管理
 Route::resource('/admin/navigation','Admin\NavigationController');
+//  后台文章管理
+Route::resource('/admin/article','Admin\ArticleController');

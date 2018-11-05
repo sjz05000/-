@@ -21,7 +21,8 @@
                     					<select class="medium" name="pid">
                     						<option value="0">--请选择--</option>
                     						@foreach($data as $k=>$v)
-                    						<option value="{{$v->id}}" @if($v->id == $navigation->pid) selected @endif>{{$v->navname}}</option>
+                    						<option value="{{$v->id}}" @if($v->id == $navigation->pid) selected  @endif
+                                                       @if($v->navname == '|----'.$navigation->navname || $v->navname == $navigation->navname) disabled @endif>{{$v->navname}}</option>
                     						@endforeach
                     					</select>
                     				</div>
@@ -38,7 +39,7 @@
                                       <div class="mws-form-row">
                                         <label class="mws-form-label">导航地址</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="medium" name="url">
+                                             <input type="text" class="medium" name="url" value="{{$navigation->url}}">
                                         </div>
                                    </div>
                     		</div>

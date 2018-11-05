@@ -29,6 +29,7 @@
                                 	<th>父级ID</th>
                                 	<th>路径</th>
                                 	<th>状态</th>
+                                    <th>URL</th>
                                 	<th>创建时间</th>
                                 	<th>操作</th>
                                 </tr>
@@ -42,6 +43,7 @@
                                     <td class="  sorting_1">{{$v->pid}}</td>
                                     <td class="  sorting_1">{{$v->path}}</td>
                                     <td class="  sorting_1">{{$v->status==1 ? '激活' : '未激活'}}</td>
+                                    <td class="  sorting_1">{{$v->url}}</td>
                                     <td class="  sorting_1">{{$v->created_at}}</td>
                                     <td>
                                     	<a href="/admin/navigation/{{$v->id}}/edit" class="btn btn-info">修改</a>

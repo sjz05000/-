@@ -43,7 +43,7 @@ class AdvertisementsController extends Controller
     {
         if($request->hasFile('adfile')){
                     $adfile = $request->file('adfile');
-                    $adfile_path = './uploads/'.date('Ymd',time());
+                    $adfile_path = './d/uploads/'.date('Ymd',time());
                     $adfile_name =str_random(20).'.'.$adfile->getClientOriginalExtension();
                     $res = $adfile->move($adfile_path,$adfile_name);
                     $adfile_addr = ltrim($adfile_path.'/'.$adfile_name,'.');
@@ -98,7 +98,7 @@ class AdvertisementsController extends Controller
     {
         if($request->hasFile('adfile')){
                 $adfile = $request->file('adfile');
-                $adfile_path = './uploads/'.date('Ymd',time());
+                $adfile_path = './d/uploads/'.date('Ymd',time());
                 $adfile_name =str_random(20).'.'.$adfile->getClientOriginalExtension();
                 $res = $adfile->move($adfile_path,$adfile_name);
                 $adfile_addr = ltrim($adfile_path.'/'.$adfile_name,'.');

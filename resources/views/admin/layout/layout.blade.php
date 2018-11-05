@@ -233,7 +233,7 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-                    <li class="active">
+                    <li class="active" >
                         <a href="#"><i class="icon-picture"></i>广告管理</a>
                         <ul>
                             <li><a href="/admin/advertisements/create">添加广告</a></li>
@@ -260,6 +260,17 @@
                         <ul>
                             <li><a href="/admin/navigation/create">添加导航</a></li>
                             <li><a href="/admin/navigation">浏览导航</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="mws-navigation">
+                <ul>
+                    <li class="active">
+                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
+                        <ul>
+                            <li><a href="/admin/article/create">添加文章</a></li>
+                            <li><a href="/admin/article">浏览文章</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -321,6 +332,5 @@
     <script src="/d/js/core/themer.js"></script>
 
     <!-- Demo Scripts (remove if not needed) -->
-
 </body>
 </html>
