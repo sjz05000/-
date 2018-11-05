@@ -250,7 +250,7 @@
                     </li>
                     <li class="active" >
                         <a href="#"><i class="icon-picture"></i>广告管理</a>
-                        <ul>
+                        <ul class="closed">
                             <li><a href="/admin/advertisements/create">添加广告</a></li>
                             <li><a href="/admin/advertisements">浏览广告</a></li>
                         </ul>
@@ -260,7 +260,7 @@
                 
                     <li class="active">
                         <a href="#"><i class="icon-list"></i>分类管理</a>
-                        <ul>
+                        <ul class="closed">
                             <li><a href="/admin/cate/create">添加类别</a></li>
                             <li><a href="/admin/cate">浏览类别</a></li>
                         </ul>
@@ -270,14 +270,14 @@
                 
                     <li class="active">
                         <a href="#"><i class="icon-tags"></i>导航管理</a>
-                        <ul>
+                        <ul class="closed">
                             <li><a href="/admin/navigation/create">添加导航</a></li>
                             <li><a href="/admin/navigation">浏览导航</a></li>
                         </ul>
                     </li>
                     <li class="active">
                         <a href="#"><i class="icon-list-2"></i>文章管理</a>
-                        <ul>
+                        <ul class="closed">
                             <li><a href="/admin/article/create">添加文章</a></li>
                             <li><a href="/admin/article">浏览文章</a></li>
                         </ul>
@@ -287,10 +287,7 @@
         </div>
         
         <!-- Main Container Start -->
-        <div id="mws-container" class="clearfix">
-        
-        <!-- 内容开始 -->       
-             <div class="container">
+        <div id="mws-container" class="clearfix">      
                 <!-- 显示验证信息 开始 -->
             @if (count($errors) > 0)
                 <div class="mws-form-message error">
@@ -314,6 +311,7 @@
                 </div>
             @endif
             <!-- 提示信息 结束 -->
+        <!-- 内容开始 -->
         <div class="container">
          @section('content')
 
@@ -323,10 +321,10 @@
                        
             <!-- Footer -->
             <div id="mws-footer">
-                PHP09
+                PHP209
             </div>
             
-        </div>
+
         <!-- Main Container End -->
         
     </div>
