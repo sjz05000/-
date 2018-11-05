@@ -32,6 +32,8 @@
 <!-- Theme Stylesheet -->
 <link rel="stylesheet" type="text/css" href="/d/css/mws-theme.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/themer.css" media="screen">
+<link rel="stylesheet" type="text/css" href="/d/css/page_page.css" media="screen">
+
 
 <title>MWS Admin - Form Layouts</title>
 
@@ -246,6 +248,40 @@
                             <li><a href="/admin/banner">浏览轮播图</a></li>
                         </ul>
                     </li>
+                    <li class="active" >
+                        <a href="#"><i class="icon-picture"></i>广告管理</a>
+                        <ul>
+                            <li><a href="/admin/advertisements/create">添加广告</a></li>
+                            <li><a href="/admin/advertisements">浏览广告</a></li>
+                        </ul>
+                    </li>
+            
+         
+                
+                    <li class="active">
+                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <ul>
+                            <li><a href="/admin/cate/create">添加类别</a></li>
+                            <li><a href="/admin/cate">浏览类别</a></li>
+                        </ul>
+                    </li>
+                
+         
+                
+                    <li class="active">
+                        <a href="#"><i class="icon-tags"></i>导航管理</a>
+                        <ul>
+                            <li><a href="/admin/navigation/create">添加导航</a></li>
+                            <li><a href="/admin/navigation">浏览导航</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
+                        <ul>
+                            <li><a href="/admin/article/create">添加文章</a></li>
+                            <li><a href="/admin/article">浏览文章</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -265,22 +301,20 @@
                     </ul>
                 </div>
             @endif
-            <!-- 显示验证信息 结束 -->
-            <!-- 读取提示信息 开始 -->
-            @if (session('success'))
-            <div class="mws-form-message success">
-                {{ session('success') }}
-            </div>
+            <!-- 显示验证信息 结束 -->          
+            <!-- 提示信息 开始 -->
+            @if(session('success'))
+                <div class="mws-form-message success">
+                    {{session('success')}}
+                </div>
             @endif
-
             @if (session('error'))
-            <div class="mws-form-message error">
-                {{ session('error') }}
-            </div>
-             @endif
-            <!-- 读取提示信息 结束 -->
-
-
+                <div class="mws-form-message warning">
+                    {{ session('error') }}
+                </div>
+            @endif
+            <!-- 提示信息 结束 -->
+        <div class="container">
          @section('content')
 
          @show
@@ -320,6 +354,5 @@
     <script src="/d/js/core/themer.js"></script>
 
     <!-- Demo Scripts (remove if not needed) -->
-
 </body>
 </html>
