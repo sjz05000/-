@@ -6,37 +6,31 @@
         <span>{{ $title or '' }}</span>
     </div>
     <div class="mws-panel-body no-padding">
-        <form class="mws-form" action="/admin/users" method="post">
+        <form class="mws-form" action="/admin/label" method="post">
             {{ csrf_field() }}
             <div class="mws-form-inline">
                 <div class="mws-form-row">
-                    <label class="mws-form-label">用户名</label>
+                    <label class="mws-form-label">标签名</label>
                     <div class="mws-form-item">
-                        <input type="text" name="username" value="{{ old('username') }}" class="small medium">
+                        <input type="text" name="labelname" value="{{ old('labelname') }}" class="small medium">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">密码</label>
+                    <label class="mws-form-label">标签背景色</label>
                     <div class="mws-form-item">
-                        <input type="password" name="password" class="medium">
+                        <input type="color" name="labelcolor" value="{{ old('labelcolor') }}" class="small">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">确认密码</label>
+                    <label class="mws-form-label">包含文章数量</label>
                     <div class="mws-form-item">
-                        <input type="password" name="repassword" class="medium">
+                        <input type="text" name="articlecount" value="{{ old('articlecount') }}" class="medium">
                     </div>
                 </div>
                 <div class="mws-form-row">
-                    <label class="mws-form-label">手机</label>
+                    <label class="mws-form-label">包含文章编号</label>
                     <div class="mws-form-item">
-                        <input type="text" name="phone" value="{{ old('phone') }}" class="medium">
-                    </div>
-                </div>
-                <div class="mws-form-row">
-                    <label class="mws-form-label">邮箱</label>
-                    <div class="mws-form-item">
-                        <input type="text" name="email" value="{{ old('email') }}" class="medium">
+                        <input type="text" name="articlenumber" value="{{ old('articlenumber') }}" class="medium">
                     </div>
                 </div>
             </div>

@@ -6,7 +6,7 @@
     </div>
     <div class="mws-panel-body no-padding">
         <div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
-            <form action="/admin/users" method="get">
+            <form action="/admin/label" method="get">
                 <div id="showCount" class="dataTables_length">
                     <label>显示 
                         <select size="1" name="showCount" aria-controls="DataTables_Table_1">
@@ -27,11 +27,11 @@
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" style="width: 120px;">ID</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 174px;">用户名</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">手机号</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">邮箱</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 120px;">状态</th>
+                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" style="width: 100px;">ID</th>
+                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 174px;">标签名</th>
+                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 100px;">标签背景色</th>
+                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 100px;">包含文章数量</th>
+                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 174px;">包含文章编号</th>
                         <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">注册时间</th>
                         <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">操作</th>
   
@@ -39,22 +39,17 @@
                 </thead>
                 
                 <tbody role="alert" aria-live="polite" aria-relevant="all">
-                    @foreach($user as $k=>$v)
+                    @foreach($label as $k=>$v)
                         <tr class="odd">
                             <td>{{ $v->id }}</td>
-                            <td>{{ $v->username }}</td>
-                            <td>{{ $v->userinfo->phone }}</td>
-                            <td>{{ $v->userinfo->email }}</td>
-                            @if( $v->status == 1)
-                            <td><span style="background: orange;">未激活</span></td>
-                            @else
-                            <td><span style="background: greenyellow;">激活</span></td>
-                            @endif
-                            <!-- <td>{{ $v->status == 1 ? '未激活' : '激活' }}</td> -->
-                            <td>{{ $v->userinfo->created_at }}</td>
+                            <td>{{ $v->labelname }}</td>
+                            <td><div style="width:30px;height:20px;border:1px solid #ddd; background-color: {{ $v->labelcolor }};"></div></td>
+                            <td>{{ $v->articlecount }}</td>
+                            <td>{{ $v->articlenumber }}</td>
+                            <td>{{ $v->created_at }}</td>
                             <td>
-                                <a href="/admin/users/{{ $v->id }}/edit" class="btn btn-warning btn-small">修改</a>
-                                <form action="/admin/users/{{$v->id}}" method="post" style="display: inline-block;">
+                                <a href="/admin/label/{{ $v->id }}/edit" class="btn btn-warning btn-small">修改</a>
+                                <form action="/admin/label/{{$v->id}}" method="post" style="display: inline-block;">
                                     {{ csrf_field() }}
                                     {{ method_field('DELETE') }}
                                     <input type="submit" value="删除" onclick="return confirm('确定要删除吗?')" class="btn btn-danger btn-small">
@@ -97,7 +92,7 @@
                 }
             </style>
             <div id="pagepage">
-                {!! $user->appends($request)->render() !!}
+                {!! $label->appends($request)->render() !!}
             </div>
         </div>
     </div>

@@ -315,9 +315,6 @@
         
         <!-- Main Container Start -->
         <div id="mws-container" class="clearfix">
-        
-        	<!-- Inner Container Start -->
-            <div class="container">
             	<!-- 读取提示信息 开始 -->
             	
             	@if (session('success'))
