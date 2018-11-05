@@ -22,3 +22,86 @@ Route::get('/admin', 'Admin\IndexController@index');
 Route::resource('/admin/link', 'Admin\LinkController');
 //后台轮播图管理
 Route::resource('/admin/banner', 'Admin\BannerController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 100-150 陈晓芳
+// 后台首页的路由
+// Route::get('/admin','Admin\IndexController@index');
+// 后台用户的路由
+Route::resource('/admin/users','Admin\UsersController');
+// 后台标签的路由
+Route::resource('/admin/label','Admin\LabelController');
