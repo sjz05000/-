@@ -97,6 +97,7 @@ class CateController extends Controller
      */
     public function edit($id)
     {
+        $cate = Cate::find($id);
         return view('admin.cate.edit',['title'=>'修改类别','data'=>self::getCate(),'cate'=>$cate]);
     }
 
