@@ -1,0 +1,230 @@
+[1mdiff --cc app/Http/routes.php[m
+[1mindex d110c5d,46e75dc..0000000[m
+[1m--- a/app/Http/routes.php[m
+[1m+++ b/app/Http/routes.php[m
+[36m@@@ -18,7 -18,91 +18,98 @@@[m [mRoute::get('/', function () [m
+  //后台首页路由[m
+  Route::get('/admin', 'Admin\IndexController@index');[m
+  [m
+[32m++<<<<<<< HEAD[m
+[32m +//后台友情管理[m
+[32m +Route::resource('/admin/link', 'Admin\LinkController');[m
+[32m +//后台轮播图管理[m
+[32m +Route::resource('/admin/banner', 'Admin\BannerController');[m
+[32m++=======[m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ [m
+[32m+ //  后台分类管理[m
+[32m+ Route::resource('/admin/cate','Admin\CateController');[m
+[32m+ //	后台广告管理[m
+[32m+ Route::resource('/admin/advertisements','Admin\AdvertisementsController');[m
+[32m+ //  后台导航管理[m
+[32m+ Route::resource('/admin/navigation','Admin\NavigationController');[m
+[32m+ //  后台文章管理[m
+[31m -Route::resource('/admin/article','Admin\ArticleController');[m
+[32m++Route::resource('/admin/article','Admin\ArticleController');[m
+[32m++>>>>>>> origin/abzhangzhipeng[m
+[1mdiff --cc resources/views/admin/layout/layout.blade.php[m
+[1mindex 0b01755,8d13bc8..0000000[m
+[1m--- a/resources/views/admin/layout/layout.blade.php[m
+[1m+++ b/resources/views/admin/layout/layout.blade.php[m
+[36m@@@ -231,19 -233,44 +233,60 @@@[m
+              <!-- Main Navigation -->[m
+              <div id="mws-navigation">[m
+                  <ul>[m
+[32m++<<<<<<< HEAD[m
+[32m +                    <li class="active">[m
+[32m +                        <a href="#"><i class="icon-attachment"></i>友情链接管理</a>[m
+[32m +                        <ul class="closed">[m
+[32m +                            <li><a href="/admin/link/create">添加链接</a></li>[m
+[32m +                            <li><a href="/admin/link">浏览链接</a></li>[m
+[32m +                        </ul>[m
+[32m +                    </li>[m
+[32m +[m
+[32m +                    <li class="active">[m
+[32m +                        <a href="#"><i class="icon-flickr"></i>轮播图管理</a>[m
+[32m +                        <ul class="closed">      [m
+[32m +                            <li><a href="/admin/banner/create">添加轮播图</a></li>[m
+[32m +                            <li><a href="/admin/banner">浏览轮播图</a></li>[m
+[32m++=======[m
+[32m+                     <li class="active" >[m
+[32m+                         <a href="#"><i class="icon-picture"></i>广告管理</a>[m
+[32m+                         <ul>[m
+[32m+                             <li><a href="/admin/advertisements/create">添加广告</a></li>[m
+[32m+                             <li><a href="/admin/advertisements">浏览广告</a></li>[m
+[32m+                         </ul>[m
+[32m+                     </li>[m
+[32m+                 </ul>[m
+[32m+             </div>[m
+[32m+             <div id="mws-navigation">[m
+[32m+                 <ul>[m
+[32m+                     <li class="active">[m
+[32m+                         <a href="#"><i class="icon-list"></i>分类管理</a>[m
+[32m+                         <ul>[m
+[32m+                             <li><a href="/admin/cate/create">添加类别</a></li>[m
+[32m+                             <li><a href="/admin/cate">浏览类别</a></li>[m
+[32m+                         </ul>[m
+[32m+                     </li>[m
+[32m+                 </ul>[m
+[32m+             </div>[m
+[32m+             <div id="mws-navigation">[m
+[32m+                 <ul>[m
+[32m+                     <li class="active">[m
+[32m+                         <a href="#"><i class="icon-tags"></i>导航管理</a>[m
+[32m+                         <ul>[m
+[32m+                             <li><a href="/admin/navigation/create">添加导航</a></li>[m
+[32m+                             <li><a href="/admin/navigation">浏览导航</a></li>[m
+[32m+                         </ul>[m
+[32m+                     </li>[m
+[32m+                 </ul>[m
+[32m+             </div>[m
+[32m+             <div id="mws-navigation">[m
+[32m+                 <ul>[m
+[32m+                     <li class="active">[m
+[32m+                         <a href="#"><i class="icon-list-2"></i>文章管理</a>[m
+[32m+                         <ul>[m
+[32m+                             <li><a href="/admin/article/create">添加文章</a></li>[m
+[32m+                             <li><a href="/admin/article">浏览文章</a></li>[m
+[32m++>>>>>>> origin/abzhangzhipeng[m
+                          </ul>[m
+                      </li>[m
+                  </ul>[m
+[36m@@@ -252,40 -279,25 +295,58 @@@[m
+          [m
+          <!-- Main Container Start -->[m
+          <div id="mws-container" class="clearfix">[m
+[32m++<<<<<<< HEAD[m
+[32m +        [m
+[32m +        <!-- 内容开始 -->       [m
+[32m +             <div class="container">[m
+[32m +                <!-- 显示验证信息 开始 -->[m
+[32m +            @if (count($errors) > 0)[m
+[32m +                <div class="mws-form-message error">[m
+[32m +                    <ul>[m
+[32m +                        @foreach ($errors->all() as $error)[m
+[32m +                            <li>{{ $error }}</li>[m
+[32m +                        @endforeach[m
+[32m +                    </ul>[m
+[32m +                </div>[m
+[32m +            @endif[m
+[32m +            <!-- 显示验证信息 结束 -->[m
+[32m +            <!-- 读取提示信息 开始 -->[m
+[32m +            @if (session('success'))[m
+[32m +            <div class="mws-form-message success">[m
+[32m +                {{ session('success') }}[m
+[32m +            </div>[m
+[32m +            @endif[m
+[32m++=======[m
+[32m+             <!-- 提示信息 开始 -->[m
+[32m+             @if(session('success'))[m
+[32m+                 <div class="mws-form-message success">[m
+[32m+                     {{session('success')}}[m
+[32m+                 </div>[m
+[32m+             @endif[m
+[32m+             @if (session('error'))[m
+[32m+                 <div class="mws-form-message warning">[m
+[32m+                     {{ session('error') }}[m
+[32m+                 </div>[m
+[32m+             @endif[m
+[32m+             <!-- 提示信息 结束 -->[m
+[32m+             <!-- 内容开始 -->[m
+[32m+             <div class="container">[m
+[32m+              @section('content')[m
+[32m++>>>>>>> origin/abzhangzhipeng[m
+  [m
+[31m -             @show[m
+[32m +            @if (session('error'))[m
+[32m +            <div class="mws-form-message error">[m
+[32m +                {{ session('error') }}[m
+              </div>[m
+[31m -            <!-- 内容结束 -->[m
+[32m +             @endif[m
+[32m +            <!-- 读取提示信息 结束 -->[m
+[32m +[m
+[32m +[m
+[32m +         @section('content')[m
+[32m +[m
+[32m +         @show[m
+[32m +        </div>[m
+[32m +        <!-- 内容结束 -->[m
+                         [m
+              <!-- Footer -->[m
+              <div id="mws-footer">[m

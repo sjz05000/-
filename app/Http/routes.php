@@ -19,62 +19,10 @@ Route::get('/', function () {
 Route::get('/admin', 'Admin\IndexController@index');
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+//后台友情管理
+Route::resource('/admin/link', 'Admin\LinkController');
+//后台轮播图管理
+Route::resource('/admin/banner', 'Admin\BannerController');
 
 
 
@@ -106,3 +54,4 @@ Route::resource('/admin/advertisements','Admin\AdvertisementsController');
 Route::resource('/admin/navigation','Admin\NavigationController');
 //  后台文章管理
 Route::resource('/admin/article','Admin\ArticleController');
+
