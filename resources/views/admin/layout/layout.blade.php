@@ -234,6 +234,22 @@
             <div id="mws-navigation">
                 <ul>
                     <li class="active">
+                        <a href="#"><i class="icon-users"></i> 用户管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/users">用户列表</a></li>
+                            <li><a href="/admin/users/create">用户添加</a></li>
+                            <li><a href="/admin/users/????">回收站</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-tags"></i> 标签管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/label">标签列表</a></li>
+                            <li><a href="/admin/label/create">标签添加</a></li>
+                            <li><a href="/admin/label/????">回收站</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
                         <a href="#"><i class="icon-attachment"></i>友情链接管理</a>
                         <ul class="closed">
                             <li><a href="/admin/link/create">添加链接</a></li>
@@ -255,9 +271,6 @@
                             <li><a href="/admin/advertisements">浏览广告</a></li>
                         </ul>
                     </li>
-            
-         
-                
                     <li class="active">
                         <a href="#"><i class="icon-list"></i>分类管理</a>
                         <ul class="closed">
@@ -265,9 +278,6 @@
                             <li><a href="/admin/cate">浏览类别</a></li>
                         </ul>
                     </li>
-                
-         
-                
                     <li class="active">
                         <a href="#"><i class="icon-tags"></i>导航管理</a>
                         <ul class="closed">
@@ -285,10 +295,10 @@
                 </ul>
             </div>
         </div>
-        
-        <!-- Main Container Start -->
-        <div id="mws-container" class="clearfix">      
-                <!-- 显示验证信息 开始 -->
+        <div id="mws-container" class="clearfix">    
+        <!-- 内容开始 -->
+        <div class="container">
+            <!-- 显示验证信息 开始 -->
             @if (count($errors) > 0)
                 <div class="mws-form-message error">
                     <ul>
@@ -311,8 +321,6 @@
                 </div>
             @endif
             <!-- 提示信息 结束 -->
-        <!-- 内容开始 -->
-        <div class="container">
          @section('content')
 
          @show

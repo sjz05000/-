@@ -126,11 +126,11 @@ class LinkController extends Controller
         ]);
         // 创建文件上传对象
         if($request->hasFile('yqpic')){ 
-            $profile = $request -> file('yqpic');
-            $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+            $profile = $request->file('yqpic');
+            $ext = $profile->getClientOriginalExtension(); //获取文件后缀
             $file_name = str_random('20').'.'.$ext;
             $dir_name = './uploads/'.date('Ymd',time());
-            $res = $profile -> move($dir_name,$file_name);
+            $res = $profile->move($dir_name,$file_name);
         }
        
         // 提交到数据库
@@ -144,9 +144,9 @@ class LinkController extends Controller
         
         $res = $link->save();
         if($res){
-            return redirect('admin/link')->with('success', '添加成功!');
+            return redirect('admin/link')->with('success', '修改成功!');
         }else{
-            return back()->with('error', '添加失败!');
+            return back()->with('error', '修改失败!');
         }
     }
 
