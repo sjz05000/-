@@ -27,7 +27,6 @@ Route::resource('/admin/collect', 'Admin\CollectController');
 // 反馈管理
 Route::resource('/admin/feedback', 'Admin\FeedbackController');
 
-
 // 后台用户的路由
 Route::resource('/admin/users','Admin\UsersController');
 // 后台标签的路由
@@ -41,5 +40,34 @@ Route::resource('/admin/advertisements','Admin\AdvertisementsController');
 Route::resource('/admin/navigation','Admin\NavigationController');
 //  后台文章管理
 Route::resource('/admin/article','Admin\ArticleController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 后台评论管理
+Route::resource('/admin/comment','Admin\CommentController');
+// 前台首页
+Route::get('/home', 'Home\IndexController@index');
+// 前台个人中心页
+Route::resource('/home/my','Home\MyController');
 
 

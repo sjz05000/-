@@ -63,8 +63,7 @@ class CollectController extends Controller
         $name = $request->input('username');
         $title = $request->input('title');
         
-        DB::table('dy-collect')->insert(['uid' => , 'tid' => 0]
-);
+        // DB::table('dy-collect')->insert(['uid' => , 'tid' => 0]);
     }
 
     /**

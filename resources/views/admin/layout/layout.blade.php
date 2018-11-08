@@ -186,9 +186,19 @@
                             <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
+
+                    <li class="active">
+                        <a href="#"><i class="icon-pacman"></i>评论管理</a>
+                        <ul class="closed">
+                            <!-- <li><a href="/admin/comment/create">添加评论</a></li> -->
+                            <li><a href="/admin/comment">浏览评论</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>
+
         <div id="mws-container" class="clearfix">    
         <!-- 内容开始 -->
         <div class="container">

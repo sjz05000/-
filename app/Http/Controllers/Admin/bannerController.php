@@ -18,7 +18,7 @@ class bannerController extends Controller
     public function index()
     {
         // 获取数据
-        $data = Banner::all();
+        $data = Banner::paginate(7);
         // 加载页面
         return view('admin.banner.index',['data'=>$data,'title'=>'轮播列表']);
     }

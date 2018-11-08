@@ -1,0 +1,1537 @@
+var api = {
+    ucenter_url: "https://ucenterapi.cnool.net/wrapper",
+    platform_url: "https://platformapi.cnool.net",
+    api_url: "https://api.cnool.net",
+
+
+    //http://ucenterapi.cnool.net/wrapper/User/GetCnoolUserInfo
+    //获取个人信息
+    getUserInfo: function (onSuccess) {
+        api.getData(api.ucenter_url, "User/GetCnoolUserInfo", {}, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //获取其他用户属性
+    getFriendUserInfo: function (FriendUserName, onSuccess) {
+        api.getData(api.ucenter_url, "User/GetFriendUserInfo", { FriendUserName: FriendUserName }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //http://ucenterapi.cnool.net/wrapper/User/ChangeCnoolUserInfo
+    //修改用户的信息
+    changeCnoolUserInfo: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/ChangeCnoolUserInfo.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //http://ucenterapi.cnool.net/wrapper/User/ChangeUserName
+    //修改用户的用户名
+    changeUserName: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/ChangeUserName.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //栏目信息
+    getColunmList: function (onSuccess) {
+        api.getData(api.platform_url, "column/GetColunmList", {}, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //APP栏目标签列表
+    getColunm: function (id, onSuccess) {
+        api.getData(api.platform_url, "column/GetColunm", { id: id }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //APP热门板块
+    getHotForumStat: function (onSuccess) {
+        api.getData(api.ucenter_url, "Statistics/GetHotForumStat", {}, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //获取单个标签
+    getTagByName: function (tagName, onSuccess) {
+        api.getData(api.platform_url, "tag/GetTagByName", { tagName: tagName }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //版块文章列表/article/GetForumList
+    getForumList: function (tagName, page, onSuccess) {
+        api.getData(api.platform_url, "article/GetForumList", { tagName: tagName, page: page, pageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+        //apicmd.getData(API_LIST.platform, "article", "GetForumList", "tagname=" + tagname + "&page=" + page + "&pageSize=10", {}, function (data, err) {
+        //    if (fn)
+        //        fn(data, err);
+        //}, 'json');
+    },
+    //用户所关注的栏目列表
+    getColunmsByUserId: function (onSuccess) {
+        api.getData(api.ucenter_url, "UserFavorite/GetColunmsByUserId", { PageId: 1, PageSize: 100 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    getColunmsByUserIdPage: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "UserFavorite/GetColunmsByUserId", { PageId: PageId, PageSize: 100 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //http://ucenterapi.cnool.net/wrapper/UserFavorite/AttentedOrCacnleColunm
+    //关注或取消关注某个栏目
+    attentedOrCacnleColunm: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/attentedOrCacnleColunm.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+
+    //首页文章列表
+    getArticleListIndex: function (page, onSuccess) {
+        api.getData(api.platform_url, "article/GetAppIndexList", { page: page, pageSize: 10 }, function (json) {
+            for (i = 0; i < json.data.length; i++) {
+                if (!json.data[i].CoverImage) {
+                    json.data[i].CoverImage = [];
+                }
+                for (j = 0; j < json.data[i].CoverImage.length; j++) {
+                    json.data[i].CoverImage[j] = replaceImg(json.data[i].CoverImage[j]);
+                }
+            };
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //栏目文章列表
+    getArticleListByColunm: function (ColumnId, page, onSuccess) {
+        api.getData(api.platform_url, "article/GetArticleListByColumn", { ColumnId: ColumnId, page: page, pageSize: 10 }, function (json) {
+            for (i = 0; i < json.data.length; i++) {
+                if (!json.data[i].CoverImage) {
+                    json.data[i].CoverImage = [];
+                }
+                for (j = 0; j < json.data[i].CoverImage.length; j++) {
+                    json.data[i].CoverImage[j] = replaceImg(json.data[i].CoverImage[j]);
+                }
+            };
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //板块热帖列表
+    getForumViewRankList: function (tagname, onSuccess) {
+        api.getData(api.platform_url, "article/GetViewRankList", { tagname: tagname, pageSize: 15 }, function (json) {
+            for (i = 0; i < json.data.length; i++) {
+                if (!json.data[i].CoverImage) {
+                    json.data[i].CoverImage = [];
+                }
+                for (j = 0; j < json.data[i].CoverImage.length; j++) {
+                    json.data[i].CoverImage[j] = replaceImg(json.data[i].CoverImage[j]);
+                }
+            };
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //文章详情信息
+    getArticleById: function (id, onSuccess) {
+        api.getData(api.platform_url, "article/GetArticleById", { id: id }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //文章评论信息
+    getCommentByArticleId: function (ArticleId, page, onSuccess) {
+        api.getData(api.platform_url, "comment/getCommentByArticleId", { ArticleId: ArticleId, page: page, pageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //栏目标签信息
+    getTagCategory: function (onSuccess) {
+        api.getData(api.platform_url, "tag/GetTagCategory", {}, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //栏目标签列表信息
+    getListByCategory: function (Category, onSuccess) {
+        api.getData(api.platform_url, "tag/getListByCategory", { Category: Category, page: 1, pageSize: 999 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //http://testapi.platform.cnool.net/forum/create
+    //发帖
+    create: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        var useragent = useragent;
+        datas["useragent"] = useragent;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/create.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //编辑帖子
+    unitedit: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        var useragent = useragent;
+        datas["useragent"] = useragent;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/unitedit.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    forumedit: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        var useragent = useragent;
+        datas["useragent"] = useragent;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/forumedit.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //http://testapi.platform.cnool.net/comment/create
+    //评论
+    comment: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        var useragent = useragent;
+        datas["useragent"] = useragent;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/comment.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //修改评论
+    commentedit: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        var useragent = useragent;
+        datas["useragent"] = useragent;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/commentedit.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //点赞
+    addlike: function (ArticleId, onSuccess) {
+        api.getData(api.platform_url, "article/addlike", { ArticleId: ArticleId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //评论点赞
+    addreplylike: function (ArticleId, commentId, onSuccess) {
+        api.getData(api.platform_url, "comment/addlike", { ArticleId: ArticleId, commentId: commentId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //点踩
+    addunlike: function (ArticleId, onSuccess) {
+        api.getData(api.platform_url, "article/addunlike", { ArticleId: ArticleId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //我的最新动态
+    getMyTimeline: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "Timeline/GetUserEventsByUser", { PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //好友最新动态
+    getFriendTimeline: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "Timeline/GetTimeline", { PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //是否关注
+    getConcernState: function (FriendUserName, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/GetConcernState", { FriendUserName: FriendUserName }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //我的收藏
+    getCollect: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "UserFavorite/GetCollectArticlesByUserId", { PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //判断某篇文章是否被收藏
+    IsArticelCollected: function (ArticleId, onSuccess) {
+        api.getData(api.ucenter_url, "UserFavorite/IsArticelCollected", { ArticleId: ArticleId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //收藏或取消收藏某篇文章
+    collectOrCacnleArticle: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/collectOrCacnleArticle.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //粉丝列表
+    getfanusers: function (UserName, PageId, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/getfanusers", { UserName: UserName, PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //关注列表
+    getfollowusers: function (UserName, PageId, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/getfollowusers", { UserName: UserName, PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //关注/取消关注
+    follow: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/follow.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //最近私信联系人列表
+    getLatestPrivatemessageChatUsers: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/GetLatestPrivatemessageChatUsers", { PageId: PageId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //获取别人@我的通知
+    getUserAtEventsByUser: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "AtEvent/GetUserAtEventsByUser", { PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //http://ucenterapi.cnool.net/wrapper/t_api/NewPrivatePost
+    //发送私信
+    newPrivatePost: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/newPrivatePost.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //获取与某人的最近私信聊天记录
+    getPrivatemessageChatLog: function (FriendUserName, PageId, pagesize, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/GetPrivatemessageChatLog", { FriendUserName: FriendUserName, PageId: PageId, pagesize: pagesize }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //实时查询最新聊天私信记录
+    realTimeGetLatestPrivatemessage: function (FriendUserName, MinId, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/RealTimeGetLatestPrivatemessage", { FriendUserName: FriendUserName, MinId: MinId }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //从聊天面板中移除某个私信联系人
+    removeLatestPrivatemessageChatUser: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/removeLatestPrivatemessageChatUser.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //个人中心文章列表
+    getUserArticleList: function (page, onSuccess) {
+        api.getData(api.platform_url, "article/GetUserArticleList", { page: page, pageSize: 10 }, function (json) {
+            for (i = 0; i < json.data.length; i++) {
+                if (!json.data[i].CoverImage) {
+                    json.data[i].CoverImage = [];
+                }
+                for (j = 0; j < json.data[i].CoverImage.length; j++) {
+                    json.data[i].CoverImage[j] = replaceImg(json.data[i].CoverImage[j]);
+                }
+            };
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //他人中心列表
+    getOtherArticleList: function (AuthorUserName, page, onSuccess) {
+        api.getData(api.platform_url, "article/GetUserArticleList", { AuthorUserName: AuthorUserName, page: page, pageSize: 10 }, function (json) {
+            for (i = 0; i < json.data.length; i++) {
+                if (!json.data[i].CoverImage) {
+                    json.data[i].CoverImage = [];
+                }
+                for (j = 0; j < json.data[i].CoverImage.length; j++) {
+                    json.data[i].CoverImage[j] = replaceImg(json.data[i].CoverImage[j]);
+                }
+            };
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //我的消息
+    getNotificationListByUser: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "UserNotification/GetNotificationListByUser", { PageId: PageId, PageSize: 5 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //我的消息条数
+    mymsgcount: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/mymsgcount.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //未读消息条数清零
+    setmsg0: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/setmsg0.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //设置@消息已读
+    setnews: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/setnews.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //获取@未读消息
+    getnews: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/getnews.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //获取未读私信
+    getprinews: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/getprinews.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //我的消息条数
+    mymsgcount: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/mymsgcount.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //黑名单
+    getMyPrivatemessageblacklist: function (PageId, onSuccess) {
+        api.getData(api.ucenter_url, "t_api/GetMyPrivatemessageblacklist", { PageId: PageId, PageSize: 10 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //添加黑名单
+    addToMyPrivatemessageblacklist: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/addToMyPrivatemessageblacklist.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //移除黑名单
+    deleteFromMyPrivatemessageblacklist: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/deleteFromMyPrivatemessageblacklist.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //未读条数清零
+    cleanmsg: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/setPrivateMessageChatStateAsRead.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //图形验证码获取Key
+    imgValCodeKey: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/imgValCodeKey.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //图形验证码获取图片
+    imgValCodeSrc: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/imgValCodeSrc.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //图形验证码验证
+    imgValCodeValidate: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/imgValCodeValidate.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //三方登陆
+    threelogin: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var $sessionId = api.getSessionId();
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        datas["SessionId"] = $sessionId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/registerForThirdParty.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+
+    //登录
+    login: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/login.aspx",
+            data: datas,
+            success: function (json) {
+                if (json != undefined && json.ResponseCode == 0) {
+                    //localStorage.SessionId = json.SessionId;
+                    //localStorage.UserName = json.UserName;
+                    //$.cookie("SessionId", json.SessionId, { path: "/", expires: 3650, domain: "cnool.net", secure: false, raw: false })
+                    //$.cookie("UserName", json.UserName, { path: "/", expires: 3650, domain: "cnool.net", secure: false, raw: false })
+                    //sessionStorage.SessionId = json.SessionId;
+                    //alert("localStorage:" + localStorage.SessionId);
+                    //alert("sessionStorage:" + sessionStorage.SessionId);
+                }
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //快捷登录
+    quickLogin: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/quickLogin.aspx",
+            data: datas,
+            success: function (json) {
+                if (json != undefined && json.ResponseCode == 0) {
+                    //localStorage.SessionId = json.SessionId;
+                    //$.cookie("SessionId", json.SessionId, { path: "/", expires: 3650, domain: "cnool.net", secure: false, raw: false })
+                    //$.cookie("UserName", json.UserName, { path: "/", expires: 3650, domain: "cnool.net", secure: false, raw: false })
+                }
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //
+    register: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/register.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //绑定东论
+    registerWithBindOldCnoolUser: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/registerWithBindOldCnoolUser.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //手机登录发送验证码
+    sendMobilegCode: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/sendMobilegCode.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //ActiveUserByMobile
+    activeUserByMobile: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/ActiveUserByMobile.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //注册  检测账号是否已注册
+    isRegisteredUser: function (RegisterName, onSuccess) {
+        api.getData(api.ucenter_url, "User/IsRegisteredUser", { RegisterName: RegisterName, Type: 2 }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+    //检测手机验证码
+    checkRegMobilegCode: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        var IP = userip;
+        var Port = userport;
+        datas["IP"] = IP;
+        datas["Port"] = Port;
+        datas["AppId"] = AppId;
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/checkRegMobilegCode.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //根据手机获取账户
+    getUserListByAuthMobile: function (Mobile, onSuccess) {
+        api.getData(api.ucenter_url, "User/GetUserListByAuthMobile", { Mobile: Mobile }, function (json) {
+            if (onSuccess)
+                onSuccess(json);
+        });
+    },
+
+    //清除html保留img,p,br
+    clearContentHtml: function (str) {
+        //只保留img,p,br标签 
+        str = str.replace(/<img/g, "#####");
+        //str = str.replace(/<p/g, "%%%%%");
+        //str = str.replace(/<\/p>/g, "&&&&&");
+
+        //str = str.replace(/<blockquote/g, "!!!!!");
+        //str = str.replace(/<\/blockquote>/g, "~~~~~");
+        str = str.replace(/<br[^>]+>/g, "@@@@@");
+        //str = str.replace(/data-src/g, "src");
+        //过滤style class
+        str = str.replace(/style\s*=(['\"\s]?)[^'\"]*?\1/g, "");
+        str = str.replace(/class\s*=(['\"\s]?)[^'\"]*?\1/g, "");
+        //删除脚本
+        str = str.replace(/<script[^>]*?>.*?<\/script>/g, "");
+        //替换符号
+        str = str.replace(/&nbsp;/g, "")
+        str = str.replace(/&(quot|#34);/g, "\"")
+        str = str.replace(/&(amp|#38);/g, "&")
+        str = str.replace(/&(lt|#60);/g, "<")
+        str = str.replace(/&(gt|#62);/g, ">")
+        //str = str.replace(/&(nbsp|#160);/g, " ")
+        str = str.replace(/&(iexcl|#161);/g, "\xa1")
+        str = str.replace(/&(cent|#162);/g, "\xa2")
+        str = str.replace(/&(pound|#163);/g, "\xa3")
+        str = str.replace(/&(copy|#169);/g, "\xa9")
+        str = str.replace(/&#(\d+);/g, "")
+        //清楚html
+        str = str.replace(/<\/?[^>]*>/g, "");
+        //还原img,p,br标签
+        str = str.replace(/#####/g, "<img");
+        //str = str.replace(/%%%%%/g, "<p");
+        //str = str.replace(/&&&&&/g, "</p>");
+        //str = str.replace(/!!!!!/g, "<blockquote");
+        //str = str.replace(/~~~~~/g, "</blockquote>");
+        str = str.replace(/@@@@@/g, "<br/>");
+        return str;
+    },
+
+    //解析Url  获取Url中的参数值
+    getParam: function (paramName) {
+        paramValue = "";
+        isFound = false;
+        if (window.location.search.indexOf("?") == 0 && window.location.search.indexOf("=") > 1) {
+            arrSource = decodeURI(window.location.search).substring(1, window.location.search.length).split("&");
+            i = 0;
+            while (i < arrSource.length && !isFound) {
+                if (arrSource[i].indexOf("=") > 0) {
+                    if (arrSource[i].split("=")[0].toLowerCase() == paramName.toLowerCase()) {
+                        paramValue = (arrSource[i].split("=")[1]);
+                        isFound = true;
+                    }
+                }
+                i++;
+            }
+        }
+        return paramValue;
+    },
+    //页面传输数据
+    //sessionStorage
+
+    //获取时间格式
+    getdate: function (time) {
+        var now = new Date(time),
+            y = now.getFullYear(),
+            m = now.getMonth() + 1,
+            d = now.getDate();
+        return y + "-" + (m < 10 ? "0" + m : m) + "-" + (d < 10 ? "0" + d : d) + " " + now.toTimeString().substr(0, 8);
+    },
+    //显示提示
+    showWarning: function (text) {
+        var $toast = document.getElementById("toast");
+        if ($toast.style.display != 'none') {
+            return;
+        }
+        $(".weui_toast_content").html(text);
+        //document.getElementById('weui_toast_content').innerHTML = text;
+        $('#toast').show();
+        //document.getElementById('toast').style.display = "block"
+        setTimeout(function () {
+            $('#toast').hide();
+            //document.getElementById('toast').style.display = "none"
+        }, 2000);
+    },
+    //显示提示
+    toast_show: function (text) {
+        var $toast = document.getElementById("toast");
+        if ($toast.style.display != 'none') {
+            return;
+        }
+        $(".weui_toast_content").html(text);
+        $('#toast').show();
+    },
+    //隐藏提示
+    toast_hide: function () {
+        setTimeout(function () {
+            $('#toast').hide();
+        }, 2000);
+    },
+    getPassport: function () {
+        return $.cookie("CNOOL.passport");
+    },
+    getSessionId: function () {
+        return sessionId;
+    },
+    // 获取数据
+    getData: function (apiUrl, invoke, datas, onSuccess) {
+        var appId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        datas["app_Id"] = appId;
+        datas["SessionId"] = $sessionId;
+        //datas["callback"] = "json";
+        return $.ajax({
+            type: "get",
+            url: apiUrl + "/" + invoke,
+            async: false,
+            cache: false,
+            dataType: "jsonp",
+            //jsonp: "callback",
+            //jsonpCallback: "json",
+            data: datas,
+            success: function (json) {
+                //alert(JSON.stringify(json));
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            },
+            error: function (e) {
+                console.log(invoke + "接口传输出错...");
+            }
+        });
+    },
+    // 提交数据
+    submitData: function (apiUrl, invoke, datas, onSuccess) {
+        var appId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        var $sessionId = api.getSessionId();
+        datas["app_Id"] = appId;
+        datas["SessionId"] = $sessionId;
+        //datas["callback"] = "json";
+        return $.ajax({
+            type: "post",
+            url: apiUrl + "/" + invoke,
+            async: false,
+            cache: false,
+            dataType: "jsonp",
+            //jsonp: "callback",
+            //jsonpCallback: "json",
+            data: datas,
+            success: function (json) {
+                //alert(JSON.stringify(json));
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            },
+            error: function (e) {
+                console.log(invoke + "接口传输出错...");
+            }
+        });
+    },
+    //上传图片
+    uploadImage: function (data, onSuccess) {
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/upload.aspx",
+            data: data,
+            async: false,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    },
+    //转小图
+    Convert2SmallImg: function (url) {
+        if (url == undefined) return url;
+        if (url.indexOf("https://upload2007.cnool.net/") >= 0) {
+            url = url.replace(".jpg", "_m.jpg");
+            url = url.replace(".png", "_m.png");
+            url = url.replace(".jpeg", "_m.jpeg");
+            return url;
+        }
+        if (url.indexOf("https://upload2016.cnool.net/") >= 0) {
+            url = url.replace("https://upload2016.cnool.net/uploads_large/", "https://upload2016.cnool.net/uploads_mobile/");
+            return url;
+        }
+        return url;
+    },
+    Convert2SmallImg200: function (url) {
+        if (url == undefined) return url;
+        if (url.indexOf("https://upload2007.cnool.net/") >= 0) {
+            url = url.replace(".jpg", "_s.jpg");
+            url = url.replace(".png", "_s.png");
+            url = url.replace(".jpeg", "_s.jpeg");
+            return url;
+        }
+        if (url.indexOf("https://upload2016.cnool.net/") >= 0) {
+            url = url.replace("https://upload2016.cnool.net/uploads_large/", "https://upload2016.cnool.net/uploads_thumbnail/");
+            return url;
+        }
+        return url;
+    },
+    Convert2BigImg: function (url) {
+        if (url == undefined) return url;
+        if (url.indexOf("https://upload2007.cnool.net/") >= 0) {
+            url = url.replace("_m.jpg", ".jpg");
+            url = url.replace("_m.png", ".png");
+            url = url.replace("_m.jpeg", ".jpeg");
+            return url;
+        }
+        if (url.indexOf("https://upload2016.cnool.net/") >= 0) {
+            url = url.replace("https://upload2016.cnool.net/uploads_mobile/", "https://upload2016.cnool.net/uploads_large/");
+            return url;
+        }
+        return url;
+    },
+    Convert2BigImg200: function (url) {
+        if (url == undefined) return url;
+        if (url.indexOf("https://upload2007.cnool.net/") >= 0) {
+            url = url.replace("_s.jpg", ".jpg");
+            url = url.replace("_s.png", ".png");
+            url = url.replace("_s.jpeg", ".jpeg");
+            return url;
+        }
+        if (url.indexOf("https://upload2016.cnool.net/") >= 0) {
+            url = url.replace("https://upload2016.cnool.net/uploads_thumbnail/", "https://upload2016.cnool.net/uploads_large/");
+            return url;
+        }
+        return url;
+    },
+    replaceImg: function (url) {
+        if (url) {
+            if (url.indexOf("http://upload2007.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/upload2007\.cnool\.net/g, "https://upload2007.cnool.net");
+            }
+            if (url.indexOf("http://upload2016.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/upload2016\.cnool\.net/g, "https://upload2016.cnool.net");
+            }
+            if (url.indexOf("http://avatar.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/avatar\.cnool\.net/g, "https://avatar.cnool.net");
+            }
+            if (url.indexOf("http://static.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/static\.cnool\.net/g, "https://static.cnool.net");
+            }
+            if (url.indexOf("http://img2011.bbs.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/img2011\.bbs\.cnool\.net/g, "https://avatar.cnool.net");
+            }
+            if (url.indexOf("http://img.bbs.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/img\.bbs\.cnool\.net/g, "https://static.cnool.net");
+            }
+            if (url.indexOf("http://source.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/source\.cnool\.net/g, "https://source.cnool.net");
+            }
+            return url;
+        } else {
+            return;
+        }
+    },
+    //获取一点登陆sessionid
+    ConvertPassportToSessionId: function (datas, onSuccess) {
+        var AppId = 0;
+        browserRedirect(function () {
+            AppId = 10002;
+        });
+        //var $sessionId = localStorage.SessionId;
+        //var $sessionId = api.getSessionId();
+        datas["AppId"] = AppId;
+        datas["CnoolPassport"] = $.cookie('CNOOL.passport');
+        return $.ajax({
+            type: "post",
+            url: "/ajax/m/ConvertPassportToSessionId.aspx",
+            data: datas,
+            success: function (json) {
+                if (onSuccess) {
+                    onSuccess(json);
+                }
+            }
+        });
+    }
+};
+//remove数组指定元素
+function removeByValue(arr, val) {
+    for (var i = 0; i < arr.length; i++) {
+        if (arr[i] == val) {
+            arr.splice(i, 1);
+            break;
+        }
+    }
+}
+function replaceImg(obj) {
+    var replaceoneImg = function (url) {
+        if (url) {
+            if (url.indexOf("http://upload2007.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/upload2007\.cnool\.net/g, "https://upload2007.cnool.net");
+            }
+            if (url.indexOf("http://upload2016.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/upload2016\.cnool\.net/g, "https://upload2016.cnool.net");
+            }
+            if (url.indexOf("http://avatar.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/avatar\.cnool\.net/g, "https://avatar.cnool.net");
+            }
+            if (url.indexOf("http://static.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/static\.cnool\.net/g, "https://static.cnool.net");
+            }
+            if (url.indexOf("http://img2011.bbs.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/img2011\.bbs\.cnool\.net/g, "https://avatar.cnool.net");
+            }
+            if (url.indexOf("http://img.bbs.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/img\.bbs\.cnool\.net/g, "https://static.cnool.net");
+            }
+            if (url.indexOf("http://source.cnool.net") >= 0) {
+                url = url.replace(/http\:\/\/source\.cnool\.net/g, "https://source.cnool.net");
+            }
+            return url;
+        } else {
+            return;
+        }
+    }
+
+    if (typeof (obj) == "string") {
+        return replaceoneImg(obj);
+    } else if (typeof (obj) == "object" && obj.length > 0) {
+        for (i = 0; i < obj.length; i++) {
+            replaceoneImg(obj[i]);
+        }
+    }
+}
+function timematch($postDate) {
+    var date_now = new Date();
+    $postDate = $postDate.replace(/-/g, "/")
+    var date_end = new Date($postDate);
+
+    var time = parseInt((date_now.getTime() - date_end.getTime()) / 1000);
+
+    var second = time % 60;
+    var all_minute = parseInt(time / 60);
+    var minute = all_minute % 60;
+    var all_hour = parseInt(all_minute / 60);
+    var hour = all_hour % 24;
+    var all_day = parseInt(all_hour / 24);
+    var all_month = parseInt(all_day / 30);
+    var all_year = parseInt(all_day / 365);
+    if (all_year >= 1) {
+        return $postDate = all_year + "年前"
+    } else {
+        if (all_month >= 1) {
+            return $postDate = all_month + "月前"
+        }
+        else {
+            if (all_day >= 1) {
+                return $postDate = all_day + "天前"
+            } else {
+                if (all_hour >= 1) {
+                    return $postDate = all_hour + "小时前"
+                } else {
+                    if (minute > 10) {
+                        return $postDate = minute + "分钟前"
+                    } else {
+                        return $postDate = "刚刚";
+                    }
+                }
+            }
+        }
+    }
+};
+function escape2Html(str) {
+    var arrEntities = { 'lt': '<', 'gt': '>', 'nbsp': ' ', 'amp': '&', 'quot': '"' };
+    return str.replace(/&(lt|gt|nbsp|amp|quot);/ig, function (all, t) {
+        return arrEntities[t];
+    }).replace(/&#([^;]*);/g, function () {
+        var args = arguments,
+        len = args.length,
+        //当前匹配的字符串
+        match = args[0],
+        //所有分组$1, $2, ..., $n，跟上面replace(RegExp, str)中的$n一样，只不过这里的下标从0开始
+        $ = Array.prototype.slice.call(args, 1, len - 2),
+        //当前匹配的开始位置
+        index = args[len - 2],
+        //原字符串
+        str = args[len - 1];
+        return String.fromCharCode($[0]);
+    });
+}
+function GetQueryString(name) {
+    var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) return decodeURI(r[2]); return null;
+};
+
+//判断浏览器为oc端还是wap端
+function browserRedirect(callback) {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    if (bIsIpad || bIsIphoneOs || bIsAndroid) {
+        if (callback) {
+            callback();
+        }
+    }
+};
+
+//判断浏览器为oc端还是wap端
+function browserRedirect_toPC(callback) {
+    var sUserAgent = navigator.userAgent.toLowerCase();
+    var bIsIpad = sUserAgent.match(/ipad/i) == "ipad";
+    var bIsIphoneOs = sUserAgent.match(/iphone os/i) == "iphone os";
+    var bIsAndroid = sUserAgent.match(/android/i) == "android";
+    if (!(bIsIpad || bIsIphoneOs || bIsAndroid)) {
+        if (callback) {
+            callback();
+        }
+    }
+};

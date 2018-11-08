@@ -27,14 +27,22 @@
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
-                        <th class="sorting_asc" role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" aria-sort="ascending" style="width: 120px;">ID</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 174px;">用户名</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">手机号</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">邮箱</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 120px;">状态</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">注册时间</th>
-                        <th class="sorting"     role="columnheader" tabindex="0" aria-controls="DataTables_Table_1" rowspan="1" colspan="1" style="width: 222px;">操作</th>
-  
+                        <th>ID</th>
+                        <!-- <th>uid</th> -->
+                        <th>用户名</th>
+                        <th>头像</th>
+                        <th>性别</th>
+                        <th>手机号</th>
+                        <th>邮箱</th>
+                        <th>QQ号</th>
+                        <th>出生日期</th>
+                        <th>城市</th>
+                        <th>关注</th>
+                        <th>粉丝</th>
+                        <th>积分</th>
+                        <th>状态</th>
+                        <th>注册时间</th>
+                        <th>操作</th>
                     </tr>
                 </thead>
                 
@@ -42,13 +50,36 @@
                     @foreach($user as $k=>$v)
                         <tr class="odd">
                             <td>{{ $v->id }}</td>
+                            <!-- <td>{{ $v->userinfo->uid }}</td> -->
                             <td>{{ $v->username }}</td>
+
+
+                            <!-- <td>{{ $v->userinfo->photo }}</td> -->
+                            <td align="center"><img  style="width:60px;height:50px;" src="{{ $v->userinfo->photo }}"></td>
+
+
+
+                            @if( $v->userinfo->sex == 1)
+                            <td><span>女</span></td>
+                            @elseif($v->userinfo->sex == 2)
+                            <td><span>男</span></td>
+                            @else
+                            <td><span></span></td>
+                            @endif
                             <td>{{ $v->userinfo->phone }}</td>
                             <td>{{ $v->userinfo->email }}</td>
+                            <td>{{ $v->userinfo->qq }}</td>
+                            <td>{{ $v->userinfo->birthday }}</td>
+                            <td>{{ $v->userinfo->city }}</td>
+                            <td>{{ $v->userinfo->following }}</td>
+                            <td>{{ $v->userinfo->fas }}</td>
+                            <td>{{ $v->userinfo->integral }}</td>
                             @if( $v->status == 1)
-                            <td><span style="background: orange;">未激活</span></td>
+                            <td><span style="background: yellowgreen;">超级管理员</span></td>
+                            @elseif( $v->status == 2)
+                            <td><span style="background: orange;">论坛管理员</span></td>
                             @else
-                            <td><span style="background: greenyellow;">激活</span></td>
+                            <td><span style="background: yellow;">普通用户</span></td>
                             @endif
                             <!-- <td>{{ $v->status == 1 ? '未激活' : '激活' }}</td> -->
                             <td>{{ $v->userinfo->created_at }}</td>

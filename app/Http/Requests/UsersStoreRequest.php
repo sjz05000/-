@@ -29,7 +29,7 @@ class UsersStoreRequest extends Request
             'password' => 'required|regex:/^[\w]{6,18}$/',
             'repassword' => 'required|same:password',
             'phone' => 'required|regex:/^1{1}[345678]{1}[\d]{9}$/',
-            'email' => 'required|email',
+            'email' => 'email',
         ];      
     }
     
@@ -45,7 +45,6 @@ class UsersStoreRequest extends Request
             'repassword.same' => '两次密码不一致',
             'phone.required' => '手机号必填',
             'phone.regex' => '手机号格式错误',
-            'email.required' => '邮箱必填',
             'email.email' => '邮箱格式错误',
         ];
     }
