@@ -90,8 +90,10 @@ class bannerController extends Controller
      */
     public function edit($id)
     {
-        //
-        echo '11';
+        // 获取数据
+        $data = Banner::find($id);
+        // 加载页面
+        return view('admin/banner/edit',['data'=>$data,'title'=>'修改轮播图']);
     }
 
     /**
@@ -103,7 +105,38 @@ class bannerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //验证表单
+        $this->validate($request, [
+            'burl' => 'required',
+            'bpic'  => 'image'
+        ],[
+            'burl.required' => '跳转地址必填',
+            'bpic.image' => '图片格式错误'
+        ]);
+        // 创建文件上传对象
+        if($request->hasFile('bpic')){ 
+            $profile = $request->file('bpic');
+            $ext = $profile->getClientOriginalExtension(); //获取文件后缀
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+            $res = $profile->move($dir_name,$file_name);
+        }
+       
+        // 提交到数据库
+        $banner = Banner::find($id);
+        $banner->burl = $request->input('burl'); 
+        // 拼接数据库存放路径
+        if($request->hasFile('bpic')){
+            $banner->bpic = ltrim($dir_name.'/'.$file_name,'.');
+        }
+        
+        $res = $banner->save();
+        if($res){
+            return redirect('admin/banner')->with('success', '修改成功!');
+        }else{
+            return back()->with('error', '修改失败!');
+        }
+
     }
 
     /**
@@ -114,6 +147,12 @@ class bannerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Banner::find($id);
+        $res = $data->delete();
+         if($res){
+            return redirect('admin/banner')->with('success', '删除成功!');
+        }else{
+            return back()->with('error', '删除失败!');
+        }
     }
 }

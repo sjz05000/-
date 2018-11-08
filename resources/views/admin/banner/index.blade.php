@@ -11,7 +11,7 @@
                 <tr>
                     <th>ID</th>
                     <th>图片</th>
-                    <th>跳转路径</th>
+                    <th>跳转地址</th>
                     <th>操作</th>
                 </tr>
             </thead>

@@ -41,6 +41,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
+         //  验证表单
+        $this->validate($request, [
+            'title' => 'required',
+            'auth' => 'required',
+            'path' => 'required',
+            'content' => 'required',
+        ],[
+            'title.required' => '文章标题必填',
+            'auth.required' => '作者必填',
+            'path.required' => '路径必填',
+            'content.required' => '内容必填',
+        ]);
         $article = new Article;
         $article->title = $request->input('title','');
         $article->auth = $request->input('auth','');
@@ -48,7 +60,7 @@ class ArticleController extends Controller
         $article->content = $request->input('content','');
         $res = $article->save();
         if($res){
-            return redirect('/admin/article')->with('success','文章添加成功');
+            return redirect('/admin/article')->withInput($request->all())->with('success','文章添加成功');
         }else{
             return back()->with('error','文章添加失败');
         }
@@ -87,6 +99,18 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
+          //  验证表单
+        $this->validate($request, [
+            'title' => 'required',
+            'auth' => 'required',
+            'path' => 'required',
+            'content' => 'required',
+        ],[
+            'title.required' => '文章标题必填',
+            'auth.required' => '作者必填',
+            'path.required' => '路径必填',
+            'content.required' => '内容必填',
+        ]);
         $article = Article::find($id);
         $article->title = $request->input('title','');
         $article->auth = $request->input('auth','');

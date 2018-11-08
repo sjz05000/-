@@ -12,7 +12,7 @@
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">导航名称</label>
                     				<div class="mws-form-item">
-                    					<input type="text" class="medium" name="navname">
+                    					<input type="text" class="medium" name="navname" value="{{old('navname')}}">
                     				</div>
                     			</div>
                     			<div class="mws-form-row">
@@ -38,7 +38,7 @@
                                    <div class="mws-form-row">
                                         <label class="mws-form-label">导航地址</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="medium" name="url">
+                                             <input type="text" class="medium" name="url" value="{{old('url')}}">
                                         </div>
                                    </div>
                     		</div>

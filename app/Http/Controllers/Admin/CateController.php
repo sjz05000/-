@@ -58,10 +58,22 @@ class CateController extends Controller
      */
     public function store(Request $request)
     {
+        //  验证表单
+        $this->validate($request, [
+            'cname' => 'required|unique:dy-cates',
+        ],[
+            'cname.required' => '类别名称必填',
+            'cname.unique' => '类别名称已存在',
+        ]);
         $pid = $request->input('pid','');
         if($pid == 0){
             $path = 0;
         }else{
+            $pid_path = Cate::find($pid);
+            $m = substr_count($pid_path->path,',');
+            if($m > 0){
+                return back()->with('error','最高两级分类');
+            }
             $parents_path = Cate::find($pid);
             $path = $parents_path->path.','.$parents_path->id;
         }
@@ -110,6 +122,12 @@ class CateController extends Controller
      */
     public function update(Request $request, $id)
     {
+          //  验证表单
+        $this->validate($request, [
+            'cname' => 'required',
+        ],[
+            'cname.required' => '类别名称必填',
+        ]);
         $child_cate = Cate::where('pid','=',$id)->first();
         if($child_cate){
             return back()->with('error','此类别下有子分类');
@@ -118,6 +136,11 @@ class CateController extends Controller
         if($pid == 0){
             $path = 0;
         }else{
+             $pid_path = Cate::find($pid);
+            $m = substr_count($pid_path->path,',');
+            if($m > 0){
+                return back()->with('error','最高两级分类');
+            }
             $parents_path = Cate::find($pid);
             $path = $parents_path->path.','.$parents_path->id;
         }
