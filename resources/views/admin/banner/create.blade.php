@@ -1,4 +1,4 @@
-@extends('admin/layout/layout')
+@extends('admin.layout.layout')
 
 @section('content')
 <div class="mws-panel grid_8">

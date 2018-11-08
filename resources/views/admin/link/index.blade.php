@@ -1,4 +1,4 @@
-@extends('admin/layout/layout')
+@extends('admin.layout.layout')
 
  
 @section('content')
@@ -7,6 +7,7 @@
 	    	<span><i class="icon-table"></i>{{ $title or '' }}</span>
 	    </div>
 	    <div class="mws-panel-body no-padding">
+	    	<div id="DataTables_Table_1_wrapper" class="dataTables_wrapper" role="grid">
 	        <table class="mws-table">
 	            <thead>
 	                <tr>
@@ -42,7 +43,12 @@
 					 </tr> -->
 	                @endforeach    
 	            </tbody>
-	        </table>
+	        </table> 
+	        <div class="dataTables_info" id="DataTables_Table_1_info">Showing 1 to 10 of 57 entries</div>
+	        <div id="page_page">{!! $data->render() !!}</div>
+	    </div>
 	    </div>
 	</div>
+	
+	
 @endsection

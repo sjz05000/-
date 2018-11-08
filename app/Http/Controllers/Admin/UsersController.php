@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersStoreRequest;
 use App\User;
 use Hash;
-use App\Models\Userdetail;
+use App\Model\Userdetail;
 use DB;
 
 class UsersController extends Controller
