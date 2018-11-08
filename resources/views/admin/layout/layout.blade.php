@@ -292,6 +292,15 @@
                             <li><a href="/admin/article">浏览文章</a></li>
                         </ul>
                     </li>
+
+                    <li class="active">
+                        <a href="#"><i class="icon-pacman"></i>评论管理</a>
+                        <ul class="closed">
+                            <!-- <li><a href="/admin/comment/create">添加评论</a></li> -->
+                            <li><a href="/admin/comment">浏览评论</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
         </div>

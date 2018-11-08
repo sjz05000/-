@@ -40,3 +40,32 @@ Route::resource('/admin/navigation','Admin\NavigationController');
 Route::resource('/admin/article','Admin\ArticleController');
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 后台评论管理
+Route::resource('/admin/comment','Admin\CommentController');
+// 前台首页
+Route::get('/home', 'Home\IndexController@index');
+// 前台个人中心页
+Route::resource('/home/my','Home\MyController');
+
+

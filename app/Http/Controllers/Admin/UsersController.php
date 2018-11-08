@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersStoreRequest;
 use App\User;
 use Hash;
-use App\Models\Userdetail;
+use App\Model\Userdetail;
 use DB;
 
 class UsersController extends Controller
@@ -56,6 +56,12 @@ class UsersController extends Controller
         DB::beginTransaction();
 
         // 验证表单在UsersStoreRequest中
+        // 创建文件上传对象
+        $profile = $request -> file('photo');
+        $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+        $file_name = str_random('20').'.'.$ext;         //重命名
+        $dir_name = './uploads/'.date('Ymd',time());    //存储目录
+        $res2 = $profile->move($dir_name,$file_name);    //移动文件到指定目录
         // 获取数据 进行添加
         $user = new User;
         $user->username=$request->input('username');
@@ -66,6 +72,13 @@ class UsersController extends Controller
         $userdetail->uid = $id;
         $userdetail->phone = $request->input('phone');
         $userdetail->email = $request->input('email');
+        $userdetail->qq = $request->input('qq');
+        $userdetail->city = $request->input('city');
+        $userdetail->birthday = $request->input('birthday');
+        $userdetail->sex = $request->input('sex');
+        $userdetail->photo = $request->input('photo');// 提交到数据库
+        // 拼接数据库存放路径
+        $userdetail->photo = ltrim($dir_name.'/'.$file_name,'.');
         $res2 = $userdetail->save();
         // 逻辑判断
         if ($res1 && $res2) {
@@ -75,7 +88,7 @@ class UsersController extends Controller
         } else {
             // 回滚
             DB::rollBack;
-            return back()->with('success','添加失败');
+            return back()->with('error','添加失败');
         }
 
     }
@@ -123,16 +136,22 @@ class UsersController extends Controller
         $this->validate($request, [
             'username' => 'required|regex:/^[a-zA-Z]{1}[\w]{7,15}$/',
             'phone' => 'required|regex:/^1{1}[345678]{1}[\d]{9}$/',
-            'email' => 'required|email',
+            'email' => 'email',
         ],[
             'username.required' => '用户名必填',
             'username.regex' => '用户名格式错误',
             'phone.required' => '手机号必填',
             'phone.regex' => '手机号格式错误',
-            'email.required' => '邮箱必填',
             'email.email' => '邮箱格式错误',
         ]);
 
+        if($request->hasFile('photo')){ 
+            $profile = $request->file('photo');
+            $ext = $profile->getClientOriginalExtension(); //获取文件后缀
+            $file_name = str_random('20').'.'.$ext;
+            $dir_name = './uploads/'.date('Ymd',time());
+            $res2 = $profile->move($dir_name,$file_name);
+        }
 
         // 获取数据 进行添加
         $user = User::find($id);
@@ -146,6 +165,15 @@ class UsersController extends Controller
         $userdetail->uid = $id;
         $userdetail->phone = $request->input('phone');
         $userdetail->email = $request->input('email');
+        $userdetail->qq = $request->input('qq');
+        $userdetail->city = $request->input('city');
+        $userdetail->birthday = $request->input('birthday');
+        $userdetail->sex = $request->input('sex');
+        // 拼接数据库存放路径
+        if($request->hasFile('photo')){
+            $userdetail->photo = ltrim($dir_name.'/'.$file_name,'.');
+            // $userdetail->photo = $request->input('photo');
+        }
         $res2 = $userdetail->save();
 
         // $some = $request->all();
@@ -159,7 +187,7 @@ class UsersController extends Controller
         } else {
             // 回滚
             DB::rollBack;
-            return back()->with('success','修改失败');
+            return back()->with('error','修改失败');
         }
 
     }
@@ -186,7 +214,7 @@ class UsersController extends Controller
         } else {
             // 回滚
             DB::rollBack;
-            return back()->with('success','添加失败');
+            return back()->with('error','添加失败');
         }
     }
 }

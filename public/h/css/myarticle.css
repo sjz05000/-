@@ -1,0 +1,87 @@
+
+.bankuailist_newsbox{
+    padding: 14px;
+    border-bottom: 1px solid #f0f0f0;
+    overflow: hidden;
+    margin-bottom: 14px;
+}
+.bankuailist_newsimg{
+    float: left;
+    width: 156px;
+    height: 102px;
+    cursor: pointer;
+    overflow:hidden;
+    margin:0 20px 0 0;
+}
+.bankuailist_newsimg img{
+    width: 100%;
+}
+.bankuailist_news{
+}
+.bankuailist_newstitle{
+    
+}
+.bankuailist_newstitle h1{
+    font:normal 18px/28px "微软雅黑";
+    color: #444;
+    cursor: pointer;
+}
+.bankuailist_newstitle h1:hover{
+    color: #406599;
+}
+.bankuailist_newstitle h1 a {color:#444;}
+.bankuailist_news p a {color:#999;}
+.bankuailist_tabbar{
+    overflow: hidden;
+}
+.bankuailist_tab{
+    color: #ffaa00;
+    font: 14px/18px "微软雅黑";
+    float: left;
+}
+.bankuailist_tab .fa{
+    color: #ccc;
+}
+.bankuailist_name{
+    float: left;
+    margin-left: 14px;
+    overflow: hidden;
+}
+.bankuailist_name *{
+    float: left;
+}
+.bankuailist_icon{
+    float: right;
+}
+.bankuailist_icon span{
+    color: #999;
+    margin-left: 10px;
+}
+.bankuailist_icon .fa{
+    color: #ccc;
+}
+.bankuailist_name img{
+    width: 18px;
+    height: 18px;
+    float: left;
+    border-radius:50%;
+}
+.bankuailist_news p {height: 48px;
+    font: normal 14px/24px "微软雅黑";
+    margin: 0 0 5px 0;
+    color: #999;}
+.bankuailist_name span{
+    font: 14px/18px "微软雅黑";
+    color: #999;
+    margin-left: 6px;
+    float: left;
+}
+.bankuailist_name span:hover{
+    color: #406599;
+}
+.bankuailist_time{
+    font: 14px/18px "微软雅黑";
+    color: #999;
+    margin-left: 14px;
+    float: left;
+}

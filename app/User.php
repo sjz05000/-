@@ -42,6 +42,6 @@ class User extends Model implements AuthenticatableContract,
     // 一对一
     public function userinfo()
     {
-        return $this->hasOne('App\Models\Userdetail','uid');
+        return $this->hasOne('App\Model\Userdetail','uid');
     }
 }
