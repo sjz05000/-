@@ -21,7 +21,8 @@
                     					<select class="medium" name="pid">
                     						<option value="0">--请选择--</option>
                     						@foreach($data as $k=>$v)
-                    							<option value="{{$v->id}}" @if($v->id == $cate->pid) selected @endif>{{$v->cname}}</option>
+                    							<option value="{{$v->id}}" @if($v->id == $cate->pid) selected @elseif($v->cname == 
+                                                       $cate->cname || $v->cname == '|----'.$cate->cname) disabled @endif >{{$v->cname}}</option>
                     						@endforeach
                     					</select>
                     				</div>

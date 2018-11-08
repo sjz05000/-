@@ -11,7 +11,7 @@
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">类别名称</label>
                     				<div class="mws-form-item">
-                    					<input type="text" class="medium" name="cname">
+                    					<input type="text" class="medium" name="cname" value="{{old('cname')}}">
                     				</div>
                     			</div>
                     			<div class="mws-form-row">

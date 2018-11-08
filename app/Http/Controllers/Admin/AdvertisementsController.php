@@ -42,6 +42,20 @@ class AdvertisementsController extends Controller
      */
     public function store(Request $request)
     {
+        //验证表单
+        $this->validate($request, [
+            'adname' => 'required|unique:dy-advertisements',
+            'adphone'  => 'required|regex:/1[3-8]{1}[0-9]{9}/',
+            'url' => 'required|url'
+        ],[
+            'adname.required' => '广告名称必填',
+            'adname.unique' => '广告名称已存在',
+            'adphone.required' => '手机号必填',
+            'adphone.regex'=>'手机号格式错误',
+            'url.required' => 'URL不能为空',
+            'url.url' => 'URL格式错误',
+        ]);
+        // 判断有无文件上传
         if($request->hasFile('adfile')){
                     $adfile = $request->file('adfile');
                     $adfile_path = './d/uploads/'.date('Ymd',time());
@@ -56,7 +70,7 @@ class AdvertisementsController extends Controller
                     $advertisements->url = $request->input('url');
                     $res = $advertisements->save();
                     if($res){
-                        return redirect('/admin/advertisements')->with('success','添加成功');
+                        return redirect('/admin/advertisements')->withInput($request->all())->with('success','添加成功');
                     }else{
                         return back()->with('error','添加失败');
                     }
@@ -97,6 +111,19 @@ class AdvertisementsController extends Controller
      */
     public function update(Request $request, $id)
     {
+         //验证表单
+        $this->validate($request, [
+            'adname' => 'required',
+            'adphone'  => 'required|regex:/1[3-8]{1}[0-9]{9}/',
+            'url' => 'required|url'
+        ],[
+            'adname.required' => '广告名称必填',
+            'adphone.required' => '手机号必填',
+            'adphone.regex'=>'手机号格式错误',
+            'url.required' => 'URL不能为空',
+            'url.url' => 'URL格式错误',
+        ]);
+        // 判断有无文件上传
         if($request->hasFile('adfile')){
                 $adfile = $request->file('adfile');
                 $adfile_path = './d/uploads/'.date('Ymd',time());

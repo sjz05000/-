@@ -9,15 +9,15 @@
                     		{{csrf_field()}}
                     		<div class="mws-form-inline">
                     			<div class="mws-form-row">
-                    				<label class="mws-form-label">公司名称</label>
+                    				<label class="mws-form-label">广告名称</label>
                     				<div class="mws-form-item">
-                    					<input type="text" class="medium" name="adname">
+                    					<input type="text" class="medium" name="adname" value="{{old('adname')}}">
                     				</div>
                     			</div>
                     			<div class="mws-form-row">
                     				<label class="mws-form-label">联系电话</label>
                     				<div class="mws-form-item">
-                    					<input type="text" class="medium" name="adphone">
+                    					<input type="text" class="medium" name="adphone" value="{{old('adphone')}}">
                     				</div>
                     			</div>
                     		　　<label for="file_file" class="mws-form-label" style="margin-left: 25px;">广告图片</label>
@@ -34,7 +34,7 @@
                     		     <div class="mws-form-row">
                                         <label class="mws-form-label">网站地址</label>
                                         <div class="mws-form-item">
-                                             <input type="text" class="medium" name="url">
+                                             <input type="text" class="medium" name="url" value="{{old('url')}}">
                                         </div>
                                    </div>
                     		</div>

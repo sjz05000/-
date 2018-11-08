@@ -59,13 +59,23 @@ class NavigationController extends Controller
      */
     public function store(Request $request)
     {
+         //  验证表单
+        $this->validate($request, [
+            'navname' => 'required|unique:dy-navigation',
+            'url' => 'required|url',
+        ],[
+            'navname.required' => '导航名称必填',
+            'navname.unique' => '导航名称已存在',
+            'url.required' => 'URL不能为空',
+            'url.url' => 'URL格式错误',
+        ]);
         $navigation = new Navigation;
         if($request->input('pid')==0){
             $navigation->path = 0;
         }else{
-             $pid = Navigation::find($request->pid);
-             $path_count = substr_count($pid->path,',')+1;
-             if($path_count>1){
+             $pid = Navigation::find($request->input('pid',''));
+             $path_count = substr_count($pid->path,',');
+             if($path_count>0){
                 return back()->with('error','导航最高二级');
              }
            $parent_path = Navigation::find($request->input('pid'));
@@ -77,7 +87,7 @@ class NavigationController extends Controller
         $navigation->url = $request->input('url','');
         $res = $navigation->save();
         if($res){
-            return redirect('/admin/navigation')->with('success','添加成功');
+            return redirect('/admin/navigation')->withInput($request->all())->with('success','添加成功');
         }else{
             return back()->with('error','添加失败');
         }
@@ -116,6 +126,15 @@ class NavigationController extends Controller
      */
     public function update(Request $request, $id)
     {
+          //  验证表单
+        $this->validate($request, [
+            'navname' => 'required',
+            'url' => 'required|url',
+        ],[
+            'navname.required' => '导航名称必填',
+            'url.required' => 'URL不能为空',
+            'url.url' => 'URL格式错误',
+        ]);
         $child = Navigation::where('pid','=',$id)->first();
         if($child){
             return back()->with('error','该类别下有子分类');
@@ -124,9 +143,9 @@ class NavigationController extends Controller
         if($request->input('pid')==0){
             $navigation->path = 0;
         }else{
-            $pid = Navigation::find($request->pid);
-             $path_count = substr_count($pid->path,',')+1;
-             if($path_count>1){
+            $pid = Navigation::find($request->input('pid',''));
+             $path_count = substr_count($pid->path,',');
+             if($path_count>0){
                 return back()->with('error','导航最高二级');
              }
            $parent_path = Navigation::find($request->input('pid'));
