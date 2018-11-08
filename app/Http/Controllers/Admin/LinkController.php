@@ -18,7 +18,7 @@ class LinkController extends Controller
     public function index()
     {
         // 获取数据
-        $data = Link::all();
+        $data = Link::paginate(6);
         // 加载页面
         return view('admin/link/index',['data'=>$data,'title'=>'链接列表']);
     }

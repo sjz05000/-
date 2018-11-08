@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Models\Label;
+use App\Model\Label;
 use App\Http\Requests\LabelStoreRequest;
 use Hash;
 use DB;
-
 
 class LabelController extends Controller
 {

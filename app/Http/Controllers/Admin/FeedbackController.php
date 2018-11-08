@@ -7,18 +7,21 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Feedback;
-
-class IndexController extends Controller
+use App\User;
+class FeedbackController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {   
-        //加载模板
-        return view('admin.index.index');
+    public function index(Request $request)
+    {    
+        // 引入反馈数据
+        $data = Feedback::paginate(8);
+        // 加载页面
+        return view('admin.feedback.index',['title'=>'反馈列表','data'=>$data]);
+
     }
 
     /**
@@ -28,7 +31,7 @@ class IndexController extends Controller
      */
     public function create()
     {
-        //
+        // 
     }
 
     /**
@@ -50,7 +53,11 @@ class IndexController extends Controller
      */
     public function show($id)
     {
-        //
+        // 加载数据
+        $data = Feedback::find($id);
+        // 加载页面
+        return view('admin.feedback.show',['data'=>$data,'title'=>'信息内容']);
+
     }
 
     /**
@@ -84,6 +91,12 @@ class IndexController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $flight = Feedback::find($id);
+        $res = $flight->delete();
+         if($res){
+            return redirect('/admin/feedback')->with('success', '删除成功!');
+        }else{
+            return back()->with('error', '删除失败!');
+        }
     }
 }

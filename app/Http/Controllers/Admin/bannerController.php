@@ -20,7 +20,7 @@ class bannerController extends Controller
         // 获取数据
         $data = Banner::all();
         // 加载页面
-        return view('admin/banner/index',['data'=>$data,'title'=>'轮播列表']);
+        return view('admin.banner.index',['data'=>$data,'title'=>'轮播列表']);
     }
 
     /**
@@ -31,7 +31,7 @@ class bannerController extends Controller
     public function create()
     {
         // 加载页面
-        return view('admin/banner/create',['title'=>'添加轮播图']);
+        return view('admin.banner.create',['title'=>'添加轮播图']);
     }
 
     /**

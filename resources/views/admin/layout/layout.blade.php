@@ -59,127 +59,14 @@
         
         <!-- User Tools (notifications, logout, profile, change password) -->
         <div id="mws-user-tools" class="clearfix">
-        
-            <!-- Notifications -->
-            <div id="mws-user-notif" class="mws-dropdown-menu">
-                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-exclamation-sign"></i></a>
-                
-                <!-- Unread notification count -->
-                <span class="mws-dropdown-notif">35</span>
-                
-                <!-- Notifications dropdown -->
-                <div class="mws-dropdown-box">
-                    <div class="mws-dropdown-content">
-                        <ul class="mws-notifications">
-                            <li class="read">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="read">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-                            <a href="#">View All Notifications</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
             <!-- Messages -->
             <div id="mws-user-message" class="mws-dropdown-menu">
-                <a href="#" data-toggle="dropdown" class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
+                <a href="/admin/feedback"  class="mws-dropdown-trigger"><i class="icon-envelope"></i></a>
                 
                 <!-- Unred messages count -->
-                <span class="mws-dropdown-notif">35</span>
-                
+                <!-- <span class="mws-dropdown-notif"></span> -->
                 <!-- Messages dropdown -->
-                <div class="mws-dropdown-box">
-                    <div class="mws-dropdown-content">
-                        <ul class="mws-messages">
-                            <li class="read">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet consectetur adipiscing elit, et al commore
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="read">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                            <li class="unread">
-                                <a href="#">
-                                    <span class="sender">John Doe</span>
-                                    <span class="message">
-                                        Lorem ipsum dolor sit amet
-                                    </span>
-                                    <span class="time">
-                                        January 21, 2012
-                                    </span>
-                                </a>
-                            </li>
-                        </ul>
-                        <div class="mws-dropdown-viewall">
-                            <a href="#">View All Messages</a>
-                        </div>
-                    </div>
-                </div>
             </div>
             
             <!-- User Information and functions section -->
@@ -241,24 +128,45 @@
                             <li><a href="/admin/users/????">回收站</a></li>
                         </ul>
                     </li>
+                    
+                    <li class="active">
+                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/cate/create">添加类别</a></li>
+                            <li><a href="/admin/cate">浏览类别</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/article/create">添加文章</a></li>
+                            <li><a href="/admin/article">浏览文章</a></li>
+                        </ul>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-heart"></i>用户收藏</a>
+                        <ul class="closed">
+                            <li><a href="/admin/collect/create">添加收藏</a></li>
+                            <li><a href="/admin/collect">浏览收藏</a></li>
+                        </ul>
+                    </li>
                     <li class="active">
                         <a href="#"><i class="icon-tags"></i> 标签管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/label">标签列表</a></li>
                             <li><a href="/admin/label/create">标签添加</a></li>
+                            <li><a href="/admin/label">标签列表</a></li>                 
                             <li><a href="/admin/label/????">回收站</a></li>
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="icon-attachment"></i>友情链接管理</a>
+                        <a href="#"><i class="icon-direction"></i>导航管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/link/create">添加链接</a></li>
-                            <li><a href="/admin/link">浏览链接</a></li>
+                            <li><a href="/admin/navigation/create">添加导航</a></li>
+                            <li><a href="/admin/navigation">浏览导航</a></li>
                         </ul>
                     </li>
-
                     <li class="active">
-                        <a href="#"><i class="icon-flickr"></i>轮播图管理</a>
+                        <a href="#"><i class="icon-pictures"></i>轮播图管理</a>
                         <ul class="closed">      
                             <li><a href="/admin/banner/create">添加轮播图</a></li>
                             <li><a href="/admin/banner">浏览轮播图</a></li>
@@ -272,24 +180,10 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="icon-list"></i>分类管理</a>
+                        <a href="#"><i class="icon-attachment"></i>友情链接管理</a>
                         <ul class="closed">
-                            <li><a href="/admin/cate/create">添加类别</a></li>
-                            <li><a href="/admin/cate">浏览类别</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-tags"></i>导航管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/navigation/create">添加导航</a></li>
-                            <li><a href="/admin/navigation">浏览导航</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/article/create">添加文章</a></li>
-                            <li><a href="/admin/article">浏览文章</a></li>
+                            <li><a href="/admin/link/create">添加链接</a></li>
+                            <li><a href="/admin/link">浏览链接</a></li>
                         </ul>
                     </li>
                 </ul>

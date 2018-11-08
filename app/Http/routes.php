@@ -21,7 +21,11 @@ Route::get('/admin', 'Admin\IndexController@index');
 Route::resource('/admin/link', 'Admin\LinkController');
 // 后台轮播图管理
 Route::resource('/admin/banner', 'Admin\BannerController');
-
+// 用户收藏
+Route::resource('/admin/collect', 'Admin\CollectController');
+// Route::get('/admin/collect/{tid}{id}','Admin\CollectController@delete');
+// 反馈管理
+Route::resource('/admin/feedback', 'Admin\FeedbackController');
 
 
 // 后台用户的路由
