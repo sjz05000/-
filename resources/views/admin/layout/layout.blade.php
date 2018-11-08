@@ -292,13 +292,6 @@
                             <li><a href="/admin/article">浏览文章</a></li>
                         </ul>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-list-2"></i>积分管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/article/create">添加积分</a></li>
-                            <li><a href="/admin/article">修改积分</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
         </div>
