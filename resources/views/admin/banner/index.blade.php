@@ -18,9 +18,9 @@
                 </thead>
                 <tbody>
                    @foreach ($data as $v)
-          				<tr>
+          				
           					<td>{{ $v->id }}</td>
-          					<td align="center"><img  style="width:100px;height:50px;" src="{{ $v->bpic }}"></td>
+                    <td align="center"><img style="width:60px;height:50px;" src="{{ $v->bpic }}"></td>
           					<td>{{ $v->burl }}</td>
           					<td align="center">
           						<a href="/admin/banner/{{ $v->id }}/edit" class="btn btn-warning">修改</a>

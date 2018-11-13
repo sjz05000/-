@@ -155,8 +155,6 @@ class UsersController extends Controller
 
         // 获取数据 进行添加
         $user = User::find($id);
-        // $user->username=$request->input('username');
-        // $user->password=$request->input('password');
         $res1 = $user->save();//bool
 
         $id = $user->id;//获取最后插入的id号
@@ -172,12 +170,8 @@ class UsersController extends Controller
         // 拼接数据库存放路径
         if($request->hasFile('photo')){
             $userdetail->photo = ltrim($dir_name.'/'.$file_name,'.');
-            // $userdetail->photo = $request->input('photo');
         }
         $res2 = $userdetail->save();
-
-        // $some = $request->all();
-        // dump($some);
         
         // 逻辑判断
         if ($res1 && $res2) {

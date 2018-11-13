@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Http\Controllers\Admin\CateController;
+use App\Http\Controllers\Admin\bannerController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // 共享数据
+         view()->share('common_cates_data',CateController::getPidCates(0) );
+         view()->share('common_banner_data',BannerController::getBanner() );
+
     }
 
     /**

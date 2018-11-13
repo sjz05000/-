@@ -8,8 +8,15 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Banner;
 
-class bannerController extends Controller
+class BannerController extends Controller
 {
+    /**
+     *  前台轮播图
+     */
+    public static function getBanner()
+    {
+        return  Banner::all();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -50,7 +57,7 @@ class bannerController extends Controller
             'burl.required' => '链接地址必填',
             'burl.unique' => '链接地址已存在',
             'bpic.required' => '图片必填',
-            'bpic.image' => '图片格式错误'
+            'bpic.image' => '图片格式错误' 
         ]);
         // 创建文件上传对象
         $profile = $request -> file('bpic');

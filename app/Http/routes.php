@@ -10,6 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
+	共享数据
+	common_cates_data  共享前台分类处理
+	common_banner_data  共享前台轮播图处理
+
+*/ 
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,5 +75,30 @@ Route::resource('/admin/comment','Admin\CommentController');
 Route::get('/home', 'Home\IndexController@index');
 // 前台个人中心页
 Route::resource('/home/my','Home\MyController');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// 后台站点管理
+Route::get('admin/config/edit','admin\ConfigController@edit');
+Route::post('admin/config/update','admin\ConfigController@update');
 
 

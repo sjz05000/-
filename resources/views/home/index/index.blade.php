@@ -771,19 +771,22 @@
                     <!--焦点图片开始-->
                     <div class="focusImg" id="focus_01">
                         <ul id="roll_img">
+                            <!-- @foreach($common_banner_data as $k=>$v)
                             <li>
                                 <a href="http://bbs.cnool.net/10512875.html" target="_blank" author="0书寒0" node="00-1106">
-                                    <img alt="电梯内惊现邻居“表情包警告”，有才" src="/h/picture/7f24e17e-2729-4e72-99e6-83f95ea132ab_1.jpg" />
+                                    <img alt="电梯内惊现邻居“表情包警告”，有才" src="{{$v->bpic}}" />
                                     <p>电梯内惊现邻居“表情包警告”，有才</p>
                                 </a>
                             </li>
+                            @endforeach -->
+                            dump({{$common_banner_data}})
                             <li>
                                 <a href="http://bbs.cnool.net/10512827.html" target="_blank" author="0书寒0" node="00-1106">
                                     <img alt="山上独走，遭遇晒太阳的眼镜蛇！" src="/h/picture/78fde0c1-1ede-4b79-bb0e-76ec10b3f875_1.jpg" />
                                     <p>山上独走，遭遇晒太阳的眼镜蛇！</p>
                                 </a>
                             </li>
-                            <li>
+               <!--              <li>
                                 <a href="https://bbs.cnool.net/10504086.html" target="_blank" author="0书寒0" node="00-1106">
                                     <img alt="从宁波转上海，坐2天2夜火车到新疆" src="/h/picture/573012ff-0ebb-46b9-b131-856fadad1a42_1.jpg" />
                                     <p>从宁波转上海，坐2天2夜火车到新疆</p>
@@ -812,7 +815,7 @@
                                     <img alt="结婚需求大集合，网上报名送烤箱+300现金" src="/h/picture/43ff141d-5498-463d-aae6-d0d6d91c471d_1.jpg" />
                                     <p>结婚需求大集合，网上报名送烤箱+300现金</p>
                                 </a>
-                            </li>
+                            </li> -->
                         </ul>
                         <script type="text/javascript">
                             var x = new cnool_slideplayer("#roll_img", { width: "320px", height: "335px", fontsize: "14px", right: "0px", bottom: "36px", time: "5000" });
@@ -2527,30 +2530,18 @@
             <div class="categoryBody">
                 <div class="homeBook-body01" style="display: block;">
                     <ul class="linkListItem-list08">
+                         @foreach($common_cates_data as $k=>$v)
                         <li class="line05 line07">
                             <h3>
-                                <a href="/column/21" target="_blank"><font color="#ec8a10">民生</font></a>
+                                <a href="/column/21" target="_blank"><font color="#ec8a10">{{$v->cname}}</font></a>
                             </h3>
                             <span>
-                                <a href="/forum/生活热点" target="_blank">生活热点</a>
-                                <a href="/forum/宁波社区警务" target="_blank">宁波社区警务</a>
-                                <a href="/forum/法律援助" target="_blank">法律援助</a>
-                                <a href="/forum/贴图视界" target="_blank">贴图视界</a>
-                                <a href="/forum/职场纵横" target="_blank">职场纵横</a>
-                                <a href="/forum/寻人寻物" target="_blank">寻人寻物</a>
-                                <a href="/forum/公益慈善" target="_blank">公益慈善</a>
-                                <a href="/forum/海曙区" target="_blank">海曙区</a>
-                                <a href="/forum/鄞州区" target="_blank">鄞州区</a>
-                                <a href="/forum/江北区" target="_blank">江北区</a>
-                                <a href="/forum/奉化" target="_blank">奉化区</a>
-                                <a href="/forum/北仑" target="_blank">北仑</a>
-                                <a href="/forum/镇海" target="_blank">镇海</a>
-                                <a href="/forum/余姚" target="_blank">余姚</a>
-                                <a href="/forum/慈溪" target="_blank">慈溪</a>
-                                <a href="/forum/象山" target="_blank">象山</a>
-                                <a href="/forum/宁海" target="_blank">宁海</a>
+                                @foreach($v['sub'] as $kk=>$vv)
+                                <a href="/forum/{{$vv->cname}}" target="_blank">{{$vv->cname}}</a>
+                                @endforeach
                             </span>
                         </li>
+                        @endforeach
                         <li class="line05">
                             <h3>
                                 <a href="/column/34" target="_blank"><font color="#984343">爱好</font></a>
@@ -2565,178 +2556,6 @@
                                 <a href="/forum/人像人文" target="_blank">人像人文</a>
                                 <a href="/forum/贴图视界" target="_blank">贴图视界</a>
                                 <a href="/forum/风景摄影" target="_blank">风景摄影</a>
-                            </span>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/29" target="_blank"><font color="#ffa600">美食</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/私家厨房" target="_blank">私家厨房</a>
-                                <a href="/forum/吃在宁波" target="_blank">吃在宁波</a>
-                            </span>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/33" target="_blank"><font color="#4abdcc">旅游</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/旅游集散地" target="_blank">旅游集散地</a>
-                                <a href="/forum/周末旅游" target="_blank">周末旅游</a>
-                                <a href="/forum/玩在宁波" target="_blank">玩在宁波</a>
-                                <a href="/forum/单休游走" target="_blank">单休游走</a>
-                                <a href="/forum/乡村风情" target="_blank">乡村风情</a>
-                                <a href="/forum/户外联盟" target="_blank">户外联盟</a>
-                                <a href="/forum/自驾游" target="_blank">自驾游</a>
-                                <a href="/forum/单车骑游" target="_blank">单车骑游</a>
-                                <a href="/forum/行在路上" target="_blank">行在路上</a>
-                                <a href="/forum/骑迹浙东" target="_blank">骑迹浙东</a>
-                            </span>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/24" target="_blank"><font color="#fd463e">娱乐</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/影视夜话" target="_blank">影视夜话</a>
-                                <a href="/forum/影视资源分享" target="_blank">影视资源分享</a>
-                                <a href="/forum/音乐频道" target="_blank">音乐频道</a>
-                            </span>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/25" target="_blank"><font color="#4b96ea">体育</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/就爱运动" target="_blank">就爱运动</a>
-                                <a href="/forum/篮球" target="_blank">篮球</a>
-                                <a href="/forum/乒乓球" target="_blank">乒乓球</a>
-                                <a href="/forum/羽毛球" target="_blank">羽毛球</a>
-                                <a href="/forum/足球" target="_blank">足球</a>
-                                <a href="/forum/游泳" target="_blank">游泳</a>
-                                <a href="/forum/武术爱好者" target="_blank">武术爱好者</a>
-                                <a href="/forum/四明内家拳" target="_blank">四明内家拳</a>
-                            </span>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/30" target="_blank"><font color="#ffb029">亲子</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/孕味十足" target="_blank">孕味十足</a>
-                                <a href="/forum/健康育儿" target="_blank">健康育儿</a>
-                                <a href="/forum/幼教论坛" target="_blank">幼教论坛</a>
-                                <a href="/forum/家有读书郎" target="_blank">家有读书郎</a>
-                            </span>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/31" target="_blank"><font color="#e6950b">教育</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/教师论坛" target="_blank">教师论坛</a>
-                                <a href="/forum/家长论坛" target="_blank">家长论坛</a>
-                                <a href="/forum/大学心声" target="_blank">大学心声</a>
-                                
-                                <a href="/forum/国际学校" target="_blank">国际学校</a>
-                                <a href="/forum/家教" target="_blank">家教</a>
-                                <a href="/forum/数学" target="_blank">数学</a>
-                                <a href="/forum/社会考试" target="_blank">社会考试</a>
-                                <a href="/forum/童书馆" target="_blank">童书馆</a>
-                                <a href="/forum/外语论坛" target="_blank">外语论坛</a>
-                            </span>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/22" target="_blank"><font color="#de7d42">情感</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/找朋友" target="_blank">找朋友</a>
-                                <a href="/forum/婚姻物语" target="_blank">婚姻物语</a>
-                                <a href="/forum/情缘随笔" target="_blank">情缘随笔</a>
-                                <a href="/forum/单亲停靠" target="_blank">单亲停靠</a>
-                                <a href="/forum/８０年代" target="_blank">８０年代</a>
-                                <a href="/forum/７０年代" target="_blank">７０年代</a>
-                                <a href="/forum/６０年代" target="_blank">６０年代</a>
-                                <a href="/forum/老年人之家" target="_blank">老年人之家</a>
-                                <a class="cRed" href="/forum/宁波花田婚恋" target="_blank">宁波花田婚恋</a>
-                                <a class="cRed" href="/forum/金顶高端婚恋" target="_blank">金顶高端婚恋</a>
-                            </span>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/23" target="_blank"><font color="#b70123">婚嫁</font></a>
-                            </h3>
-                            <p>
-                                <span>
-                                    <a href="/forum/婚纱摄影" target="_blank">婚纱摄影</a>
-                                    <a href="/forum/婚庆广场" target="_blank">婚庆广场</a>
-                                    <a href="/forum/喜事宝" target="_blank">喜事宝</a>
-                                </span>
-                            </p>
-                        </li>
-
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/32" target="_blank"><font color="#7bb022">健康</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/医疗卫生" target="_blank">医疗卫生</a>
-                                <a href="/forum/两性生活" target="_blank">两性生活</a>
-                                <a href="/forum/肝病" target="_blank">肝病</a>
-                                <a href="/forum/针灸理疗" target="_blank">针灸理疗</a>
-                                <a href="/forum/养生与保健" target="_blank">养生与保健</a>
-                            </span>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/28" target="_blank"><font color="#0ea3da">汽车</font></a>
-                            </h3>
-                            <p>
-                                <span>
-                                    <a href="/forum/驾驶天地" target="_blank">驾驶天地</a>
-                                    <a href="/forum/驾校培训" target="_blank">驾校培训</a>
-                                    <a href="/forum/谈学说驾" target="_blank">谈学说驾</a>
-                                    <a href="/forum/爱驾会" target="_blank">爱驾会</a>
-                                    <a href="/forum/二手车市场" target="_blank">二手车市场</a>
-                                    <a href="/forum/拼车一族" target="_blank">拼车一族</a>
-                                    <a href="/forum/改装维修" target="_blank">改装维修</a>
-                                </span>
-                            </p>
-                        </li>
-                        <li class="cDBackground line05">
-                            <h3>
-                                <a href="/column/46" target="_blank"><font color="#688ff5">财经</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/银行天地" target="_blank">银行天地</a>
-                                <a href="/forum/国际贸易" target="_blank">国际贸易</a>
-                                <a class="cRed" href="/forum/邦宁贷款" target="_blank">邦宁贷款</a>
-                                
-                            </span>
-                            <p>
-                            </p>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/26" target="_blank"><font color="#c69511">房产</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/大家小家" target="_blank">大家小家</a>
-                                <a href="/forum/二手房" target="_blank">二手房</a>
-                                <a href="/forum/租房" target="_blank">租房</a>
-                                <a href="/forum/宁波新楼盘" target="_blank">宁波新楼盘</a>
-                                <a class="cRed" href="/forum/创客工场写字楼" target="_blank">创客工场写字楼</a>
-                            </span>
-                        </li>
-                        <li class="line05">
-                            <h3>
-                                <a href="/column/27" target="_blank"><font color="#c69511">家装</font></a>
-                            </h3>
-                            <span>
-                                <a href="/forum/宁波家居" target="_blank">宁波家居</a>
-                                <a href="/forum/装修日记" target="_blank">装修日记</a>
-                                <a href="/forum/装修讨论" target="_blank">装修讨论</a>
                             </span>
                         </li>
                     </ul>

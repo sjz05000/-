@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\User;
 use App\Model\Article;
 use DB;
+use App\Model\Collect;
 
 class CollectController extends Controller
 {
@@ -20,14 +21,17 @@ class CollectController extends Controller
     public function index(Request $request)
     {
         $id = $request->input('show_page',5);
-        $title = $request->input('title','');
-        // $tid = Article::where('title','like','%'.$title.'%')
-        $data = User::paginate($id);
-        // $data = User::where('title','like','%'.$title.'%')->paginate($id);
+        $name = $request->input('username','');
+        $collect = DB::table('dy-collect')->get();
+        foreach ($collect as $k=> $v) {
+            $uid[] = $v->uid;
+        }
+        $uid = array_unique($uid); 
+        $data = User::whereIn('id', $uid)->where('username','like','%'.$name.'%')->paginate($id);
         // 加载页面
         return view('admin.collect.index',['title'=>'收藏列表','data'=>$data,'request'=>$request->all()]);
     }
-
+ 
     /**
      * Show the form for creating a new resource.
      *
@@ -52,18 +56,30 @@ class CollectController extends Controller
         $request->input('username');
          $this->validate($request, [
             'username' => 'required|exists:dy-users',
-            'title' => 'required|exists:dy-users',
+            'title' => 'required|exists:dy-articles',
         ],[
             'username.required'=>'用户名必填',
             'username.exists'=>'用户名不存在',
             'username.required'=>'用户名必填',
             'title.required'=>'标题必填',
-            'title.exists'=>'标题不存在',
-        ]);die;
+            'title.exists'=>'文章不存在',
+        ]);
         $name = $request->input('username');
         $title = $request->input('title');
-        
-        // DB::table('dy-collect')->insert(['uid' => , 'tid' => 0]);
+        $data = User::where('username','=',$name)->get();
+        $uid = $data[0]->id;
+        $data1 = Article::where('title','=',$title)->get();
+        $tid = $data1[0]->id;
+        // $res = DB::table('dy-collect')->insert(['uid' =>$uid,'tid' =>$id]);
+        $res = new Collect;
+        $res->uid = $uid;
+        $res->tid = $tid;
+        $res->save();
+        if($res){
+            return redirect('admin/collect')->with('success', '添加成功!');
+        }else{
+            return back()->with('error', '添加失败!');
+        }
     }
 
     /**
@@ -110,27 +126,13 @@ class CollectController extends Controller
     {
         $uid = $request->input('uid');
         $tid = $request->input('tid');
-        $res = DB::table('dy-collect')->where('uid', '=', $uid)->where('tid','=',$tid)->delete();
+        dump($uid);
+        dump($tid);die;
+        // $res = DB::table('dy-collect')->where('uid', '=', $uid)->where('tid','=',$tid)->delete();
          if($res){
             return redirect('admin/collect')->with('success', '删除成功!');
         }else{
             return back()->with('error', '删除失败!');
         }
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(Request $request, $id,$tid)
-    {
-        echo $id;
-        echo $tid;
-        dump($request->all);
-        // dump($id);
-        // dump($tid);
-        // DB::table('users')->where('id', '<', 100)->delete();
     }
 }
