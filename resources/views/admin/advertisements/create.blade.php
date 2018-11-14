@@ -27,7 +27,7 @@
                     				<div class="mws-form-item clearfix">
                     					<ul class="mws-form-list inline">
                     						<li><input type="radio" name="status" id="s1" value="1" checked> <label for="s1">激活</label></li>
-                    						<li><input type="radio" name="status" id="s2" value="2"> <label for="s2">未激活</label></li>
+                    						<li><input type="radio" name="status" id="s2" value="2" @if(old('status')==2) checked @endif> <label for="s2">未激活</label></li>
                     					</ul>
                     				</div>
                     			</div>

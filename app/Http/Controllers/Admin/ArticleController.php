@@ -10,6 +10,13 @@ use App\Model\Article;
 
 class ArticleController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,9 +24,12 @@ class ArticleController extends Controller
      */
     public function index(Request $request)
     {
+        // 分页搜索
         $show_page = $request->input('show_page',5);
         $title = $request->input('title','');
+        // 查询数据
         $data = Article::where('title','like','%'.$title.'%')->paginate($show_page);
+        // 加载模板
         return view('admin.article.index',['title'=>'浏览文章','data'=>$data,'request'=>$request->all()]);
     }
 
@@ -30,6 +40,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
+        // 加载模板
         return view('admin.article.create',['title'=>'文章添加']);
     }
 
@@ -53,12 +64,14 @@ class ArticleController extends Controller
             'path.required' => '路径必填',
             'content.required' => '内容必填',
         ]);
+        // 接收表单数据保存
         $article = new Article;
         $article->title = $request->input('title','');
         $article->auth = $request->input('auth','');
         $article->path = $request->input('path','');
         $article->content = $request->input('content','');
         $res = $article->save();
+        // 判断
         if($res){
             return redirect('/admin/article')->withInput($request->all())->with('success','文章添加成功');
         }else{
@@ -74,7 +87,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
+        // 查询数据
         $data = Article::find($id);
+        // 加载模板
         return view('admin.article.show',['data'=>$data]);
     }
 
@@ -86,7 +101,9 @@ class ArticleController extends Controller
      */
     public function edit($id)
     {
+        // 查询数据
         $data = Article::find($id);
+        // 加载模板
         return view('admin.article.edit',['title'=>'文章修改','data'=>$data]);
     }
 
@@ -111,12 +128,14 @@ class ArticleController extends Controller
             'path.required' => '路径必填',
             'content.required' => '内容必填',
         ]);
+        // 查询保存数据
         $article = Article::find($id);
         $article->title = $request->input('title','');
         $article->auth = $request->input('auth','');
         $article->path = $request->input('path','');
         $article->content = $request->input('content','');
         $res = $article->save();
+        // 判断
         if($res){
             return redirect('/admin/article')->with('success','文章修改成功');
         }else{
@@ -132,7 +151,9 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
+        // 删除数据
         $res = Article::destroy($id);
+        // 判断
          if($res){
             return redirect('/admin/article')->with('success','文章删除成功');
         }else{

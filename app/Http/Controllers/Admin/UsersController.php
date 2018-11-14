@@ -14,6 +14,13 @@ use DB;
 
 class UsersController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -159,7 +166,7 @@ class UsersController extends Controller
 
         $id = $user->id;//获取最后插入的id号
 
-        $userdetail = Userdetail::where('id',$id)->first();
+        $userdetail = Userdetail::where('uid',$id)->first();
         $userdetail->uid = $id;
         $userdetail->phone = $request->input('phone');
         $userdetail->email = $request->input('email');

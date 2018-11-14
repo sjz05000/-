@@ -10,6 +10,13 @@ use App\Model\Banner;
 
 class BannerController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
      *  前台轮播图
      */

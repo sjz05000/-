@@ -74,18 +74,19 @@
             
                 <!-- User Photo -->
                 <div id="mws-user-photo">
-                    <img src="/d/example/profile.jpg" alt="User Photo">
+                    <!-- /d/example/profile.jpg -->
+                    <img src="{{session('photo')}}" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        你好, 小伙子
+                        你好, {{session('admininfo')['username']}}
                     </div>
                     <ul>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="index.html">退出</a></li>
+                        {{$id = session('admininfo')['id']}}
+                        <li><a href="/admin/users/{{$id}}/edit">修改信息</a></li>
+                        <li><a href="admin/login/checkdown">退出</a></li>
                     </ul>
                 </div>
             </div>

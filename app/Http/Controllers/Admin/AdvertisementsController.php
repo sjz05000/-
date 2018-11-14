@@ -11,6 +11,13 @@ use App\Model\Advertisements;
 
 class AdvertisementsController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,9 +25,14 @@ class AdvertisementsController extends Controller
      */
     public function index(Request $request)
     {
+        // 搜索分页
         $show_page = $request->input('show_page',5);
         $adname = $request->input('adname','');
-        $data = Advertisements::select()->where('adname','like',"%{$adname}%")->paginate($show_page);
+        // 查询数据
+        $data = Advertisements::select()
+                ->where('adname','like',"%{$adname}%")
+                ->paginate($show_page);
+        // 加载模板
         return view('admin.advertisements.index',['title'=>'浏览广告','data'=>$data,'request'=>$request->all()]);
     }
 
@@ -31,6 +43,7 @@ class AdvertisementsController extends Controller
      */
     public function create()
     {
+        // 加载模板
         return view('admin.advertisements.create',['title'=>'广告添加']);
     }
 
@@ -46,34 +59,36 @@ class AdvertisementsController extends Controller
         $this->validate($request, [
             'adname' => 'required|unique:dy-advertisements',
             'adphone'  => 'required|regex:/1[3-8]{1}[0-9]{9}/',
-            'url' => 'required|url'
+            'url' => 'required'
         ],[
             'adname.required' => '广告名称必填',
             'adname.unique' => '广告名称已存在',
             'adphone.required' => '手机号必填',
             'adphone.regex'=>'手机号格式错误',
             'url.required' => 'URL不能为空',
-            'url.url' => 'URL格式错误',
         ]);
         // 判断有无文件上传
         if($request->hasFile('adfile')){
-                    $adfile = $request->file('adfile');
-                    $adfile_path = './d/uploads/'.date('Ymd',time());
-                    $adfile_name =str_random(20).'.'.$adfile->getClientOriginalExtension();
-                    $res = $adfile->move($adfile_path,$adfile_name);
-                    $adfile_addr = ltrim($adfile_path.'/'.$adfile_name,'.');
-                    $advertisements = new Advertisements;
-                    $advertisements->adname = $request->input('adname');
-                    $advertisements->adphone = $request->input('adphone');
-                    $advertisements->adfile = $adfile_addr;
-                    $advertisements->status = $request->input('status');
-                    $advertisements->url = $request->input('url');
-                    $res = $advertisements->save();
-                    if($res){
-                        return redirect('/admin/advertisements')->withInput($request->all())->with('success','添加成功');
-                    }else{
-                        return back()->with('error','添加失败');
-                    }
+            // 保存文件
+            $adfile = $request->file('adfile');
+            $adfile_path = './d/uploads/'.date('Ymd',time());
+            $adfile_name =str_random(20).'.'.$adfile->getClientOriginalExtension();
+            $res = $adfile->move($adfile_path,$adfile_name);
+            $adfile_addr = ltrim($adfile_path.'/'.$adfile_name,'.');
+            // 接收数据保存
+            $advertisements = new Advertisements;
+            $advertisements->adname = $request->input('adname','');
+            $advertisements->adphone = $request->input('adphone','');
+            $advertisements->adfile = $adfile_addr;
+            $advertisements->status = $request->input('status','');
+            $advertisements->url = $request->input('url');
+            $res = $advertisements->save();
+            // 判断
+            if($res){
+                return redirect('/admin/advertisements')->withInput($request->all())->with('success','添加成功');
+            }else{
+                return back()->with('error','添加失败');
+            }
         }else{
             return back()->with('error','请选择图片');
         }
@@ -98,7 +113,9 @@ class AdvertisementsController extends Controller
      */
     public function edit($id)
     {
+        // 查询数据
         $data = Advertisements::find($id);
+        // 加载模板
         return view('admin.advertisements.edit',['title'=>'修改广告','data'=>$data]);
     }
 
@@ -115,12 +132,11 @@ class AdvertisementsController extends Controller
         $this->validate($request, [
             'adname' => 'required',
             'adphone'  => 'required|regex:/1[3-8]{1}[0-9]{9}/',
-            'url' => 'required|url'
+            'url' => 'required'
         ],[
             'adname.required' => '广告名称必填',
             'adphone.required' => '手机号必填',
             'adphone.regex'=>'手机号格式错误',
-            'url.required' => 'URL不能为空',
             'url.url' => 'URL格式错误',
         ]);
         // 判断有无文件上传
@@ -131,6 +147,7 @@ class AdvertisementsController extends Controller
                 $res = $adfile->move($adfile_path,$adfile_name);
                 $adfile_addr = ltrim($adfile_path.'/'.$adfile_name,'.');
         }
+        // 接收数据保存
         $advertisements = Advertisements::find($id);
         $advertisements->adname = $request->input('adname');
         $advertisements->adphone = $request->input('adphone');
@@ -140,6 +157,7 @@ class AdvertisementsController extends Controller
         $advertisements->status = $request->input('status');
         $advertisements->url = $request->input('url');
         $res = $advertisements->save();
+        // 判断
         if($res){
             return redirect('/admin/advertisements')->with('success','修改成功');
         }else{
@@ -155,7 +173,9 @@ class AdvertisementsController extends Controller
      */
     public function destroy($id)
     {
+        // 查询数据
         $res = Advertisements::destroy($id);
+        // 判断
         if($res){
             return redirect('/admin/advertisements')->with('success','删除成功');
         }else{
