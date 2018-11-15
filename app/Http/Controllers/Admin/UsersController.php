@@ -161,7 +161,7 @@ class UsersController extends Controller
 
         $id = $user->id;//获取最后插入的id号
 
-        $userdetail = Userdetail::where('id',$id)->first();
+        $userdetail = Userdetail::where('uid',$id)->first();
         $userdetail->uid = $id;
         $userdetail->phone = $request->input('phone');
         $userdetail->email = $request->input('email');

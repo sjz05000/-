@@ -180,27 +180,6 @@
                         </ul>
                     </li>
                     <li class="active">
-                        <a href="#"><i class="icon-list"></i>分类管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/cate/create">添加类别</a></li>
-                            <li><a href="/admin/cate">浏览类别</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-tags"></i>导航管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/navigation/create">添加导航</a></li>
-                            <li><a href="/admin/navigation">浏览导航</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/article/create">添加文章</a></li>
-                            <li><a href="/admin/article">浏览文章</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
                         <a href="#"><i class="icon-attachment"></i>友情链接管理</a>
                         <ul class="closed">
                             <li><a href="/admin/link/create">添加链接</a></li>
