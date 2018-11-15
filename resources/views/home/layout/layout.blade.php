@@ -25,6 +25,7 @@
     <link href="/h/css/common_index_1.css" rel="stylesheet" />
     <link href="/h/css/font-awesome_1.css" rel="stylesheet" />
     <link media="screen" href="/h/css/bbs-common_1.css" type="text/css" rel="Stylesheet" />
+    <link media="screen" href="/h/css/bbs-common.css" type="text/css" rel="Stylesheet" />
     <!-- 首页css结束-->
 
     <!-- 书签页js代码开始-->

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
-class MyController extends Controller
+class RegisterController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,13 +16,7 @@ class MyController extends Controller
      */
     public function index()
     {
-        // 加载模板
-        return view('home.my.mydongyu',['title'=>'个人中心']);
-    }
-    public function indexshouye()
-    {
-        // 加载模板
-        return view('home.my.mygrshouye');
+        echo "123654987";
     }
 
     /**
@@ -32,7 +26,8 @@ class MyController extends Controller
      */
     public function create()
     {
-        //
+        // 加载模板
+        return view('home.register.create',['title'=>'注册']);
     }
 
     /**

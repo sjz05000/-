@@ -88,6 +88,10 @@ Route::get('/', function () {
 Route::get('/home', 'Home\IndexController@index');
 // 前台个人中心页
 Route::resource('/home/my','Home\MyController');
+Route::resource('/home/mygrshouye','Home\MyController@indexshouye');
+Route::resource('/home/register','Home\RegisterController');
+
+
 
 
 

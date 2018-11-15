@@ -1,0 +1,39 @@
+﻿
+.balckbg545652 {background: #545652;}
+
+body {background: #fafafa}
+.wrap .header {width:100%; height:40px;}
+.wrap .header .headerbody {width:1000px; margin:0 auto;}
+.wrap .header .headerbody .user {width:30px; height:30px; border-radius:50%; margin:5px 0; overflow: hidden;}
+.wrap .layout {width:1000px; margin:0 auto;}
+.wrap .layout .bread {font:normal 14px/36px "微软雅黑"; color:#888;}
+.wrap .layout .bread a {color: #888;}
+
+.sign {width:400px; margin:20px auto; }
+.sign .hd {text-align: center; width: 100%; margin: 0 0 35px 0;}
+.sign .bd {border: 1px solid #e6e6e6; box-shadow: 0 0 10px #ddd;}
+.sign .bd .bdhd {border-bottom:1px solid #e6e6e6; background:#fafafa; overflow-x: hidden; height: 50px;}
+.sign .bd .bdhd h3 {font:normal 18px/50px "微软雅黑"; float: left; padding: 0 0 0 25px; color: #333;}
+.sign .bd .bdhd a {font:normal 14px/50px "微软雅黑"; margin:0 25px 0 0; color: #999;}
+.sign .bd ul {border-bottom:1px solid #e6e6e6; overflow-x: hidden; padding:20px 25px;}
+.sign .bd li {width: 100%; float: left; margin:0 0 15px 0; color: #999; font:normal 14px/24px "微软雅黑"; }
+.sign .bd li i {width: 100%; display: block; font:normal 14px/24px "微软雅黑"; color: #999; padding:0 0 5px 0;}
+.sign .bd li i span {float: left; margin: 0 10px 10px 0; cursor: pointer;}
+.sign .bd li i span.on {border-bottom:3px solid #ffaa00; color: #ffaa00;}
+.sign .bd li .txt {border:1px solid #eaeaea; width:330px; height:38px; padding:0 0 0 10px; font:normal 14px/38px "微软雅黑";}
+.sign .bd li .txt01 {width:250px; border:1px solid #eaeaea; height:38px; padding:0 0 0 10px; font:normal 14px/38px "微软雅黑";}
+.sign .bd li .txt02 {width:242px; border:1px solid #eaeaea; height:38px; padding:0 0 0 10px; font:normal 14px/38px "微软雅黑";}
+.sign .bd li .btnyz {width: 80px; font-size: 12px; border:1px solid #eaeaea; border-left: 0px; height:40px; color: #999;}
+.sign .bd li a {color: #ffaa00;}
+.sign .bd li input[type=checkbox] {float: left; margin:6px 4px 0 0;}
+.sign .bd li input[type=radio] {float: left; margin:6px 4px 0 0;}
+.sign .bd li .btnsign {width: 342px; border-radius: 5px; border:none; background:#ffaa00; color: #fff; text-align: center;font:normal 16px/40px "微软雅黑";}
+.sign .bd li label.sex {float: left; margin:0 15px 0 0;}
+.otherSign {width:250px; padding:20px 0 0 110px;}
+.otherSign a {margin:0 25px 0 0;}
+.code {margin: 40px auto 20px; width: 234px;}
+.sign .bd li select {font:normal 14px/38px "微软雅黑"; height:38px; text-align: right; border:1px solid #e6e6e6; width:111px;}
+.sign .bd li select option.test {height:34px; border:1px solid #e6e6e6;}
+.signover { padding:20px 25px;}
+.signover p {color: #999; font:normal 14px/24px "微软雅黑";}
+.signover input.btn {background: #ffaa00; border:none; border-radius: 5px; color: #fff; text-align: center; font:normal 14px/34px "微软雅黑"; padding:0 10px; margin:30px 20px 0 0;}
