@@ -107,5 +107,8 @@ Route::resource('/home/my','Home\MyController');
 Route::get('admin/login','Admin\LoginController@login');
 Route::post('admin/login/checkup','Admin\LoginController@checkup');
 Route::get('admin/login/checkdown','Admin\LoginController@checkdown');
+Route::get('admin/login/passwords/{id}','Admin\LoginController@passwords');
+Route::post('admin/login/update/{id}','Admin\LoginController@update');
+Route::post('admin/login/uploads','Admin\LoginController@uploads');
 
 
