@@ -14,6 +14,13 @@ use DB;
 
 class UsersController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
      * Display a listing of the resource.
      *
@@ -64,8 +71,9 @@ class UsersController extends Controller
         $res2 = $profile->move($dir_name,$file_name);    //移动文件到指定目录
         // 获取数据 进行添加
         $user = new User;
-        $user->username=$request->input('username');
-        $user->password=Hash::make($request->input('password'));
+        $user->username = $request->input('username');
+        $user->password = Hash::make($request->input('password'));
+        $user->status = $request->input('status','');
         $res1 = $user->save();//bool
         $id = $user->id;//获取最后插入的id号
         $userdetail = new Userdetail;
@@ -155,6 +163,9 @@ class UsersController extends Controller
 
         // 获取数据 进行添加
         $user = User::find($id);
+        $user->username = $request->input('username');
+        $user->status = $request->input('status','');
+
         $res1 = $user->save();//bool
 
         $id = $user->id;//获取最后插入的id号

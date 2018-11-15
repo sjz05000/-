@@ -7,7 +7,11 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Cate;
+<<<<<<< HEAD
 use App\Model\Heatmap;
+=======
+use App\Model\Config;
+>>>>>>> origin/abzhangzhipeng
 
 class IndexController extends Controller
 {
@@ -18,10 +22,18 @@ class IndexController extends Controller
      */
     public function index()
     {
+<<<<<<< HEAD
         $heatmap = Heatmap::where('id','<',6)->get();
         $heatmap1 = Heatmap::find(6);
         // dd($heatmap1);
         return view('home/index/index',['heatmap'=>$heatmap,'heatmap1'=>$heatmap1]);
+=======
+        // 查询数据
+        $config = Config::find(1);
+        session(['config'=>$config]);
+        // 加载模板
+        return view('home/index/index');
+>>>>>>> origin/abzhangzhipeng
     }
 
     /**

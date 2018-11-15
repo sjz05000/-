@@ -4,7 +4,9 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>DONG●YU</title>
+    <meta name="keywords" content="{{session('config')['keywords']}}" />
+    <META name="Description" content="{{session('config')['content']}}">
+    <title>{{session('config')['title']}}</title>
     
     <!-- 图标 开始 -->
     <link rel="stylesheet" type="text/css" href="/h/css/fonts/ptsans/stylesheet.css" media="screen">
@@ -91,7 +93,7 @@
     <div class="top">
         <div class="topbox">
             <div class="logo">
-                <a href="http://bbs.cnool.net/home/list" target="_blank"><img src="/h/images/logo.png"></a>
+                <a href="http://bbs.cnool.net/home/list" target="_blank"><img src="{{session('config')['file']}}"></a>
             </div>
 
             <!--导航更改-->

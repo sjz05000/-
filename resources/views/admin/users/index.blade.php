@@ -53,8 +53,6 @@
                             <td>{{ $v->id }}</td>
                             <!-- <td>{{ $v->userinfo->uid }}</td> -->
                             <td>{{ $v->username }}</td>
-
-
                             <!-- <td>{{ $v->userinfo->photo }}</td> -->
                             <td align="center"><div style="width:60px;height:50px;"><img src="{{ $v->userinfo->photo }}"></div></td>
 

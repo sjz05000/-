@@ -11,12 +11,38 @@ use DB;
 
 class NavigationController extends Controller
 {
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
     /**
-     * 获取分类类别
+     * 获取导航数据
+     */
+    public static function getNavigations($id=0)
+    {
+        // 查询导航
+        $navigations = Navigation::where('pid',$id)->get();
+        $temp = [];
+        // 遍历数据
+        foreach ($navigations as $key => $value) {
+            $value['sub'] = self::getNavigations($value->id);
+            $temp[] = $value;
+        }
+        return $temp;
+    }
+    /**
+     * 获取导航类别
      */
     public static function getNavigation()
     {
-        $Navigation = Navigation::select('*',DB::raw("concat(path,',',pid) as paths"))->orderBy('paths','asc')->get();
+        // 查询数据 排序
+        $Navigation = Navigation::select('*',DB::raw("concat(path,',',id) as paths"))
+                      ->orderBy('paths','asc')
+                      ->get();
+            // 遍历
             foreach($Navigation as $k=>$v){
                 $m = substr_count($v->path,',');
                 $Navigation[$k]->navname = str_repeat('|----',$m).$v->navname;
@@ -30,13 +56,16 @@ class NavigationController extends Controller
      */
     public function index(Request $request)
     {
+        // 分页查询
         $show_page = $request->input('show_page',5);
         $status = $request->input('status','');
-        $data = Navigation::select('*',DB::raw("concat(path,',',pid) as paths"))->where('status','like','%'.$status.'%')->orderBy('paths','asc')->paginate($show_page);
+        $data = Navigation::select('*',DB::raw("concat(path,',',id) as paths"))->where('status','like','%'.$status.'%')->orderBy('paths','asc')->paginate($show_page);
+            // 遍历
             foreach($data as $k=>$v){
                 $n = substr_count($v->path,',');
                 $data[$k]->navname = str_repeat('|----',$n).$v->navname;
             }
+        // 加载模板
         return view('admin.navigation.index',['title'=>'浏览导航','data'=>$data,'request'=>$request->all()]);
     }
 
@@ -47,7 +76,9 @@ class NavigationController extends Controller
      */
     public function create()
     {
+        // 查询数据
         $data = Navigation::all();
+        // 返回模板
         return view('admin.navigation.create',['title'=>'添加导航','data'=>self::getNavigation()]);
     }
 
@@ -62,13 +93,13 @@ class NavigationController extends Controller
          //  验证表单
         $this->validate($request, [
             'navname' => 'required|unique:dy-navigation',
-            'url' => 'required|url',
+            'url' => 'required',
         ],[
             'navname.required' => '导航名称必填',
             'navname.unique' => '导航名称已存在',
             'url.required' => 'URL不能为空',
-            'url.url' => 'URL格式错误',
         ]);
+        // 接收表单数据保存到数据库
         $navigation = new Navigation;
         if($request->input('pid')==0){
             $navigation->path = 0;
@@ -86,6 +117,7 @@ class NavigationController extends Controller
         $navigation->status = $request->input('status','');
         $navigation->url = $request->input('url','');
         $res = $navigation->save();
+        // 判断
         if($res){
             return redirect('/admin/navigation')->withInput($request->all())->with('success','添加成功');
         }else{
@@ -112,8 +144,10 @@ class NavigationController extends Controller
      */
     public function edit($id)
     {
+        // 查询数据
         $data = Navigation::all();
         $navigation = Navigation::find($id);
+        // 返回模板
         return view('admin.navigation.edit',['title'=>'修改导航','data'=>self::getNavigation(),'navigation'=>$navigation]);
     }
 
@@ -135,16 +169,19 @@ class NavigationController extends Controller
             'url.required' => 'URL不能为空',
             'url.url' => 'URL格式错误',
         ]);
+        // 查询 判断是否有子类
         $child = Navigation::where('pid','=',$id)->first();
         if($child){
             return back()->with('error','该类别下有子分类');
         }
+        // 查找修改保存数据
         $navigation = Navigation::find($id);
         if($request->input('pid')==0){
             $navigation->path = 0;
         }else{
             $pid = Navigation::find($request->input('pid',''));
              $path_count = substr_count($pid->path,',');
+             // 最高二级导航
              if($path_count>0){
                 return back()->with('error','导航最高二级');
              }
@@ -156,6 +193,7 @@ class NavigationController extends Controller
         $navigation->status = $request->input('status','');
         $navigation->url = $request->input('url','');
         $res = $navigation->save();
+        // 判断
          if($res){
             return redirect('/admin/navigation')->with('success','修改成功');
         }else{
@@ -171,11 +209,15 @@ class NavigationController extends Controller
      */
     public function destroy($id)
     {
+        // 查询数据 
         $child = Navigation::where('pid','=',$id)->first();
+        // 判断是否有子类
         if($child){
             return back()->with('error','该类别下有子分类');
         }
+        // 查找数据删除
         $res = Navigation::destroy($id);
+        // 判断
           if($res){
             return redirect('/admin/navigation')->with('success','删除成功');
         }else{

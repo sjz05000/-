@@ -18,9 +18,9 @@
                     				<label class="mws-form-label">父级类别</label>
                     				<div class="mws-form-item">
                     					<select class="medium" name="pid">
-                    						<option value="0">--请选择--</option>
+                    						<option value="0" @if(old('pid') == 0) selected @endif>--请选择--</option>
                     						@foreach($data as $k=>$v)
-                    							<option value="{{$v->id}}">{{$v->cname}}</option>
+                    							<option value="{{$v->id}}" @if(old('pid') == $v->id) selected @endif>{{$v->cname}}</option>
                     						@endforeach
                     					</select>
                     				</div>
@@ -30,7 +30,7 @@
                     				<div class="mws-form-item clearfix">
                     					<ul class="mws-form-list">
                     						<li><input type="radio" name="status"  id="up" checked value="1"> <label for="up">激活</label></li>
-                    						<li><input type="radio" name="status"  id="down" value="2"> <label for="down">未激活</label></li>
+                    						<li><input type="radio" name="status"  id="down" value="2" @if(old('status')==2) checked @endif> <label for="down">未激活</label></li>
                     					</ul>
                     				</div>
                     			</div>

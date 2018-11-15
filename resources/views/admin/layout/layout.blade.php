@@ -12,7 +12,10 @@
 
 <!-- Plugin Stylesheets first to ease overrides -->
 <link rel="stylesheet" type="text/css" href="/d/plugins/colorpicker/colorpicker.css" media="screen">
-
+<!-- 引入layui -->
+<link rel="stylesheet" href="/d/layui-v2.4.5/layui/css/layui.css">
+<!-- jquery -->
+<script src="/d/js/libs/jquery-1.8.3.js"></script>
 <!-- Required Stylesheets -->
 <link rel="stylesheet" type="text/css" href="/d/bootstrap/css/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="/d/css/fonts/ptsans/stylesheet.css" media="screen">
@@ -35,11 +38,19 @@
 <link rel="stylesheet" type="text/css" href="/d/css/page_page.css" media="screen">
 
 
-<title>MWS Admin - Form Layouts</title>
+<title>{{session('config')['title']}}</title>
 
 </head>
 
 <body>
+    <!-- layui -->
+        <script src="/d/layui-v2.4.5/layui/layui.all.js"></script>
+        <script>
+        //由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
+          // var layer = layui.layer
+          
+          // layer.msg('欢迎登录后台');
+        </script> 
 
     <!-- Themer (Remove if not needed) -->  
 
@@ -71,21 +82,49 @@
             
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
-            
                 <!-- User Photo -->
                 <div id="mws-user-photo">
-                    <img src="/d/example/profile.jpg" alt="User Photo">
+                    <label for="test1"><img src="{{session('photo')}}" alt="User Photo" onerror="javascript:this.src='/d/example/profile.jpg';this.onerror = null">
+                        {{csrf_field()}}
+                        <button style="display:none;" type="button" class="layui-btn" id="test1">
+                          <i class="layui-icon">&#xe67c;</i>上传图片
+                        </button>
+                            <script src="/d/layui-v2.4.5/layui/layui.js"></script>
+                            <script>
+                            layui.use('upload', function(){
+                              var upload = layui.upload;
+                               
+                              //执行实例
+                              var uploadInst = upload.render({
+                                elem: '#test1' //绑定元素
+                                ,url: '/admin/login/uploads' //上传接口
+                                ,data: {'_token':$('input[name=_token]').eq(0).val()}
+                                ,field: 'profile'
+                                ,done: function(res){
+                                  //上传完毕回调
+                                  if(res.code==0){
+                                    layer.alert(res.msg);
+                                    $('#mws-user-info img').eq(0).attr('src',res.data.src);
+                                  }else{
+                                    layer.alert(res.msg);
+                                  }
+                                }
+                                ,error: function(){
+                                  //请求异常回调
+                                }
+                              });
+                            });
+                            </script>
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        你好, 小伙子
+                        你好, {{session('admininfo')['username']}}
                     </div>
                     <ul>
-                        <li><a href="#">Profile</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="index.html">退出</a></li>
+                        <li><a href="/admin/login/passwords/{{session('admininfo')['id']}}">修改密码</a></li>
+                        <li><a href="/admin/login/checkdown">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -191,6 +230,12 @@
                         <ul class="closed">
                             <li><a href="/admin/link/create">添加链接</a></li>
                             <li><a href="/admin/link">浏览链接</a></li>
+                        </ul>
+                    </li>
+                     <li class="active">
+                        <a href="#"><i class="icon-cog-2"></i>系统管理</a>
+                        <ul class="closed">
+                            <li><a href="/admin/config/edit">站点设置</a></li>
                         </ul>
                     </li>
 

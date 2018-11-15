@@ -48,204 +48,16 @@
     <div class="headerbg">
         <div class="header">
             <ul class="menu">
+                @foreach($common_navigation_data as $k=>$v)
                 <li>
-                    <a href="/column/21" target="_blank">民生</a>
+                    <a href="{{$v->url}}" target="_blank">{{$v->navname}}</a>
                     <ul class="ycul" style="display: none;">
-                            <li><a href="http://bbs.cnool.net/forum/%e7%94%9f%e6%b4%bb%e7%83%ad%e7%82%b9" target="_blank">生活热点</a></li>
-                            <li><a href="" target="_blank">法律援助</a></li>
-                            <li><a href="" target="_blank">宁波社区警务</a></li>
-                            <li><a href="" target="_blank">鄞州区</a></li>
-                            <li><a href="" target="_blank">海曙区</a></li>
-                            <li><a href="" target="_blank">江北区</a></li>
-                            <li><a href="" target="_blank">奉化</a></li>
-                            <li><a href="" target="_blank">镇海</a></li>
-                            <li><a href="" target="_blank">北仑</a></li>
-                            <li><a href="" target="_blank">余姚</a></li>
-                            <li><a href="" target="_blank">象山</a></li>
-                            <li><a href="" target="_blank">宁海</a></li>
-                            <li><a href="" target="_blank">慈溪</a></li>
-                            <li><a href="" target="_blank">寻人寻物</a></li>
-                            <li><a href="" target="_blank">网友之家</a></li>
-                            <li><a href="" target="_blank">公益慈善</a></li>
-                            <li><a href="" target="_blank">小城镇整治</a></li>
+                        @foreach($v->sub as $kk=>$vv)
+                            <li><a href="{{$vv->url}}" target="_blank">{{$vv->navname}}</a></li>
+                        @endforeach
                     </ul>
                 </li>
-                <li>
-                    <a href="/column/22" target="_blank">情感</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">找朋友</a></li>
-                            <li><a href="" target="_blank">婚姻物语</a></li>
-                            <li><a href="" target="_blank">情缘随笔</a></li>
-                            <li><a href="" target="_blank">单亲停靠</a></li>
-                            <li><a href="" target="_blank">６０年代</a></li>
-                            <li><a href="" target="_blank">７０年代</a></li>
-                            <li><a href="" target="_blank">８０年代</a></li>
-                            <li><a href="" target="_blank">老年人之家</a></li>
-                            <li><a href="" target="_blank">宁波花田婚恋</a></li>
-                            <li><a href="" target="_blank">金顶高端婚恋</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/33" target="_blank">旅游</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">自驾游</a></li>
-                            <li><a href="" target="_blank">单休游走</a></li>
-                            <li><a href="" target="_blank">乡村风情</a></li>
-                            <li><a href="" target="_blank">玩在宁波</a></li>
-                            <li><a href="" target="_blank">周末旅游</a></li>
-                            <li><a href="" target="_blank">单车骑游</a></li>
-                            <li><a href="" target="_blank">行在路上</a></li>
-                            <li><a href="" target="_blank">户外联盟</a></li>
-                            <li><a href="" target="_blank">出境旅游</a></li>
-                            <li><a href="" target="_blank">旅游集散地</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/24" target="_blank">娱乐</a>
-
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">影视夜话</a></li>
-                            <li><a href="" target="_blank">音乐频道</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="http://bbs.cnool.net/Home/list?columnId=23" target="_blank">婚嫁</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">婚纱摄影</a></li>
-                            <li><a href="" target="_blank">婚庆广场</a></li>
-                            <li><a href="" target="_blank">喜事宝</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="http://house.cnool.net" target="_blank">房产</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">大家小家</a></li>
-                            <li><a href="" target="_blank">二手房</a></li>
-                            <li><a href="" target="_blank">宁波新楼盘</a></li>
-                            <li><a href="" target="_blank">租房</a></li>
-                            <li><a href="" target="_blank">商业广场</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/52" target="_blank">家居</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">宁波家居</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/27" target="_blank">装修</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">装修日记</a></li>
-                            <li><a href="" target="_blank">装修讨论</a></li>
-                            <li><a href="" target="_blank">东论曝光台</a></li>
-                            <li><a href="" target="_blank">装修老娘舅</a></li>
-                            <li><a href="" target="_blank">软巢软装</a></li>
-                            <li><a href="" target="_blank">十杰装饰</a></li>
-                            <li><a href="" target="_blank">点墨设计</a></li>
-                            <li><a href="" target="_blank">圣都装饰</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/30" target="_blank">亲子</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">健康育儿</a></li>
-                            <li><a href="" target="_blank">幼教论坛</a></li>
-                            <li><a href="" target="_blank">家有读书郎</a></li>
-                            <li><a href="" target="_blank">孕味十足</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/34" target="_blank">爱好</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">宠物宝贝</a></li>
-                            <li><a href="" target="_blank">花鸟鱼虫</a></li>
-                            <li><a href="" target="_blank">钓鱼</a></li>
-                            <li><a href="" target="_blank">贴图视界</a></li>
-                            <li><a href="" target="_blank">甬城随拍</a></li>
-                            <li><a href="" target="_blank">风景摄影</a></li>
-                            <li><a href="" target="_blank">艺术品收藏</a></li>
-                            <li><a href="" target="_blank">宁波书画</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/25" target="_blank">体育</a>
-
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">就爱运动</a></li>
-                            <li><a href="" target="_blank">CNBA-篮球</a></li>
-                            <li><a href="" target="_blank">足球</a></li>
-                            <li><a href="" target="_blank">乒乓球</a></li>
-                            <li><a href="" target="_blank">羽毛球</a></li>
-                            <li><a href="" target="_blank">游泳</a></li>
-                            <li><a href="" target="_blank">钓鱼</a></li>
-                            <li><a href="" target="_blank">武术爱好者</a></li>
-                            <li><a href="" target="_blank">四明内家拳</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/29" target="_blank">美食</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">私家厨房</a></li>
-                            <li><a href="" target="_blank">吃在宁波</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/31" target="_blank">教育</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">家长论坛</a></li>
-                            <li><a href="" target="_blank">教师论坛</a></li>
-                            <li><a href="" target="_blank">大学心声</a></li>
-                            <li><a href="" target="_blank">国际学校</a></li>
-                            <li><a href="" target="_blank">数学</a></li>
-                            <li><a href="" target="_blank">外语论坛</a></li>
-                            <li><a href="" target="_blank">校园榜事</a></li>
-                            <li><a href="" target="_blank">童书馆</a></li>
-                            <li><a href="" target="_blank">社会考试</a></li>
-                            <li><a href="" target="_blank">家教</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/28" target="_blank">汽车</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">驾驶天地</a></li>
-                            <li><a href="" target="_blank">谈学说驾</a></li>
-                            <li><a href="" target="_blank">爱驾会</a></li>
-                            <li><a href="" target="_blank">驾校培训</a></li>
-                            <li><a href="" target="_blank">拼车一族</a></li>
-                            <li><a href="" target="_blank">改装维修</a></li>
-                            <li><a href="" target="_blank">自驾游</a></li>
-                            <li><a href="" target="_blank">品牌车型</a></li>
-                            <li><a href="" target="_blank">东风悦达起亚</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/32" target="_blank">健康</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">医疗卫生</a></li>
-                            <li><a href="" target="_blank">两性生活</a></li>
-                            <li><a href="" target="_blank">肝病</a></li>
-                            <li><a href="" target="_blank">针灸理疗</a></li>
-                            <li><a href="" target="_blank">养生与保健</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="http://finance.cnool.net/" target="_blank">财经</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">银行天地</a></li>
-                            <li><a href="" target="_blank">国际贸易</a></li>
-                            <li><a href="" target="_blank">邦宁贷款</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="/column/50" target="_blank">便民</a>
-                    <ul class="ycul" style="display: none;">
-                            <li><a href="" target="_blank">人才招聘</a></li>
-                            <li><a href="" target="_blank">东方热线区</a></li>
-                    </ul>
-                </li>
-                <li><a href="http://job.cnool.net/" target="_blank">招聘</a></li>
-                <li><a href="http://market.cnool.net" target="_blank">交易</a></li>
-                <li><a href="http://www.ruanchaohome.com/" target="_blank">软巢软装</a></li>
+                @endforeach
             </ul>
         </div>
     </div>
@@ -771,6 +583,7 @@
                     <!--焦点图片开始-->
                     <div class="focusImg" id="focus_01">
                         <ul id="roll_img">
+<<<<<<< HEAD
                             @foreach($common_banner_data as $k=>$v)
                             <li>
                                 <a href="http://bbs.cnool.net/10512875.html" target="_blank" author="0书寒0" node="00-1106">
@@ -779,6 +592,53 @@
                                 </a>
                             </li>
                             @endforeach
+=======
+                            <!-- @foreach($common_banner_data as $k=>$v)
+                            <li>
+                                <a href="http://bbs.cnool.net/10512875.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="电梯内惊现邻居“表情包警告”，有才" src="{{$v->bpic}}" />
+                                    <p>电梯内惊现邻居“表情包警告”，有才</p>
+                                </a>
+                            </li>
+                            @endforeach -->
+                            dump({{$common_banner_data}})
+                            <li>
+                                <a href="http://bbs.cnool.net/10512827.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="山上独走，遭遇晒太阳的眼镜蛇！" src="/h/picture/78fde0c1-1ede-4b79-bb0e-76ec10b3f875_1.jpg" />
+                                    <p>山上独走，遭遇晒太阳的眼镜蛇！</p>
+                                </a>
+                            </li>
+               <!--              <li>
+                                <a href="https://bbs.cnool.net/10504086.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="从宁波转上海，坐2天2夜火车到新疆" src="/h/picture/573012ff-0ebb-46b9-b131-856fadad1a42_1.jpg" />
+                                    <p>从宁波转上海，坐2天2夜火车到新疆</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://bbs.cnool.net/10512137.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="江北余姚交界的江畔秋色，像一幅幅油画" src="/h/picture/400ed0ae-95cf-4eda-8598-aaf6ba7a3182_1.jpg" />
+                                    <p>江北余姚交界的江畔秋色，像一幅幅油画</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="http://bbs.cnool.net/10512126.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="手机丢后的神奇经历，天下之大，啥都有！" src="/h/picture/9846285b-00e5-438a-95f8-cd81a7d14f2b_1.png" />
+                                    <p>手机丢后的神奇经历，天下之大，啥都有！</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://bbs.cnool.net/10512930.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="重大福利！给你一个亲睹绝唱画作的机会！" src="/h/picture/bf3b5b30-20af-4aec-8f27-7d1a943c7aaa_1.jpg" />
+                                    <p>重大福利！给你一个亲睹绝唱画作的机会！</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="https://bbs.cnool.net/10500231.html" target="_blank" author="0书寒0" node="00-1106">
+                                    <img alt="结婚需求大集合，网上报名送烤箱+300现金" src="/h/picture/43ff141d-5498-463d-aae6-d0d6d91c471d_1.jpg" />
+                                    <p>结婚需求大集合，网上报名送烤箱+300现金</p>
+                                </a>
+                            </li> -->
+>>>>>>> origin/abzhangzhipeng
                         </ul>
                         <script type="text/javascript">
                             var x = new cnool_slideplayer("#roll_img", { width: "320px", height: "335px", fontsize: "14px", right: "0px", bottom: "36px", time: "5000" });
@@ -2484,6 +2344,7 @@
                         <li class="line05 line07">
                             <h3>
                                 <a href="/column/21" target="_blank"><font color="#ec8a10">{{$v->cname}}</font></a>
+<<<<<<< HEAD
                             </h3>
                             <span>
                                 @foreach($v['sub'] as $kk=>$vv)
@@ -2508,22 +2369,21 @@
                                 <a href="/forum/风景摄影" target="_blank">风景摄影</a>
                             </span>
                         </li>
+=======
+                            </h3>
+                            <span>
+                                @foreach($v['sub'] as $kk=>$vv)
+                                <a href="/forum/{{$vv->cname}}" target="_blank">{{$vv->cname}}</a>
+                                @endforeach
+                            </span>
+                        </li>
+                        @endforeach
+>>>>>>> origin/abzhangzhipeng
                     </ul>
                 </div>
             </div>
         </div>
     <!--板块地图 分类 结束 end -->
-
-    <!--编辑名字开始 -->
-        <div class="ed-title"></div>
-        <div class="edBody">
-            <p>
-                综合：<a class="cRed" href="http://bbs.cnool.net/other/七里飘香" target="_blank">七里飘香</a> <a class="cRed" href="http://bbs.cnool.net/other/苏叶子" target="_blank">苏叶子</a> <a class="cRed" href="http://bbs.cnool.net/other/曲陌" target="_blank">曲陌</a> 汽车：<a class="cRed" href="http://bbs.cnool.net/other/小任2008" target="_blank">小任2008</a>   教育、旅游：<a class="cRed" href="http://bbs.cnool.net/other/妙朵儿" target="_blank">妙朵儿</a> 亲子：<a class="cRed" href="http://bbs.cnool.net/other/00海" target="_blank">00海</a> 美食、时尚：<a class="cRed" href="http://bbs.cnool.net/other/%E5%B9%BB%E6%B5%AA" target="_blank">幻浪</a>   健康、求职：<a class="cRed" href="http://bbs.cnool.net/other/%E5%9F%BA%E5%B0%BC" target="_blank">基尼</a>   娱乐：<a class="cRed" href="http://bbs.cnool.net/other/yona2007" target="_blank">yona2007</a>  结婚：<a class="cRed" href="http://bbs.cnool.net/other/lingcole" target="_blank">lingcole</a>   <a class="cRed" href="http://bbs.cnool.net/other/vicky0916" target="_blank">vicky0916</a><br />情感、交友：<a class="cRed" href="http://bbs.cnool.net/other/%E4%B8%9C%E8%AE%BA%E4%BA%A4%E5%8F%8B" target="_blank">东论交友</a>  经济：<a class="cRed" href="http://bbs.cnool.net/other/卷来卷去儿" target="_blank">卷来卷去儿</a>  体育：<a class="cRed" href="http://bbs.cnool.net/other/%E4%B8%9C%E8%AE%BA%E4%BD%93%E8%82%B2" target="_blank">东论体育</a> <a class="cRed" href="http://bbs.cnool.net/other/科尔维特" target="_blank">科尔维特</a> 交易、家居：<a class="cRed" href="http://bbs.cnool.net/other/繁花依旧" target="_blank">繁花依旧</a> <a class="cRed" href="http://bbs.cnool.net/other/保拉" target="_blank">保拉</a>  房产：<a class="cRed" href="http://bbs.cnool.net/other/%E4%B8%9C%E6%88%BF%E7%BD%91" target="_blank">东房网</a><a class="cRed" href="http://bbs.cnool.net/other/社区管理员" target="_blank">社区管理员</a> <a class="cRed" href="http://bbs.cnool.net/other/%E5%96%84%E8%8B%A5" target="_blank">善若</a> 装修：<a class="cRed" href="http://bbs.cnool.net/other/模拟拥抱" target="_blank">模拟拥抱</a>
-            </p>
-        </div>
-    <!--编辑名字结束 -->
-
-
     <!--页尾开始 -->
         <style>
             #footerfooter .footer-bg {width: 100%;background: #fff;font-size: 12px;}
