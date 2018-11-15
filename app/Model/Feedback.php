@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Feedback extends Model
 {
-    //
+    // 是指当前表名
     public $table = 'dy-feedback';
 
     // 反馈属于用户

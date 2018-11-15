@@ -16,7 +16,7 @@
             			<option value="20" @if((!empty($request['show_page'])&&isset($request['show_page']))&& $request['show_page']==20) selected @endif>20</option>
             		</select>条</label></div>
             		<div class="dataTables_filter" id="DataTables_Table_1_filter">
-            			<label>标题: <input type="text" aria-controls="DataTables_Table_1" name="title" value="{{$request['title'] or ''}}"></label>
+            			<label>用户名: <input type="text" aria-controls="DataTables_Table_1" name="username" value="{{$request['username'] or ''}}"></label>
             			<input type="submit" value="搜索" class="btn btn-info">
             		</div>
             	</form>
@@ -39,24 +39,20 @@
 	        			<td>{{ $v->username }}</td>
 	        			<td>{{ $v->userinfo['phone'] }}</td>
 	        			<td>{{ $v->userinfo['email'] }}</td>
-	        			<td>
+	        			<td><ol>
 	        				@foreach ($v->usercollect as $kk=>$vv)
-	        					<li>{{$vv->title}};</li>
+	        					<li>{{ $vv->title }}</li>
 	        				@endforeach
-	        			</td>
-	        			<td align="center">
-	        				<form action="/admin/collect/{{ $vv->id}}" method="post" style="display: inline-block;">
+	        			</td></ol>
+	        			<td align="center"><ol>@foreach ($v->usercollect as $kkk=>$vvv)
+	        				<form action="/admin/collect/{{ $vvv->id }}" method="post">
 	        					{{csrf_field()}}    {{method_field('DELETE')}}
-	        					@foreach ($v->usercollect as $kk=>$vv)
-	        					<ol>
-	                    			<input type="text" name="tid" hidden value="{{ $vv->id }}">
-	                    			<input type="text" name="uid" hidden value="{{ $v->id }}">
-	                    		<!-- <a href="/admin/collect/{{$vv->id}}{{ $v->id}}" class="btn btn-danger" >删除</a> -->
-	                    		<input type="submit" class="btn btn-danger" onclick="return confirm('您确定要删除吗?');" value="删除">
-	                    	</ol>
-	        				@endforeach
+	        						<input type="text" name="uid" hidden value="{{ $v->id }}">
+	                    			<input type="text" name="tid" hidden value="{{ $vvv->id }}">
+	                    		<li><input type="submit" class="btn btn-danger" onclick="return confirm('您确定要删除吗?');" value="删除"></li>
 	                    	</form>
-	                    </td>    
+	                    @endforeach</ol>
+	                    </td>   
 	                </tr>    
 	                @endforeach
 	            </tbody>

@@ -10,6 +10,12 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+/*
+	共享数据
+	common_cates_data  共享前台分类处理
+	common_banner_data  共享前台轮播图处理
+
+*/ 
 
 Route::get('/', function () {
     return view('welcome');
@@ -23,9 +29,14 @@ Route::resource('/admin/link', 'Admin\LinkController');
 Route::resource('/admin/banner', 'Admin\BannerController');
 // 用户收藏
 Route::resource('/admin/collect', 'Admin\CollectController');
-// Route::get('/admin/collect/{tid}{id}','Admin\CollectController@delete');
 // 反馈管理
 Route::resource('/admin/feedback', 'Admin\FeedbackController');
+// 后台热图管理
+Route::resource('/admin/heatmap', 'Admin\HeatmapController');
+
+
+
+
 
 // 后台用户的路由
 Route::resource('/admin/users','Admin\UsersController');
@@ -40,17 +51,6 @@ Route::resource('/admin/advertisements','Admin\AdvertisementsController');
 Route::resource('/admin/navigation','Admin\NavigationController');
 //  后台文章管理
 Route::resource('/admin/article','Admin\ArticleController');
-
-
-
-
-
-
-
-
-
-
-
 
 
 

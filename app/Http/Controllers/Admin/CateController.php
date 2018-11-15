@@ -12,6 +12,21 @@ use DB;
 class CateController extends Controller
 {
     /**
+     * 前台分类
+     */
+    public  static function getPidCates($pid = 0)
+    {
+        //加载模板
+        $data = Cate::where('pid',$pid)->get();
+        $temp = [];
+        foreach($data as $k=>$v)
+        {
+            $v['sub'] = self::getPidCates($v->id);
+            $temp[] = $v;
+        }
+        return $temp;
+    }
+    /**
      * 获取分类类别
      */
     public static function getCate()

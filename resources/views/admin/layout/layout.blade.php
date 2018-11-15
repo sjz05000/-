@@ -80,7 +80,7 @@
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-username">
-                        Hello, John Doe
+                        你好, 小伙子
                     </div>
                     <ul>
                         <li><a href="#">Profile</a></li>
@@ -172,32 +172,18 @@
                             <li><a href="/admin/banner">浏览轮播图</a></li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-newspaper"></i>热点图管理</a>
+                        <ul class="closed">      
+                            <!-- <li><a href="/admin/heatmap/create">添加图片</a></li> -->
+                            <li><a href="/admin/heatmap">浏览图片</a></li>
+                        </ul>
+                    </li>
                     <li class="active" >
                         <a href="#"><i class="icon-picture"></i>广告管理</a>
                         <ul class="closed">
                             <li><a href="/admin/advertisements/create">添加广告</a></li>
                             <li><a href="/admin/advertisements">浏览广告</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-list"></i>分类管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/cate/create">添加类别</a></li>
-                            <li><a href="/admin/cate">浏览类别</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-tags"></i>导航管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/navigation/create">添加导航</a></li>
-                            <li><a href="/admin/navigation">浏览导航</a></li>
-                        </ul>
-                    </li>
-                    <li class="active">
-                        <a href="#"><i class="icon-list-2"></i>文章管理</a>
-                        <ul class="closed">
-                            <li><a href="/admin/article/create">添加文章</a></li>
-                            <li><a href="/admin/article">浏览文章</a></li>
                         </ul>
                     </li>
                     <li class="active">

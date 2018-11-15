@@ -24,6 +24,7 @@
                     <input type="submit" value="提交" class="btn btn-success btn-small">
                 </div>
             </form>
+            <div style="overflow: scroll;width: 100%;height: 100%;">
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                 <thead>
                     <tr role="row">
@@ -55,7 +56,7 @@
 
 
                             <!-- <td>{{ $v->userinfo->photo }}</td> -->
-                            <td align="center"><img  style="width:60px;height:50px;" src="{{ $v->userinfo->photo }}"></td>
+                            <td align="center"><div style="width:60px;height:50px;"><img src="{{ $v->userinfo->photo }}"></div></td>
 
 
 
@@ -102,8 +103,17 @@
                     </tr> -->
                 </tbody>
             </table>
+            </div>
             <div class="dataTables_info" id="DataTables_Table_1_info">Showing 1 to 10 of 57 entries有几页共几条</div>
             <style type="text/css">
+                thead tr th{
+                    white-space:nowrap;
+                    word-break:keep-all;
+                }
+                tbody tr td{
+                    white-space: normal;
+                    word-break:keep-all;
+                }
                 #pagepage .disabled{color: #666666;cursor: default;}
                 #pagepage .active{background-color: #c5d52b;cursor: default;}
                 #pagepage{color: #ffffff;float: right;padding: 2px;margin: 10px 8px 10px 0;background-color: rgba(0, 0, 0, 0.15);
