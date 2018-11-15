@@ -14,16 +14,17 @@
     <link rel="stylesheet" type="text/css" href="/h/css/icons/icol16.css" media="screen">
     <link rel="stylesheet" type="text/css" href="/h/css/icons/icol32.css" media="screen">
     <!-- 图标 结束 -->
-
+    <!-- 轮播图 -->
+    <link rel="stylesheet" href="/h/img/css/style.css">
     <link rel="stylesheet" href="/h/css/base.css">
-    <link href="/h/css/font-awesome.css" rel="stylesheet">
+    <link href="/h/css/font-awesome_2.css" rel="stylesheet">
     <link rel="stylesheet" href="/h/css/myarticle.css">
     <link href="/h/css/common(1).css" rel="stylesheet">
 
     <!-- 首页css开始-->
     <link media="screen" href="/h/css/base_1.css" type="text/css" rel="Stylesheet" />
     <link href="/h/css/common_index_1.css" rel="stylesheet" />
-    <link href="/h/css/font-awesome_1.css" rel="stylesheet" />
+    <!-- <link href="/h/css/font-awesome_1.css" rel="stylesheet" /> -->
     <link media="screen" href="/h/css/bbs-common_1.css" type="text/css" rel="Stylesheet" />
     <!-- 首页css结束-->
 
@@ -38,7 +39,7 @@
     <script type="text/javascript" src="/h/js/jquery.cookie.js.下载"></script>
     <script type="text/javascript" src="/h/js/api.js.下载"></script>
 
-    <script type="text/javascript">
+   <!--  <script type="text/javascript">
         //判断浏览器为oc端还是wap端
         browserRedirect(function () {
             window.location.href = "http://bbs.cnool.net/m/";
@@ -66,20 +67,13 @@
 
             selectBox($(".sub-serach-switch"));
         });
-    </script>
+    </script> -->
 
     <meta http-equiv="x-ua-compatible" content="ie=edge">
 
 </head>
 <body>
 <div class="wrap">
-        
-        
-    
-    
-
-    
-
     <script type="text/javascript">
         var sessionId = 'guFGhCMHpEDu0M61P7tRHC6fWuZMgLQA5nhFLuDZPLHcGEgi6rik64kj070Mx7Wh6tx++uJgl2SEPdHtBxJgSPHPXc0jkcnAm5FnIxQyjDE=';
         var username = 'c0900@qq';

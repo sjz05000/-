@@ -532,17 +532,6 @@
             background: url(/h/images/cnool_bbs_bg01_1.jpg) #FAFEFF no-repeat center 106px;
         }
     </style>
-
-    <!--1通栏广告 开始-->
-        <div class="first-banner" id="banner_ad1">
-
-            <script language="JavaScript1.1" src="/h/js/b2de8e6f8ced40a6a35cb606c9f5c3d2.js" charset="gb2312">
-            </script>
-
-            <script src="/h/js/scroll_ad3_1.js" charset="gb2312"></script>
-        </div>
-    <!--1通栏广告 结束-->
-
     <!-- 法院公告,官方微博,举报电话 开始 -->
     <div class="bbsInfo">
         <ul>
@@ -554,13 +543,7 @@
             <li class="jifenIcon cDGray" style="width: 430px;background:none">
 
             </li>
-
-
-            <li style="width:47px; float:left">&nbsp;</li>
-            <li style="width:77px;" class=" cDGray s1">
-                <img src="/h/picture/u254_1.png" width="14" style="margin:4px 4px 0 0; *margin:-1px 4px 0 0;" /><a class="bnt" href="http://nbfy.cnool.net/announce.html"
-                                                                                                                        target="_blank"><font color="red">法院公告</font></a>
-            </li>
+         <li>
             <li style="width:77px;" class=" cDGray s1">
                 <img src="/h/picture/u254_1.png" width="14" style="margin:4px 4px 0 0; *margin:-1px 4px 0 0;" /><a class="bnt" href="http://nbfy.cnool.net/laolai.html"
                                                                                                                         target="_blank"><font color="red">宁波老赖</font></a>
@@ -577,6 +560,41 @@
 
     <!-- 排行 热点 焦点 开始 -->
     <div id="focusDiv" class="focusNews">
+            <!--1通栏广告 开始-->
+        <div class="first-banner" id="banner_ad1">
+
+            <!-- <script language="JavaScript1.1" src="/h/js/b2de8e6f8ced40a6a35cb606c9f5c3d2.js" charset="gb2312">
+            </script> -->
+            <center>
+            <div class="demo">
+                <a class="control prev"></a><a class="control next abs"></a><!--自定义按钮，移动端可不写-->
+                <div class="slider"><!--主体结构，请用此类名调用插件，此类名可自定义-->
+                    <ul>
+                        @foreach($common_advertisements_data as $k=>$v)
+                        <li><a href=""><img src="{{$v->adfile}}" alt="{{$v->adname}}　　联系我们:{{$v->adphone}}" /></a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <script src="/h/img/js/jquery.min.js"></script>
+            <script src="/h/img/js/YuxiSlider.jQuery.min.js"></script>
+            <script>
+            $(".slider").YuxiSlider({
+                width:800, //容器宽度
+                height:450, //容器高度
+                control:$('.control'), //绑定控制按钮
+                during:4000, //间隔4秒自动滑动
+                speed:800, //移动速度0.8秒
+                mousewheel:true, //是否开启鼠标滚轮控制
+                direkey:true //是否开启左右箭头方向控制
+            });
+            </script>
+            </center>
+
+
+            <script src="/h/js/scroll_ad3_1.js" charset="gb2312"></script>
+        </div>
+    <!--1通栏广告 结束-->
         <div class="body-main">
             <!-- 左边 开始 -->
                 <div class="main-left">

@@ -45,12 +45,12 @@
 <body>
     <!-- layui -->
         <script src="/d/layui-v2.4.5/layui/layui.all.js"></script>
-        <script>
+        <!-- <script>
         //由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
           var layer = layui.layer
           
           layer.msg('欢迎登录后台');
-        </script> 
+        </script>  -->
 
     <!-- Themer (Remove if not needed) -->  
 
