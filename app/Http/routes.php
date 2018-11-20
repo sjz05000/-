@@ -12,9 +12,12 @@
 */
 /*
 	共享数据
-	common_cates_data  共享前台分类处理
+	common_cates_data   共享前台分类处理
 	common_banner_data  共享前台轮播图处理
-
+	common_link_data    共享前台友情链接
+	common_heatmap_data 共享前台热点图
+	common_user_data    共享前台活跃用户
+	common_advertisements_data 共享广告数据
 */ 
 
 Route::get('/', function () {
@@ -51,12 +54,13 @@ Route::get('/', function () {
 	Route::get('admin/config/edit','Admin\ConfigController@edit');
 	Route::post('admin/config/update','Admin\ConfigController@update');
 
-
 	// 后台热图管理
 	Route::resource('/admin/heatmap', 'Admin\HeatmapController');
 
-
-
+	// 前台文章评论 comment
+	Route::resource('/home/comment', 'Home\CommentController');
+	// 前台热点图详情
+	Route::resource('/home/heatmap', 'Home\HeatmapController');
 
 
 

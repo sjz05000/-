@@ -23,14 +23,9 @@
                     </label>
                     <input type="submit" value="提交" class="btn btn-success btn-small">
                 </div>
-            </form>
-<<<<<<< HEAD
+            </form> 
             <div style="overflow: scroll;width: 100%;height: 100%;">
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
-=======
-            <div style=" overflow:scroll; width:100%; height:100%;">
-            <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info" style="">
->>>>>>> origin/chenxf0900
                 <thead>
                     <tr role="row">
                         <th>ID</th>
@@ -59,14 +54,7 @@
                             <!-- <td>{{ $v->userinfo->uid }}</td> -->
                             <td>{{ $v->username }}</td>
                             <!-- <td>{{ $v->userinfo->photo }}</td> -->
-<<<<<<< HEAD
                             <td align="center"><div style="width:60px;height:50px;"><img src="{{ $v->userinfo->photo }}"></div></td>
-=======
-                            <td><div style="width: 50px;height: 50px;"><img src="{{ $v->userinfo->photo }}"></div></td>
->>>>>>> origin/chenxf0900
-
-
-
                             @if( $v->userinfo->sex == 1)
                             <td><span>女</span></td>
                             @elseif($v->userinfo->sex == 2)
@@ -113,7 +101,7 @@
             </div>
             <div class="dataTables_info" id="DataTables_Table_1_info">Showing 1 to 10 of 57 entries有几页共几条</div>
             <style type="text/css">
-<<<<<<< HEAD
+
                 thead tr th{
                     white-space:nowrap;
                     word-break:keep-all;
@@ -121,11 +109,7 @@
                 tbody tr td{
                     white-space: normal;
                     word-break:keep-all;
-=======
-                table tr th{
-                    white-space: normal;
-                    word-break: keep-all;
->>>>>>> origin/chenxf0900
+
                 }
                 #pagepage .disabled{color: #666666;cursor: default;}
                 #pagepage .active{background-color: #c5d52b;cursor: default;}

@@ -18,6 +18,12 @@ class LinkController extends Controller
               echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
         }
     }
+    // 共享友情链接
+    public static function getLink()
+    {
+        $data = Link::all();
+        return $data;
+    }
     /**
      * Display a listing of the resource.
      *

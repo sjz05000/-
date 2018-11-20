@@ -7,11 +7,10 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Cate;
-<<<<<<< HEAD
 use App\Model\Heatmap;
-=======
 use App\Model\Config;
->>>>>>> origin/abzhangzhipeng
+use App\Model\Article;
+use App\Model\Comment;
 
 class IndexController extends Controller
 {
@@ -22,18 +21,28 @@ class IndexController extends Controller
      */
     public function index()
     {
-<<<<<<< HEAD
-        $heatmap = Heatmap::where('id','<',6)->get();
-        $heatmap1 = Heatmap::find(6);
-        // dd($heatmap1);
-        return view('home/index/index',['heatmap'=>$heatmap,'heatmap1'=>$heatmap1]);
-=======
         // 查询数据
-        $config = Config::find(1);
-        session(['config'=>$config]);
-        // 加载模板
-        return view('home/index/index');
->>>>>>> origin/abzhangzhipeng
+        // 24小时热议
+        $time = date('Y-m-d ',time());
+        $time1 = date('Y-m-d ',(time()+60*60*24));
+        $comment = Comment::orderBy('zan', 'desc')->whereBetween('created_at', [$time,$time1])->paginate(10);
+        $temp = [];
+        foreach($comment as $k=>$v){
+            $temp[] = $v->aid;
+        }
+        $article = Article::whereIn('id',$temp)->get();
+        // 本周热议
+        $time2 = '7'-date('w',time());
+        $time3 = date('Y-m-d',time()+60*60*24*$time2);     // 最大不超
+        $time4 = date('w',time());                      
+        $time5 = date('Y-m-d',(time()-60*60*24*$time4));     // 最小不超
+        $comment1 = Comment::orderBy('zan', 'desc')->whereBetween('created_at', [$time5,$time3])->paginate(10);
+        $temp1 = [];
+        foreach($comment1 as $k=>$v){
+            $temp1[] = $v->aid;
+        }
+        $article1 = Article::whereIn('id',$temp1)->get();
+        return view('home/index/index',['article'=>$article,'comment'=>$comment,'article1'=>$article1,'comment1'=>$comment1]);
     }
 
     /**
