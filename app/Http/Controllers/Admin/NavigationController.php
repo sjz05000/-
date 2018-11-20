@@ -163,11 +163,10 @@ class NavigationController extends Controller
           //  验证表单
         $this->validate($request, [
             'navname' => 'required',
-            'url' => 'required|url',
+            'url' => 'required',
         ],[
             'navname.required' => '导航名称必填',
             'url.required' => 'URL不能为空',
-            'url.url' => 'URL格式错误',
         ]);
         // 查询 判断是否有子类
         $child = Navigation::where('pid','=',$id)->first();

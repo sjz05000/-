@@ -22,8 +22,7 @@ class BannerController extends Controller
      */
     public static function getBanner()
     {
-        $data = Banner::all();
-        return $data;
+        return  Banner::all();
     }
     /**
      * Display a listing of the resource.
@@ -60,15 +59,11 @@ class BannerController extends Controller
         //验证表单
         $this->validate($request, [
             'burl' => 'required|unique:dy-banner',
-            'bpic'  => 'required|image',
-            'describe' => 'required|unique:dy-banner'
+            'bpic'  => 'required|image'
         ],[
             'burl.required' => '链接地址必填',
             'burl.unique' => '链接地址已存在',
             'bpic.required' => '图片必填',
-            'bpic.image' => '图片格式错误' ,
-            'describe.required' => '描述必填',
-            'describe.unique' => '描述已存在',
             'bpic.image' => '图片格式错误' 
         ]);
         // 创建文件上传对象
@@ -80,7 +75,6 @@ class BannerController extends Controller
         // 提交到数据库
         $banner = new Banner;
         $banner->burl = $request->input('burl'); 
-        $banner->describe = $request->input('describe'); 
         // 拼接数据库存放路径
         $banner->bpic = ltrim($dir_name.'/'.$file_name,'.');
         $res = $banner->save();
@@ -128,12 +122,10 @@ class BannerController extends Controller
         //验证表单
         $this->validate($request, [
             'burl' => 'required',
-            'bpic'  => 'image',
-            'describe' => 'required'
+            'bpic'  => 'image'
         ],[
             'burl.required' => '跳转地址必填',
-            'bpic.image' => '图片格式错误',
-            'describe.required' => '图片描述必填'
+            'bpic.image' => '图片格式错误'
         ]);
         // 创建文件上传对象
         if($request->hasFile('bpic')){ 
@@ -147,8 +139,7 @@ class BannerController extends Controller
         // 提交到数据库
         $banner = Banner::find($id);
         $banner->burl = $request->input('burl'); 
-        $banner->describe = $request->input('describe'); 
-        // 数据库存放路径
+        // 拼接数据库存放路径
         if($request->hasFile('bpic')){
             $banner->bpic = ltrim($dir_name.'/'.$file_name,'.');
         }

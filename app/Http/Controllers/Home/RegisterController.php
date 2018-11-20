@@ -16,7 +16,7 @@ class RegisterController extends Controller
      */
     public function index()
     {
-        echo "123654987";
+        return view('home.user.reg');
     }
 
     /**
@@ -26,8 +26,7 @@ class RegisterController extends Controller
      */
     public function create()
     {
-        // 加载模板
-        return view('home.register.create',['title'=>'注册']);
+        //
     }
 
     /**

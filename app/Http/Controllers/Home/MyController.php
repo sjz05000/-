@@ -6,88 +6,48 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use Hash;
+use App\Model\Userdetail;
+use DB;
 
 class MyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+        public function indexa($id)
     {
-        // 加载模板
-        return view('home.my.mydongyu',['title'=>'个人中心']);
+        return view('home.user.index',['id'=>$id]);       
     }
-    public function indexshouye()
+    public function set($id)
     {
-        // 加载模板
-        return view('home.my.mygrshouye');
+        return view('home.user.set',['id'=>$id]);
     }
+    public function message($id)
+    {
+        return view('home.user.message',['id'=>$id]);
+    }
+    public function home($id)
+    {
+        // dd($id);die
+        $id = $id;
+        $user = User::find($id);
+        // $id = $user->id;//获取最后插入的id号
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+        $userdetail = Userdetail::where('uid',$id)->first();
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $article = DB::table('dy-articles')->get();
+        foreach ($article as $k => $v) {
+            $uid[] = $v->uid;
+        }
+        $articleuid = array_unique($uid); 
+        $articleuid = array_search($id,$articleuid);
+        // dump($articleuid);
+        // false/0/7
+        // 
+        // dump(in_array('27',$articleuid ));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // dump($user);
+        // 加载添加模板
+        return view('home.user.home',['user'=>$user,'userdetail'=>$userdetail,'articleuid'=>$articleuid,'id'=>$id]);
+        // return view('home.user.home',['id'=>$id]);
     }
 }

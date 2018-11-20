@@ -95,7 +95,7 @@ class UsersController extends Controller
             return redirect('admin/users')->with('success','添加成功');
         } else {
             // 回滚
-            DB::rollBack();
+            DB::rollBack;
             return back()->with('error','添加失败');
         }
 
@@ -165,7 +165,6 @@ class UsersController extends Controller
         $user = User::find($id);
         $user->username = $request->input('username');
         $user->status = $request->input('status','');
-
         $res1 = $user->save();//bool
 
         $id = $user->id;//获取最后插入的id号
