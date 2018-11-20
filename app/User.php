@@ -44,11 +44,12 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->hasOne('App\Model\Userdetail','uid');
     }
+    
     // 配置用户和文章的多对多关系  收藏
     // 多对多
     public function usercollect()
     {
         return $this->belongsToMany('App\Model\Article','dy-collect','uid','tid');
     }
-    
+   
 }

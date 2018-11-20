@@ -48,8 +48,8 @@ Route::get('/', function () {
 	// 后台评论管理
 	Route::resource('/admin/comment','Admin\CommentController');
 	// 后台站点管理
-	Route::get('admin/config/edit','Admin\ConfigController@edit');
-	Route::post('admin/config/update','Admin\ConfigController@update');
+	Route::get('/admin/config/edit','Admin\ConfigController@edit');
+	Route::post('/admin/config/update','Admin\ConfigController@update');
 
 
 
@@ -80,8 +80,11 @@ Route::get('/', function () {
 Route::get('/home', 'Home\IndexController@index');
 // 前台个人中心页
 Route::resource('/home/my','Home\MyController');
-
-
+Route::get('/home/user/{id}','Home\UserController@index');
+Route::get('/home/user/home/{id}','Home\UserController@home');
+Route::get('/home/user/message/{id}','Home\UserController@message');
+Route::get('/home/user/comment/{id}','Home\UserController@comment');
+Route::get('/home/user/set/{id}','Home\UserController@set');
 
 
 
@@ -104,11 +107,24 @@ Route::resource('/home/my','Home\MyController');
 
 
 // 后台登录
-Route::get('admin/login','Admin\LoginController@login');
-Route::post('admin/login/checkup','Admin\LoginController@checkup');
-Route::get('admin/login/checkdown','Admin\LoginController@checkdown');
-Route::get('admin/login/passwords/{id}','Admin\LoginController@passwords');
-Route::post('admin/login/update/{id}','Admin\LoginController@update');
-Route::post('admin/login/uploads','Admin\LoginController@uploads');
-
+Route::get('/admin/login','Admin\LoginController@login');
+Route::post('/admin/login/checkup','Admin\LoginController@checkup');
+Route::get('/admin/login/checkdown','Admin\LoginController@checkdown');
+// 后台修改密码
+Route::get('/admin/login/passwords/{id}','Admin\LoginController@passwords');
+Route::post('/admin/login/update/{id}','Admin\LoginController@update');
+// 后台修改头像
+Route::post('/admin/login/uploads','Admin\LoginController@uploads');
+// 前台导航
+Route::get('/home/navigation/show/{id}','Home\NavigationController@show');
+// 前台注册
+Route::get('/home/reg','Home\RegisterController@index');
+Route::post('/home/user/reg/update','Home\RegisterController@update');
+Route::get('/home/reg/up/{id}/{token}','Home\RegisterController@up');
+Route::get('/home/reg/checkusername','Home\RegisterController@checkusername');
+// 前台登录
+Route::get('/home/login','Home\LoginController@login');
+Route::post('/home/login/checkup','Home\LoginController@checkup');
+// 前台退出
+Route::get('/home/login/checkdown','Home\LoginController@checkdown');
 
