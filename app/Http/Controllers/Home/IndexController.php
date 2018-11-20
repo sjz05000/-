@@ -12,6 +12,7 @@ use App\Model\Config;
 use App\Model\Article;
 use App\Model\Comment;
 
+
 class IndexController extends Controller
 {
     /**
@@ -42,7 +43,11 @@ class IndexController extends Controller
             $temp1[] = $v->aid;
         }
         $article1 = Article::whereIn('id',$temp1)->get();
-        return view('home/index/index',['article'=>$article,'comment'=>$comment,'article1'=>$article1,'comment1'=>$comment1]);
+        $config = Config::find(1);
+        session(['config'=>$config]);
+        return view('home/index/index',['config'=>$config,'article'=>$article,'comment'=>$comment,'article1'=>$article1,'comment1'=>$comment1]);
+
+        
     }
 
     /**

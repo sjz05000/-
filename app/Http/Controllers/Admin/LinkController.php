@@ -31,7 +31,6 @@ class LinkController extends Controller
      */
     public function index()
     {
-        
         // 获取数据
         $data = Link::paginate(6);
         // 加载页面

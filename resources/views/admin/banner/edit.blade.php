@@ -17,12 +17,16 @@
     					<input type="file" class="small" name="bpic" value="">
     				</div>
     			</div>
+<<<<<<< HEAD
 <!--                 <div class="mws-form-row">
                     <label class="mws-form-label">图片描述</label>
                     <div class="mws-form-item">
                         <input type="text" class="small" name="describe" value="{{ $data->describe }}">
                     </div>
                 </div> -->
+=======
+    			
+>>>>>>> origin/chenxf0900
     			<div class="mws-form-row">
     				<label class="mws-form-label">跳转地址</label>
     				<div class="mws-form-item">

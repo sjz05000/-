@@ -31,7 +31,7 @@ Route::get('/', function () {
 	Route::resource('/admin/banner', 'Admin\BannerController');
 	// 用户收藏
 	Route::resource('/admin/collect', 'Admin\CollectController');
-
+	// Route::get('/admin/collect/{tid}{id}','Admin\CollectController@delete');
 	// 反馈管理
 	Route::resource('/admin/feedback', 'Admin\FeedbackController');
 
@@ -56,6 +56,7 @@ Route::get('/', function () {
 
 	// 后台热图管理
 	Route::resource('/admin/heatmap', 'Admin\HeatmapController');
+	
 
 	// 前台文章评论 comment
 	Route::resource('/home/comment', 'Home\CommentController');
@@ -84,18 +85,32 @@ Route::get('/', function () {
 
 
 
-
-
-
-
 // 前台首页
 Route::get('/home', 'Home\IndexController@index');
+
+Route::get('/home/user/login','Home\LoginController@login');// 前台登录
+Route::get('kit/captcha/{tmp}', 'Home\LoginController@captcha');
+
+Route::post('/home/login/checkup','Home\LoginController@checkup');
+Route::get('/home/login/checkdown','Home\LoginController@checkdown');
+Route::get('/home/login/passwords/{id}','Home\LoginController@passwords');// 修改密码
+Route::post('/home/login/update/{id}','Home\LoginController@update');
+Route::post('/home/login/uploads','Home\LoginController@uploads');// 修改头像
+
+
+Route::resource('/home/user/reg','Home\RegisterController');
 // 前台个人中心页
-Route::resource('/home/my','Home\MyController');
-Route::resource('/home/mygrshouye','Home\MyController@indexshouye');
-Route::resource('/home/register','Home\RegisterController');
+Route::resource('/home/user/forget','Home\LoginController');
 
+Route::resource('/home/user','Home\UsersController');
 
+Route::get('/home/user/indexa/{id}','Home\MyController@indexa');
+Route::get('/home/user/home/{id}','Home\MyController@home');
+Route::get('/home/user/set/{id}','Home\MyController@set');
+Route::get('/home/user/message/{id}','Home\MyController@message');
+
+// 后台修改头像
+Route::post('/home/login/uploads','Home\LoginController@uploads');
 
 
 
@@ -120,11 +135,17 @@ Route::resource('/home/register','Home\RegisterController');
 
 
 // 后台登录
-Route::get('admin/login','Admin\LoginController@login');
-Route::post('admin/login/checkup','Admin\LoginController@checkup');
-Route::get('admin/login/checkdown','Admin\LoginController@checkdown');
-Route::get('admin/login/passwords/{id}','Admin\LoginController@passwords');
-Route::post('admin/login/update/{id}','Admin\LoginController@update');
-Route::post('admin/login/uploads','Admin\LoginController@uploads');
+Route::get('/admin/login','Admin\LoginController@login');
+Route::post('/admin/login/checkup','Admin\LoginController@checkup');
+Route::get('/admin/login/checkdown','Admin\LoginController@checkdown');
+// 后台修改密码
+Route::get('/admin/login/passwords/{id}','Admin\LoginController@passwords');
+Route::post('/admin/login/update/{id}','Admin\LoginController@update');
+// 后台修改头像
+Route::post('/admin/login/uploads','Admin\LoginController@uploads');
+// 前台文章详情
+Route::get('/home/article/show/{id}','Home\ArticleController@show');
+// 前台导航
+Route::get('/home/navigation/show/{id}','Home\NavigationController@show');
 
 

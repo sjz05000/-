@@ -122,9 +122,9 @@ class CateController extends Controller
         $res = $cate->save();
         // 判断
         if($res){
-            return redirect('/admin/cate')->withInput('request',$request->all())->with('success','添加成功');
+            return redirect('/admin/cate')->with('success','添加成功');
         }else{
-            return back()->with('error','添加失败');
+            return back()->withInput('request',$request->all())->with('error','添加失败');
         }
     }
 

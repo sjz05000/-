@@ -17,6 +17,11 @@ class ArticleController extends Controller
               echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
         }
     }
+    // 分享前台数据
+    public static function getArticle()
+    {
+        return Article::all();
+    }
     /**
      * Display a listing of the resource.
      *
