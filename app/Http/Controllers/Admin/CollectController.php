@@ -133,9 +133,7 @@ class CollectController extends Controller
     {
         $uid = $request->input('uid');
         $tid = $request->input('tid');
-        dump($uid);
-        dump($tid);die;
-        // $res = DB::table('dy-collect')->where('uid', '=', $uid)->where('tid','=',$tid)->delete();
+        $res = DB::table('dy-collect')->where('uid', '=', $uid)->where('tid','=',$tid)->delete();
          if($res){
             return redirect('admin/collect')->with('success', '删除成功!');
         }else{

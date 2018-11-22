@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Navigation;
+use App\Model\Comment;
 
 class NavigationController extends Controller
 {
@@ -47,10 +48,31 @@ class NavigationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        $data = Navigation::find($id);
-        return view('home.navigation.show',['data'=>$data]);
+        // 获取数据
+        $textarea = $request->query('textarea', '');
+        if($textarea){
+            if(session('home')){
+                $comment = new Comment;
+                $comment->content = $textarea;
+                $comment->uid = session('homeinfo')['id'];
+                $comment->aid = $id;
+                $res = $comment->save();
+                if($res){
+                    echo '发表成功';
+                }else{
+                    echo '发表失败';
+                }
+            }else{
+                echo 'error';
+            }
+        }else{
+           $data = Navigation::find($id);
+           $comment_article = Comment::where('aid','=',$id)->get();
+           
+           return view('home.navigation.show',['data'=>$data,'comment_article'=>$comment_article,'id'=>$id]); 
+        }
     }
 
     /**

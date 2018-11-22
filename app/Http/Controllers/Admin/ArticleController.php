@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Article;
+use App\Model\Heatmap;
 
 class ArticleController extends Controller
 {
@@ -75,6 +76,7 @@ class ArticleController extends Controller
         $article->auth = $request->input('auth','');
         $article->path = $request->input('path','');
         $article->content = $request->input('content','');
+        $article->uid = session('admininfo')['id'];
         $res = $article->save();
         // 判断
         if($res){
@@ -139,6 +141,7 @@ class ArticleController extends Controller
         $article->auth = $request->input('auth','');
         $article->path = $request->input('path','');
         $article->content = $request->input('content','');
+        $article->uid = session('admininfo')['id'];
         $res = $article->save();
         // 判断
         if($res){
@@ -156,6 +159,11 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
+        // 判断此文章是否在热点图内
+        if($id = Heatmap::where('tid',$id)->first())
+        {
+            return back()->with('error','此文章与热点图内照片绑定在一起,请先删除热点图内的信息');
+        }
         // 删除数据
         $res = Article::destroy($id);
         // 判断

@@ -2,43 +2,38 @@
 @include('home.layout.back')
 @else
 @include('home.layout.header')
+<link rel="stylesheet" type="text/css" href="/h/ad/css/ad.css">
     <div class="layui-container">
       <div class="layui-row layui-col-space15">
     <!-- 轮播图 开始 -->
-    <div class="layui-carousel" style="margin-left:auto;margin-right:auto;margin-bottom: 20px;" center;" id="test1">
-      <div carousel-item>
-      @foreach($common_banner_data as $k=>$v)
-        <div><img style="width: 100%;height: 100%;" src="{{ $v->bpic }}"></div>
-      @endforeach
+    <center>
+    <link rel="stylesheet" href="/h/banner/css/style.css">
+    <div class="demo">
+       <!-- <a class="control prev"></a><a class="control next abs"></a>    --><!--自定义按钮，移动端可不写!-->
+      <div class="slider" style="margin:20px; border: 2px solid black">  <!--主体结构，请用此类名调用插件，此类名可自定义-->
+        <ul>
+          @foreach($common_banner_data as $k=>$v)
+           <li><img style="width: 90%;height: 100%;" src="{{ $v->bpic }}"></li>
+          @endforeach 
+        </ul>
       </div>
     </div>
-    <!-- 条目中可以是任意内容，如：<img src=""> -->
-     
-    <script src="/h/res/layui/layui.js"></script>
+  </center>
+    <script src="/h/banner/js/jquery.min.js"></script>
+    <script src="/h/banner/js/YuxiSlider.jQuery.min.js"></script>
     <script>
-    layui.use('carousel', function(){
-      var carousel = layui.carousel;
-      //建造实例
-      carousel.render({
-        elem: '#test1'
-        ,width: '92%' //设置容器宽度
-        ,height: '300px'
-        ,arrow: 'always' //始终显示箭头
-        //,anim: 'updown' //切换动画方式
-      });
+    $(".slider").YuxiSlider({
+      width:800, //容器宽度
+      height:450, //容器高度
+      control:$('.control'), //绑定控制按钮
+      during:3500, //间隔4秒自动滑动
+      speed:800, //移动速度0.8秒
+      mousewheel:true, //是否开启鼠标滚轮控制
+      direkey:false //是否开启左右箭头方向控制
     });
-    </script> 
-    <!-- 轮播图 结束 -->
-    <script src="../layui/layui.all.js"></script>  
-    <script>
-    ;!function(){
-      //无需再执行layui.use()方法加载模块，直接使用即可
-      var form = layui.form
-      ,layer = layui.layer;
-      
-      //…
-    }();
-    </script>  
+    </script>
+    </center>
+    <!-- 轮播图 结束 -->  
     <div class="layui-col-md8">
 
       <div class="fly-panel">
@@ -448,11 +443,25 @@
 
       <div class="fly-panel">
         <div class="fly-panel-title">
-          这里可作为广告区域
+          广告区域
         </div>
-        <div class="fly-panel-main">
-          <a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
-        </div>
+          <!-- 广告开始 -->
+          <ul id="ad_ul">
+            @foreach($common_advertisements_data as $k=>$v)
+            <li><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></li>
+            @endforeach
+          </ul>
+          <script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
+          <script type="text/javascript">
+            setInterval(function(){
+              // 获取一个li 上滑动隐藏
+              $('#ad_ul li').first().slideUp('slow',function(){
+                // 追加到ul 末尾 显示
+                $('#ad_ul').append($('#ad_ul li').first().show());
+              });
+            },2000);
+          </script>
+          <!-- 广告结束 -->
       </div>
       
       <div class="fly-panel fly-link">

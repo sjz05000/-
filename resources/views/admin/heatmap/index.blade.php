@@ -23,7 +23,11 @@
                     <td align="center">{{ $v->hamap->title }}</td>
           					<td align="center">
           						<a href="/admin/heatmap/{{ $v->id }}" class="btn">查看内容</a>
-          						<a href="/admin/heatmap/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
+                      <a href="/admin/heatmap/{{ $v->id }}/edit" class="btn btn-warning">修改</a>
+                      <form action="/admin/heatmap/{{ $v->id }}" method="post" style="display: inline-block;">
+                        {{csrf_field()}}  {{method_field('DELETE')}}
+                        <input type="submit" onclick="return confirm('确定要删除吗?')" class="btn btn-danger" value="删除">
+                      </form>
           					</td>
           				</tr>
         			@endforeach

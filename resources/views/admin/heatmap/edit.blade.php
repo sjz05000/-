@@ -16,6 +16,18 @@
                         <input type="text" class="small" name="title" value="{{ $data->hamap->title }}">
                     </div>
                 </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">来源</label>
+                    <div class="mws-form-item">
+                        <input type="text" class="small" name="path" value="{{ $data->hamap->path }}">
+                    </div>
+                </div>
+                <div class="mws-form-row">
+                    <label class="mws-form-label">作者</label>
+                    <div class="mws-form-item">
+                        <input type="text" class="small" name="auth" value="{{ $data->hamap->auth }}">
+                    </div>
+                </div>
     			<div class="mws-form-row">
     				<label class="mws-form-label">热点图片</label>
     				<div class="mws-form-item">

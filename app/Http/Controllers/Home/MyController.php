@@ -15,7 +15,10 @@ class MyController extends Controller
 {
         public function indexa($id)
     {
-        return view('home.user.index',['id'=>$id]);       
+        $collect = User::find($id);
+        $shoucang = $collect->usercollect->count();
+        $fabu = $collect->usera->count();
+        return view('home.user.index',['id'=>$id,'collect'=>$collect,'fabu'=>$fabu,'shoucang'=>$shoucang]);       
     }
     public function set($id)
     {
@@ -50,4 +53,6 @@ class MyController extends Controller
         return view('home.user.home',['user'=>$user,'userdetail'=>$userdetail,'articleuid'=>$articleuid,'id'=>$id]);
         // return view('home.user.home',['id'=>$id]);
     }
+
+
 }

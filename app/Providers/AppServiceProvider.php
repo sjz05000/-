@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
         // 共享导航数据
          view()->share('common_link_data',LinkController::getLink());
         // 共享热点图数据
-         view()->share('common_heatmap_data',HeatmapController::getHeatmap());
+        view()->share('common_heatmap_data',HeatmapController::getHeatmap());
 
         // 共享广告数据
         view()->share('common_advertisements_data',AdvertisementsController::getAdvertisements());

@@ -54,6 +54,10 @@ class LoginController extends Controller
         $password = $request->input('password','');
         // 验证数据库
         $check = User::select()->where('username',$username)->first();
+        // 判断状态
+        if($check->status==4){
+          return view('home.user.status');
+        }
         if(Hash::check($password,$check->password)){
             // 保存信息到session
             session(['home'=>true]);

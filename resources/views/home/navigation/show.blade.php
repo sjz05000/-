@@ -1,4 +1,8 @@
+@if(session('config')['status']==2)
+@include('home.layout.back')
+@else
 @include('home.layout.header')
+<link rel="stylesheet" type="text/css" href="/h/ad/css/ad.css">
 <div class="layui-container">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
@@ -18,36 +22,40 @@
 <!-- 回帖开始 -->
    <div class="fly-panel detail-box" id="flyReply">
         <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
-          <legend>回帖</legend>
+          <legend>文章评论</legend>
         </fieldset>
         <h1></h1>
+   @foreach($comment_article as $k=>$v)
+        @foreach($v->user as $kk=>$vv)
         <ul class="jieda" id="jieda">
           <li data-id="111" class="jieda-daan">
             <a name="item-1111111111"></a>
             <div class="detail-about detail-about-reply">
+              <a class="fly-avatar" href="../user/home.html">
+                <img src="{{$vv->userinfo->photo}}" alt="贤心">
+              </a>
               <div class="fly-detail-user">
                 <a href="" class="fly-link">
-                  <cite>贤心</cite>
+                  <cite>{{$vv->username}}</cite>
                   <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                   <i class="layui-badge fly-badge-vip">VIP3</i>              
                 </a>
-                
-                <span>(楼主)</span>
-                <!--
-                <span style="color:#5FB878">(管理员)</span>
-                <span style="color:#FF9E3F">（社区之光）</span>
-                <span style="color:#999">（该号已被封）</span>
-                -->
+                @if($vv->status==1)
+                <span style="color:pink">(超级管理员)</span>
+                @elseif($vv->status==2)
+                <span style="color:orange">(论坛管理员)</span>
+                @elseif($vv->status==3)
+                <span style="color:#5FB878">(普通用户)</span>
+                @endif
               </div>
 
               <div class="detail-hits">
-                <span>2017-11-30</span>
+                <span>{{$v->created_at}}</span>
               </div>
-
-              <i class="iconfont icon-caina" title="最佳答案"></i>
+<!--  <i class="iconfont icon-caina" title="最佳答案"></i> -->
             </div>
             <div class="detail-body jieda-body photos">
-              <p>香菇那个蓝瘦，这是一条被采纳的回帖</p>
+              <p>{{$v->content}}</p>
             </div>
             <div class="jieda-reply">
               <span class="jieda-zan zanok" type="zan">
@@ -56,44 +64,23 @@
               </span>
               <span type="reply">
                 <i class="iconfont icon-svgmoban53"></i>
-                回复
+                <a href="#submit">回复</a>
               </span>
               <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del">删除</span>
+               <!--  <span type="edit">编辑</span>
+                <span type="del">删除</span> -->
                 <!-- <span class="jieda-accept" type="accept">采纳</span> -->
               </div>
             </div>
-          </li>
-          
-          <li data-id="111">
-            <a name="item-1111111111"></a>
-            <div class="detail-body jieda-body photos">
-              <p>蓝瘦那个香菇，这是一条没被采纳的回帖</p>
-            </div>
-            <div class="jieda-reply">
-              <span class="jieda-zan" type="zan">
-                <i class="iconfont icon-zan"></i>
-                <em>0</em>
-              </span>
-              <span type="reply">
-                <i class="iconfont icon-svgmoban53"></i>
-                回复
-              </span>
-              <div class="jieda-admin">
-                <span type="edit">编辑</span>
-                <span type="del">删除</span>
-                <span class="jieda-accept" type="accept">采纳</span>
-              </div>
-            </div>
-          </li>
-          
-          <!-- 无数据时 -->
+         </li>
+           <!-- 无数据时 -->
           <!-- <li class="fly-none">消灭零回复</li> -->
         </ul>
-        
+        @endforeach
+    @endforeach
         <div class="layui-form layui-form-pane">
-          <form action="/jie/reply/" method="post">
+          <form action="" method="post">
+            {{csrf_field()}}
             <div class="layui-form-item layui-form-text">
               <a name="comment"></a>
               <div class="layui-input-block">
@@ -101,8 +88,7 @@
               </div>
             </div>
             <div class="layui-form-item">
-              <input type="hidden" name="jid" value="123">
-              <button class="layui-btn" lay-filter="*" lay-submit>提交回复</button>
+              <input type="submit" class="layui-btn" name="" value="提交回复">
             </div>
           </form>
         </div>
@@ -124,39 +110,56 @@
 
       <div class="fly-panel">
         <div class="fly-panel-title">
-          这里可作为广告区域
+          广告
         </div>
-        <!-- 轮播图开始 -->
-        <center>
-		<div class="demo">
-			<a class="control prev"></a><a class="control next abs"></a><!--自定义按钮，移动端可不写-->
-			<div class="slider"><!--主体结构，请用此类名调用插件，此类名可自定义-->
-				<ul>
-					<li><a href=""><img src="images/1.jpg" alt="两弯似蹙非蹙笼烟眉，一双似喜非喜含情目。" /></a></li>
-					<li><a href=""><img src="images/2.jpg" alt="态生两靥之愁，娇袭一身之病。" /></a></li>
-					<li><a href=""><img src="images/3.jpg" alt="泪光点点，娇喘微微。" /></a></li>
-					<li><a href=""><img src="images/4.jpg" alt="闲静似娇花照水，行动如弱柳扶风。" /></a></li>
-					<li><a href=""><img src="images/5.jpg" alt="心较比干多一窍，病如西子胜三分。" /></a></li>
-				</ul>
-			</div>
-		</div>
-		<script src="js/jquery.min.js"></script>
-		<script src="js/YuxiSlider.jQuery.min.js"></script>
-		<script>
-		$(".slider").YuxiSlider({
-			width:800, //容器宽度
-			height:450, //容器高度
-			control:$('.control'), //绑定控制按钮
-			during:4000, //间隔4秒自动滑动
-			speed:800, //移动速度0.8秒
-			mousewheel:true, //是否开启鼠标滚轮控制
-			direkey:true //是否开启左右箭头方向控制
-		});
-		</script>
-		</center>
-		<!-- 轮播图结束 -->
+    <!-- 广告开始 -->
+    <ul id="ad_ul">
+      @foreach($common_advertisements_data as $k=>$v)
+      <li><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></li>
+      @endforeach
+    </ul>
+    <script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+      setInterval(function(){
+        // 获取一个li 上滑动隐藏
+        $('#ad_ul li').first().slideUp('slow',function(){
+          // 追加到ul 末尾 显示
+          $('#ad_ul').append($('#ad_ul li').first().show());
+        });
+      },2000);
+      // 发送ajax
+      $('input[type=submit]').click(function(){
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+         }); 
+        var textarea = $('#L_content').val();
+        $.ajax({
+        url: "/home/navigation/show/{{$id}}",
+        type: 'get',
+        data:{'textarea':textarea},
+        success: function(data){
+            if(data=='error'){
+              layer.alert('您还未登陆请登录');
+            }else{
+              layer.alert(data);
+            }
+
+          },
+          dataType: 'html',
+          async:false,
+        });
+      });
+      // 阻止表单提交
+      $('form').submit(function(){
+        return false;
+      });
+    </script>
+    <!-- 广告结束 -->
       </div>
     </div>
   </div>
 </div>
 @include('home.layout.footer')
+@endif

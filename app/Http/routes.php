@@ -31,7 +31,7 @@ Route::get('/', function () {
 	Route::resource('/admin/banner', 'Admin\BannerController');
 	// 用户收藏
 	Route::resource('/admin/collect', 'Admin\CollectController');
-	// Route::get('/admin/collect/{tid}{id}','Admin\CollectController@delete');
+
 	// 反馈管理
 	Route::resource('/admin/feedback', 'Admin\FeedbackController');
 
@@ -62,7 +62,9 @@ Route::get('/', function () {
 	Route::resource('/home/comment', 'Home\CommentController');
 	// 前台热点图详情
 	Route::resource('/home/heatmap', 'Home\HeatmapController');
-
+	// 前台收藏与发布的文章删除
+	Route::get('/home/article/{tid}','Home\ArticleController@delete');
+	Route::get('/home/articlel/{uid}/{tid}','Home\ArticleController@deletel');
 
 
 
@@ -87,8 +89,8 @@ Route::get('/', function () {
 
 // 前台首页
 Route::get('/home', 'Home\IndexController@index');
-
-Route::get('/home/user/login','Home\LoginController@login');// 前台登录
+// 前台登录
+Route::get('/home/user/login','Home\LoginController@login');
 Route::get('kit/captcha/{tmp}', 'Home\LoginController@captcha');
 
 Route::post('/home/login/checkup','Home\LoginController@checkup');
@@ -147,5 +149,10 @@ Route::post('/admin/login/uploads','Admin\LoginController@uploads');
 Route::get('/home/article/show/{id}','Home\ArticleController@show');
 // 前台导航
 Route::get('/home/navigation/show/{id}','Home\NavigationController@show');
+// 前台注册
+Route::post('/home/user/reg/update','Home\RegisterController@update');
+Route::get('/home/reg','Home\RegisterController@index');
+Route::get('/home/reg/up/{id}/{token}','Home\RegisterController@up');
+Route::get('/home/reg/checkusername','Home\RegisterController@checkusername');
 
 
