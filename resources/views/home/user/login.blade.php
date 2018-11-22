@@ -7,8 +7,8 @@
   <div class="fly-panel fly-panel-user" pad20>
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title">
-        <li class="layui-this"><a href="/home/login">登入</a></li>
-        <li><a href="/home/reg">注册</a></li>
+        <li class="layui-this">登入</li>
+        <li><a href="/home/user/reg">注册</a></li>
       </ul>
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
@@ -18,7 +18,7 @@
               <div class="layui-form-item">
                 <label for="L_email" class="layui-form-label">用户名</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_email" name="username" placeholder="请输入用户名" required lay-verify="required" autocomplete="off" class="layui-input">
+                  <input type="text" id="L_email" name="username" required lay-verify="required" autocomplete="off" class="layui-input">
                 </div>
               </div>
               <div class="layui-form-item">
@@ -30,7 +30,7 @@
               <div class="layui-form-item">
                 <label for="L_vercode" class="layui-form-label">人类验证</label>
                 <div class="layui-input-inline">
-                  <input type="text" id="L_vercode" name="captcha" value="" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input form-control">
+                  <input type="text" id="L_vercode" name="captcha" value="123" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input form-control">
                   <!-- <input type="text" name="captcha" class="form-control" style="width: 300px;"> -->
                   <!-- <input type="text" id="L_vercode" name="vercode" required lay-verify="required" placeholder="请回答后面的问题" autocomplete="off" class="layui-input"> -->
                 </div>

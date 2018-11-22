@@ -21,6 +21,10 @@ class UsersController extends Controller
               echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
         }
     }
+    public static function getUser()
+    {
+        return User::all();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -64,8 +68,8 @@ class UsersController extends Controller
 
         // 验证表单在UsersStoreRequest中
         // 创建文件上传对象
-        $profile = $request -> file('photo');
-        $ext = $profile ->getClientOriginalExtension(); //获取文件后缀
+        $profile = $request->file('photo');
+        $ext = $profile->getClientOriginalExtension(); //获取文件后缀
         $file_name = str_random('20').'.'.$ext;         //重命名
         $dir_name = './uploads/'.date('Ymd',time());    //存储目录
         $res2 = $profile->move($dir_name,$file_name);    //移动文件到指定目录

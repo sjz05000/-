@@ -1,3 +1,6 @@
+@if(session('config')['status']==2)
+@include('home.layout.back')
+@else
 @include('home.layout.header')
 <link rel="stylesheet" type="text/css" href="/h/ad/css/ad.css">
 <div class="layui-container">
@@ -110,20 +113,20 @@
           广告
         </div>
     <!-- 广告开始 -->
-		<ul id="ad_ul">
-			@foreach($common_advertisements_data as $k=>$v)
-			<li><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></li>
-			@endforeach
-		</ul>
-		<script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
-		<script type="text/javascript">
-			setInterval(function(){
-				// 获取一个li 上滑动隐藏
-				$('#ad_ul li').first().slideUp('slow',function(){
-					// 追加到ul 末尾 显示
-					$('#ad_ul').append($('#ad_ul li').first().show());
-				});
-			},2000);
+    <ul id="ad_ul">
+      @foreach($common_advertisements_data as $k=>$v)
+      <li><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></li>
+      @endforeach
+    </ul>
+    <script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
+    <script type="text/javascript">
+      setInterval(function(){
+        // 获取一个li 上滑动隐藏
+        $('#ad_ul li').first().slideUp('slow',function(){
+          // 追加到ul 末尾 显示
+          $('#ad_ul').append($('#ad_ul li').first().show());
+        });
+      },2000);
       // 发送ajax
       $('input[type=submit]').click(function(){
         $.ajaxSetup({
@@ -152,10 +155,11 @@
       $('form').submit(function(){
         return false;
       });
-		</script>
-		<!-- 广告结束 -->
+    </script>
+    <!-- 广告结束 -->
       </div>
     </div>
   </div>
 </div>
 @include('home.layout.footer')
+@endif

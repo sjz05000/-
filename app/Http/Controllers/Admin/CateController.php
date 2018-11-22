@@ -19,9 +19,16 @@ class CateController extends Controller
         }
     }
     /**
+     * 获取前台分类数据
+     */
+    public static function getCates()
+    {
+      return Cate::all();
+    }
+    /**
      * 前台分类
      */
-    public  static function getCates($pid = 0)
+    public  static function getPidCates($pid = 0)
     {
         // 查询数据
         $data = Cate::where('pid',$pid)->get();
@@ -29,7 +36,7 @@ class CateController extends Controller
         // 遍历
         foreach($data as $k=>$v)
         {
-            $v['sub'] = self::getCates($v->id);
+            $v['sub'] = self::getPidCates($v->id);
             $temp[] = $v;
         }
         return $temp;

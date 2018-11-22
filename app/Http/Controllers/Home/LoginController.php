@@ -54,6 +54,7 @@ class LoginController extends Controller
         $password = $request->input('password','');
         // 验证数据库
         $check = User::select()->where('username',$username)->first();
+        // 判断状态
         if($check->status==4){
           return view('home.user.status');
         }
@@ -62,11 +63,38 @@ class LoginController extends Controller
             session(['home'=>true]);
             // 保存用户信息
             session(['homeinfo'=>$check]);
-            // 保存头像
+            $status = session('homeinfo')['status'];
+            // 查找id
             $id = session('homeinfo')['id'];
-            $Userdetail = Userdetail::select('photo')->where('uid',$id)->first();
+            // 保存详情信息
+            // $Userdetail = Userdetail::select('photo','email','qq','phone','sex','birthday','city','fas','following','integral')->where('uid',$id)->first();
+            $Userdetail = Userdetail::where('uid',$id)->first();
+            // dump($Userdetail);die;
+
             $photo = $Userdetail->photo;
-            session(['photo'=>$photo]);
+            $email = $Userdetail->email;
+            $qq = $Userdetail->qq;
+            $phone = $Userdetail->phone;
+            $sex = $Userdetail->sex;
+            $birthday = $Userdetail->birthday;
+            $city = $Userdetail->city;
+            $fas = $Userdetail->fas;
+            $fasn = substr_count($Userdetail->fas,',');//判断粉丝数量
+            if ($fasn<0){
+              $fasn = 0;
+            }
+            $following = $Userdetail->following;
+            $followingn = substr_count($Userdetail->following,',');//判断关注数量
+            if ($followingn<0){
+              $followingn = 0;
+            }
+            $integral = $Userdetail->integral;
+            $created_at = $Userdetail->created_at;
+            $updated_at = $Userdetail->updated_at;
+            $deleted_at = $Userdetail->deleted_at;
+
+            session(['photo'=>$photo,'email'=>$email,'qq'=>$qq,'phone'=>$phone,'sex'=>$sex,'birthday'=>$birthday,'city'=>$city,'fas'=>$fas,'fasn'=>$fasn,'following'=>$following,'followingn'=>$followingn,'integral'=>$integral,'created_at'=>$created_at,'updated_at'=>$updated_at,'deleted_at'=>$deleted_at]);
+            
             // 跳转
             return redirect('/home')->with('success','登录成功');
         }else{
@@ -159,5 +187,6 @@ class LoginController extends Controller
       }
       return response()->json($str);
     }
+
 
 }

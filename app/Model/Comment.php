@@ -15,4 +15,3 @@ class Comment extends Model
         return $this->belongsToMany('App\User','dy-comment','id','uid');
     } 
 }
-

@@ -6,83 +6,52 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\User;
+use Hash;
+use App\Model\Userdetail;
+use App\Model\Article;
+use App\Model\Comment;
+use DB;
 
 class MyController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    // 我的发帖
+    public function indexa($id)
     {
-        // 加载模板
-        return view('home.my.mydongyu',['title'=>'个人中心']);
+        $data = Article::select()->where('uid',$id)->get();
+        return view('home.user.index',['id'=>$id,'data'=>$data]);       
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function set($id)
     {
-        //
+        return view('home.user.set',['id'=>$id]);
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function message($id)
     {
-        //
+        return view('home.user.message',['id'=>$id]);
     }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function home($id)
     {
-        //
-    }
+        // dd($id);die
+        $id = $id;
+        $user = User::find($id);
+        // $id = $user->id;//获取最后插入的id号
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        $userdetail = Userdetail::where('uid',$id)->first();
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        $article = DB::table('dy-articles')->get();
+        foreach ($article as $k => $v) {
+            $uid[] = $v->uid;
+        }
+        $articleuid = array_unique($uid); 
+        $articleuid = array_search($id,$articleuid);
+        // dump($articleuid);
+        // false/0/7
+        // 
+        // dump(in_array('27',$articleuid ));
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // dump($user);
+        // 加载添加模板
+        return view('home.user.home',['user'=>$user,'userdetail'=>$userdetail,'articleuid'=>$articleuid,'id'=>$id]);
+        // return view('home.user.home',['id'=>$id]);
     }
 }

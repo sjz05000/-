@@ -211,6 +211,13 @@
                             <li><a href="/admin/banner">浏览轮播图</a></li>
                         </ul>
                     </li>
+                    <li class="active">
+                        <a href="#"><i class="icon-newspaper"></i>热点图管理</a>
+                        <ul class="closed">      
+                            <!-- <li><a href="/admin/heatmap/create">添加图片</a></li> -->
+                            <li><a href="/admin/heatmap">浏览图片</a></li>
+                        </ul>
+                    </li>
                     <li class="active" >
                         <a href="#"><i class="icon-picture"></i>广告管理</a>
                         <ul class="closed">

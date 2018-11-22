@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,13 +10,12 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="/h/res/layui/css/layui.css">
   <link rel="stylesheet" href="/h/res/css/global.css">
-  <script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
 </head>
-<script src="/h/res/layui/layui.all.js"></script>
+<script type="text/javascript" src="/d/js/libs/jquery-1.8.3.min.js"></script>
 <body>
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
-    <a class="fly-logo" href="/">
+    <a class="fly-logo" href="http://www.dongyu.com/home">
       <img src="{{session('config')['file']}}" alt="layui" style="width:77px;">
     </a>
     <ul class="layui-nav fly-nav layui-hide-xs">
@@ -30,17 +30,18 @@
       </li>
     </ul>
     
-   <ul class="layui-nav fly-nav-user">
+    <ul class="layui-nav fly-nav-user">
+      
       @if(empty(session('home')))
       <!-- 未登入的状态 -->
       <li class="layui-nav-item">
-        <a class="iconfont icon-touxiang layui-hide-xs" href="/home/user/login"></a>
+        <a class="iconfont icon-touxiang layui-hide-xs" href="../user/login.html"></a>
       </li>
       <li class="layui-nav-item">
-        <a href="/home/login">登入</a>
+        <a href="/home/user/login">登入</a>
       </li>
       <li class="layui-nav-item">
-        <a href="/home/reg">注册</a>
+        <a href="/home/user/reg">注册</a>
       </li>
       <li class="layui-nav-item layui-hide-xs">
         <a href="" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" title="QQ登入" class="iconfont icon-qq"></a>
@@ -54,14 +55,24 @@
       <li class="layui-nav-item">
         <a class="fly-nav-avatar" href="javascript:;">
           <cite class="layui-hide-xs">{{session('homeinfo')['username']}}</cite>
-          <i class="iconfont icon-renzheng layui-hide-xs" title="认证信息：layui 作者"></i>
-          <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i>
+          @if( session('fasn') >= 5 ) 
+          <i class="iconfont icon-renzheng layui-hide-xs"></i>
+          @endif
+         
+          @if( session('homeinfo')['status'] == 1)
+          <i class="layui-badge fly-badge-vip layui-hide-xs">超级管理员</i>
+          @elseif( session('homeinfo')['status'] == 2)
+          <i class="layui-badge fly-badge-vip layui-hide-xs">论坛管理员</i>
+          @else
+          <i class="layui-badge fly-badge-vip layui-hide-xs">普通用户</i>          
+          @endif 
+          <!-- <i class="layui-badge fly-badge-vip layui-hide-xs">VIP3</i> -->
           <img src="{{session('photo')}}">
         </a>
         <dl class="layui-nav-child">
-          <dd><a href="/home/user/set/{{session('homeinfo')['id']}}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
-          <dd><a href="/home/user/message/{{session('homeinfo')['id']}}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
-          <dd><a href="/home/user/home/{{session('homeinfo')['id']}}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
+          <dd><a href="http://www.dongyu.com/home/user/set/{{session('homeinfo')['id']}}"><i class="layui-icon">&#xe620;</i>基本设置</a></dd>
+          <dd><a href="http://www.dongyu.com/home/user/message/{{session('homeinfo')['id']}}"><i class="iconfont icon-tongzhi" style="top: 4px;"></i>我的消息</a></dd>
+          <dd><a href="http://www.dongyu.com/home/user/home/{{session('homeinfo')['id']}}"><i class="layui-icon" style="margin-left: 2px; font-size: 22px;">&#xe68e;</i>我的主页</a></dd>
           <hr style="margin: 5px 0;">
           <dd><a href="/home/login/checkdown" style="text-align: center;">退出</a></dd>
         </dl>
@@ -72,36 +83,19 @@
   </div>
 </div>
 <!-- 导航 开始 -->
-<!-- <div class="fly-panel fly-column">
-  <div class="layui-container">
-    <ul class="layui-clear">
-      <li class="layui-hide-xs layui-this"><a href="/home">首页</a></li> 
-      <li><a href="jie/index.html">提问</a></li> 
-      <li><a href="jie/index.html">分享<span class="layui-badge-dot"></span></a></li> 
-      <li><a href="jie/index.html">讨论</a></li> 
-      <li><a href="jie/index.html">建议</a></li> 
-      <li><a href="jie/index.html">公告</a></li> 
-      <li><a href="jie/index.html">动态</a></li> 
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li> 
-      
-       用户登入后显示
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li> 
-      <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li> 
-    </ul> 
-    
-    <div class="fly-column-right layui-hide-xs"> 
-      <span class="fly-search"><i class="layui-icon"></i></span> 
-      <a href="jie/add.html" class="layui-btn">发表新帖</a> 
-    </div> 
-    <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;"> 
-      <a href="jie/add.html" class="layui-btn">发表新帖</a> 
-    </div> 
-  </div>
-</div> -->
-<ul class="layui-nav layui-bg-cyan"  lay-filter="" style="padding-left:170px; ">
-  <li class="layui-nav-item" id="navigation"><a href="/home">首页</a></li>
+<style type="text/css">
+  #shouye-nav .layui-nav .layui-nav-item a{
+    color: #000;
+  }
+  #shouye-nav .layui-nav .layui-nav-item a:hover{
+    color: green;
+  }
+</style>
+<div id="shouye-nav">
+<ul class="layui-nav" lay-filter="" style="padding-left:170px; background-color: #fff; color: #000; border-radius: 2px; font-size: 0; box-sizing: border-box;">
+  <li class="layui-nav-item"><a href="/home">首页</a></li>
   @foreach($common_navigation_data as $k=>$v)
-  <li class="layui-nav-item" id="navigation">
+  <li class="layui-nav-item">
     <a href="/home/navigation/show/{{$v->id}}">{{$v->navname}}</a>
     <dl class="layui-nav-child"> 
       <!-- 二级菜单 -->
@@ -112,19 +106,23 @@
   </li>
   @endforeach
 </ul>
-<!-- <script>
-//由于模块都一次性加载，因此不用执行 layui.use() 来加载对应模块，直接使用即可：
-;!function(){
-  var layer = layui.layer
-  ,form = layui.form;
-  
-  layer.msg('Hello World');
-}();
-</script>  -->
+</div> 
+<div class="fly-column">
+  <div class="layui-container"> 
+    <div class="fly-column-right layui-hide-xs"> 
+      <span class="fly-search"><i class="layui-icon"></i></span> 
+      <a href="/home/article/create" class="layui-btn">发表新帖</a> 
+    </div> 
+    
+  </div>
+</div>
+ 
 <!-- <script>
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
 layui.use('element', function(){
   var element = layui.element;
-  });
+  
+  //…
+});
 </script> -->
 <!-- 导航 结束 -->

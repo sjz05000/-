@@ -13,7 +13,7 @@
       <div class="layui-form layui-tab-content" id="LAY_ucm" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <div class="layui-form layui-form-pane">
-             <form method="post" enctype="multipart/form-data" action="/home/user/reg/update" >
+            <form method="post" enctype="multipart/form-data" action="/home/user/reg/update" >
               {{csrf_field()}}
             <input type=hidden name=enews value=register>
               <div class="layui-form-item">
@@ -53,36 +53,33 @@
 
 </div>
 <script type="text/javascript">
-    // 验证两次密码是否相同
+     // 验证两次密码是否相同
     var password = $('input[name=password]').val();
     var repassword = $('input[name=repassword]').val();
-    if(password != repassword){
-      layer.msg('您两次密码不一致', {icon: 5});
-      var passwordstatus = false;
-    }
+   
     $('#L_username').blur(function(){
-      var username = $('input[name=username]').val();
-      // 发送ajax验证数据库是否用户名已存在
-      $.ajax({
-        url: "/home/reg/checkusername",
-        type: 'get',
-        data:{'username':username},
-        success: function(data){
-          if(data==0){
-              layer.msg('用户名已存在', function(){
-               $('form').submit(function(){
-                 return false;
-                });
+    var username = $('input[name=username]').val();
+    // 发送ajax验证数据库是否用户名已存在
+    $.ajax({
+      url: "/home/reg/checkusername",
+      type: 'get',
+      data:{'username':username},
+      success: function(data){
+        if(data==0){
+            layer.msg('用户名已存在', function(){
+             $('form').submit(function(){
+               return false;
               });
-          }
-        },
-        dataType: 'html',
-        async:false,
+            });
+        }
+      },
+      dataType: 'html',
+      async:false,
       });
     });
     $('form').submit(function(){
-     
-      if(passwordstatus){
+      if(password != repassword){
+        layer.msg('您两次密码不一致', {icon: 5});
         return false;
       }
     });

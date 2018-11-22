@@ -17,7 +17,7 @@
     					<input type="file" class="small" name="bpic" value="">
     				</div>
     			</div>
-    			
+
     			<div class="mws-form-row">
     				<label class="mws-form-label">跳转地址</label>
     				<div class="mws-form-item">

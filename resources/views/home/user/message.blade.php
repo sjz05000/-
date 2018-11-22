@@ -12,7 +12,7 @@
       </a>
     </li>
     <li class="layui-nav-item">
-      <a href="http://www.dongyu.com/home/user/{{session('homeinfo')['id']}}">
+      <a href="http://www.dongyu.com/home/user/indexa/{{session('homeinfo')['id']}}">
         <i class="layui-icon">&#xe612;</i>
         用户中心
       </a>
@@ -27,12 +27,6 @@
       <a href="http://www.dongyu.com/home/user/message/{{session('homeinfo')['id']}}">
         <i class="layui-icon">&#xe611;</i>
         我的消息
-      </a>
-    </li>
-    <li class="layui-nav-item">
-      <a href="http://www.dongyu.com/home/user/comment/{{session('homeinfo')['id']}}">
-        <i class="layui-icon">&#xe611;</i>
-        我的评论
       </a>
     </li>
   </ul>

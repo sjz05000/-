@@ -12,7 +12,7 @@
       </a>
     </li>
     <li class="layui-nav-item">
-      <a href="http://www.dongyu.com/home/user/{{session('homeinfo')['id']}}">
+      <a href="http://www.dongyu.com/home/user/indexa/{{session('homeinfo')['id']}}">
         <i class="layui-icon">&#xe612;</i>
         用户中心
       </a>
@@ -46,70 +46,125 @@
     <div class="layui-tab layui-tab-brief" lay-filter="user">
       <ul class="layui-tab-title" id="LAY_mine">
         <li class="layui-this" lay-id="info">我的资料</li>
-        <li lay-id="avatar">头像</li>
+        <!-- <li lay-id="avatar">头像</li> -->
         <li lay-id="pass" >密码</li>
         <li lay-id="bind">帐号绑定</li>
         <li lay-id="email">激活邮箱</li>
       </ul>
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-form layui-form-pane layui-tab-item layui-show">
-          <form method="post">
+          <form class="mws-form" action="/home/user/{{session('homeinfo')['id']}}" method="post" enctype="multipart/form-data">
+            {{ csrf_field() }}
+            {{ method_field('PUT') }}
+            <input type="hidden" name="id" value="{{session('homeinfo')['id']}}">
             <div class="layui-form-item">
               <label for="L_email" class="layui-form-label">邮箱</label>
               <div class="layui-input-inline">
-                <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" value="" class="layui-input">
+                <input type="text" id="L_email" name="email" required lay-verify="email" autocomplete="off" value="{{session('email')}}" class="layui-input" placeholder="{{session('email')}}">
               </div>
               <div class="layui-form-mid layui-word-aux">如果您在邮箱已激活的情况下，变更了邮箱，需<a href="activate.html" style="font-size: 12px; color: #4f99cf;">重新验证邮箱</a>。</div>
             </div>
             <div class="layui-form-item">
+              <label for="L_username" class="layui-form-label">手机号</label>
+              <div class="layui-input-inline">
+                <input type="text" id="L_phone" name="phone" required lay-verify="required" autocomplete="off" value="{{session('phone')}}" placeholder="{{session('homeinfo')['phone']}}" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
               <label for="L_username" class="layui-form-label">昵称</label>
               <div class="layui-input-inline">
-                <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" value="" class="layui-input">
+                <input type="text" id="L_username" name="username" required lay-verify="required" autocomplete="off" value="{{session('homeinfo')['username']}}" placeholder="{{session('homeinfo')['username']}}" class="layui-input">
               </div>
               <div class="layui-inline">
                 <div class="layui-input-inline">
-                  <input type="radio" name="sex" value="0" checked title="男">
-                  <input type="radio" name="sex" value="1" title="女">
+                  <input type="radio" name="sex" value="2"  @if( session('sex') == 2 ) checked @endif  title="男">
+                  <input type="radio" name="sex" value="1" @if( session('sex') == 1 ) checked @endif  title="女">
                 </div>
               </div>
             </div>
             <div class="layui-form-item">
               <label for="L_city" class="layui-form-label">城市</label>
               <div class="layui-input-inline">
-                <input type="text" id="L_city" name="city" autocomplete="off" value="" class="layui-input">
+                <input type="text" id="L_city" name="city" placeholder="{{session('city')}}" autocomplete="off" value="{{session('city')}}" class="layui-input">
               </div>
             </div>
-            <div class="layui-form-item layui-form-text">
+           <!--  <div class="layui-form-item layui-form-text">
               <label for="L_sign" class="layui-form-label">签名</label>
               <div class="layui-input-block">
                 <textarea placeholder="随便写些什么刷下存在感" id="L_sign"  name="sign" autocomplete="off" class="layui-textarea" style="height: 80px;"></textarea>
               </div>
+            </div> -->
+            <div class="layui-form-item">
+              <!-- <label for="L_photo" class="layui-form-label">头像</label> -->
+              <!-- <div class="layui-input-inline"> -->
+                <img style="width: 100px; height: 100px; border-radius: 50%; border: 1px solid #ccc;" src="{{session('photo')}}">
+                <!-- <input type="file" id="L_photo" name="photo" placeholder="{{session('photo')}}" autocomplete="off" value="{{session('photo')}}" class="layui-input"> -->
+                <input type="file"name="photo" value="{{session('photo')}}" >
+              <!-- </div> -->
             </div>
             <div class="layui-form-item">
-              <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+              <a href="">
+              <input type="submit" class="layui-btn" name="" value="确认修改">
+              <!-- <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button> -->
+              </a>
             </div>
           </form>
         </div>
           
-        <div class="layui-form layui-form-pane layui-tab-item">
+        <!-- <div class="layui-form layui-form-pane layui-tab-item">
           <div class="layui-form-item">
-            <div class="avatar-add">
-              <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
-              <button type="button" class="layui-btn upload-img">
-                <i class="layui-icon">&#xe67c;</i>上传头像
-              </button>
-              <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg">
-              <span class="loading"></span>
+            <div class="avatar-add" id="mws-user-info">
+              <form class="mws-form" action="/home/user/{{session('homeinfo')['id']}}" method="post" enctype="multipart/form-data">
+                {{ csrf_field() }}
+                {{ method_field('PUT') }}
+                <input type="hidden" name="id" value="{{session('homeinfo')['id']}}">
+                <p>建议尺寸168*168，支持jpg、png、gif，最大不能超过50KB</p>
+                {{csrf_field()}}
+                <button type="button" class="layui-btn upload-img" id="test1">
+                  <i class="layui-icon">&#xe67c;</i>上传头像
+                </button>
+                <img for="test1" id="imgimg" src="{{session('photo')}}" alt="User Photo" onerror="javascript:this.src='/d/example/profile.jpg';this.onerror = null">
+                <span class="loading"></span>
+                <input type="file" name="photo" value="" class="small">
+                <input type="submit" name="" class="layui-btn upload-img"><i class="layui-icon">&#xe67c;</i>上传头像
+                    <script src="/d/layui-v2.4.5/layui/layui.js"></script>
+                    <script>
+                      layui.use('upload', function(){
+                        var upload = layui.upload;
+                         
+                        //执行实例
+                        var uploadInst = upload.render({
+                          elem: '#test1' //绑定元素
+                          ,url: '/home/login/uploads' //上传接口
+                          ,data: {'_token':$('input[name=_token]').eq(0).val()}
+                          ,field: 'profile'
+                          ,done: function(res){
+                            //上传完毕回调
+                            if(res.code==0){
+                              layer.alert(res.msg);
+                              $('#imgimg').eq(0).attr('src',res.data.src);
+                            }else{
+                              layer.alert(res.msg);
+                            }
+                          }
+                          ,error: function(){
+                            //请求异常回调
+                          }
+                        });
+                      });
+                    </script>
+                
+              </form>
             </div>
           </div>
-        </div>
+        </div> -->
         
         <div class="layui-form layui-form-pane layui-tab-item">
           <form action="/home/login/update/{{$id}}" method="post">
             <div class="layui-form-item">
               <label for="L_nowpass" class="layui-form-label">当前密码</label>
               <div class="layui-input-inline">
-                <!-- <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required" autocomplete="off" class="layui-input"> -->
+                <input type="password" id="L_nowpass" name="nowpass" required lay-verify="required" autocomplete="off" class="layui-input">
               </div>
             </div>
             <div class="layui-form-item">

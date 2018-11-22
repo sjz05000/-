@@ -12,9 +12,12 @@
 */
 /*
 	共享数据
-	common_cates_data  共享前台分类处理
+	common_cates_data   共享前台分类处理
 	common_banner_data  共享前台轮播图处理
-
+	common_link_data    共享前台友情链接
+	common_heatmap_data 共享前台热点图
+	common_user_data    共享前台活跃用户
+	common_advertisements_data 共享广告数据
 */ 
 
 Route::get('/', function () {
@@ -48,11 +51,17 @@ Route::get('/', function () {
 	// 后台评论管理
 	Route::resource('/admin/comment','Admin\CommentController');
 	// 后台站点管理
-	Route::get('/admin/config/edit','Admin\ConfigController@edit');
-	Route::post('/admin/config/update','Admin\ConfigController@update');
+	Route::get('admin/config/edit','Admin\ConfigController@edit');
+	Route::post('admin/config/update','Admin\ConfigController@update');
 
+	// 后台热图管理
+	Route::resource('/admin/heatmap', 'Admin\HeatmapController');
+	
 
-
+	// 前台文章评论 comment
+	Route::resource('/home/comment', 'Home\CommentController');
+	// 前台热点图详情
+	Route::resource('/home/heatmap', 'Home\HeatmapController');
 
 
 
@@ -78,13 +87,32 @@ Route::get('/', function () {
 
 // 前台首页
 Route::get('/home', 'Home\IndexController@index');
+// 前台登录
+Route::get('/home/user/login','Home\LoginController@login');
+Route::get('kit/captcha/{tmp}', 'Home\LoginController@captcha');
+
+Route::post('/home/login/checkup','Home\LoginController@checkup');
+Route::get('/home/login/checkdown','Home\LoginController@checkdown');
+Route::get('/home/login/passwords/{id}','Home\LoginController@passwords');// 修改密码
+Route::post('/home/login/update/{id}','Home\LoginController@update');
+Route::post('/home/login/uploads','Home\LoginController@uploads');// 修改头像
+
+
+Route::resource('/home/user/reg','Home\RegisterController');
 // 前台个人中心页
-Route::resource('/home/my','Home\MyController');
-Route::get('/home/user/{id}','Home\UserController@index');
-Route::get('/home/user/home/{id}','Home\UserController@home');
-Route::get('/home/user/message/{id}','Home\UserController@message');
-Route::get('/home/user/comment/{id}','Home\UserController@comment');
-Route::get('/home/user/set/{id}','Home\UserController@set');
+Route::resource('/home/user/forget','Home\LoginController');
+
+Route::resource('/home/user','Home\UsersController');
+
+Route::get('/home/user/indexa/{id}','Home\MyController@indexa');
+Route::get('/home/user/home/{id}','Home\MyController@home');
+Route::get('/home/user/set/{id}','Home\MyController@set');
+Route::get('/home/user/message/{id}','Home\MyController@message');
+
+// 后台修改头像
+Route::post('/home/login/uploads','Home\LoginController@uploads');
+
+
 
 
 
@@ -115,16 +143,22 @@ Route::get('/admin/login/passwords/{id}','Admin\LoginController@passwords');
 Route::post('/admin/login/update/{id}','Admin\LoginController@update');
 // 后台修改头像
 Route::post('/admin/login/uploads','Admin\LoginController@uploads');
+// 前台文章详情
+Route::get('/home/article/show/{id}','Home\ArticleController@show');
 // 前台导航
 Route::get('/home/navigation/show/{id}','Home\NavigationController@show');
 // 前台注册
-Route::get('/home/reg','Home\RegisterController@index');
 Route::post('/home/user/reg/update','Home\RegisterController@update');
+Route::get('/home/reg','Home\RegisterController@index');
 Route::get('/home/reg/up/{id}/{token}','Home\RegisterController@up');
 Route::get('/home/reg/checkusername','Home\RegisterController@checkusername');
-// 前台登录
-Route::get('/home/login','Home\LoginController@login');
-Route::post('/home/login/checkup','Home\LoginController@checkup');
-// 前台退出
-Route::get('/home/login/checkdown','Home\LoginController@checkdown');
 
+
+
+// 前台类别路由
+Route::get('/home/cate/{id}','Home\CateController@show');
+// 前台帖子路由
+Route::get('/home/article/create','Home\ArticleController@create');
+Route::post('/home/article/store','Home\ArticleController@store');
+// 前台帖子删除
+Route::get('/home/article/destroy/{id}','Home\ArticleController@destroy');

@@ -1,4 +1,4 @@
-@extends('home.layout.layout')
+@include('home.layout.header')
 @section('content')
     <!-- 个人中心样式，不要放到公共链接中 -->
     <link rel="stylesheet" href="/h/css/common.css">
@@ -275,4 +275,4 @@
     </div>
 <!-- 以上是个人中心 -->
 
-@endsection
+@include('home.layout.footer')
