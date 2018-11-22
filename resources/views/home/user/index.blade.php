@@ -56,24 +56,29 @@
       <div class="layui-tab-content" style="padding: 20px 0;">
         <div class="layui-tab-item layui-show">
           <ul class="mine-view jie-row">
+          @foreach( $common_article_data as $karticles=>$varticles)
+            @if( $varticles->uid == session('homeinfo')['id'] )
             <li>
+              @if( $varticles->zan >= 60 )
+              <span class="fly-jing">精</span>
+              @endif
+              <a href="/home/article/show/{{ $varticles->id }}" class="jie-title"> {{ $varticles->title }} </a>
+              <i>{{ $varticles->created_at }}</i>
+              <em class="layui-hide-xs">1136阅/27答/{{ $varticles->zan }}赞</em>
+            </li>
+            <!-- <li>
               <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
               <i>2017/3/14 上午8:30:00</i>
               <a class="mine-edit" href="/jie/edit/8116">编辑</a>
               <em>661阅/10答</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-              <em>661阅/10答</em>
-            </li>
-            <li>
-              <a class="jie-title" href="../jie/detail.html" target="_blank">基于 layui 的极简社区页面模版</a>
-              <i>2017/3/14 上午8:30:00</i>
-              <a class="mine-edit" href="/jie/edit/8116">编辑</a>
-              <em>661阅/10答</em>
-            </li>
+            </li> -->
+            @endif
+          @endforeach  
+
+          @if( $articleuid === false ) 
+            <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><i style="font-size:14px;">没有发表任何求解</i></div>
+          @endif
+
           </ul>
           <div id="LAY_page"></div>
         </div>

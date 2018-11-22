@@ -12,9 +12,12 @@
 */
 /*
 	共享数据
-	common_cates_data  共享前台分类处理
+	common_cates_data   共享前台分类处理
 	common_banner_data  共享前台轮播图处理
-
+	common_link_data    共享前台友情链接
+	common_heatmap_data 共享前台热点图
+	common_user_data    共享前台活跃用户
+	common_advertisements_data 共享广告数据
 */ 
 
 Route::get('/', function () {
@@ -48,11 +51,17 @@ Route::get('/', function () {
 	// 后台评论管理
 	Route::resource('/admin/comment','Admin\CommentController');
 	// 后台站点管理
-	Route::get('/admin/config/edit','Admin\ConfigController@edit');
-	Route::post('/admin/config/update','Admin\ConfigController@update');
+	Route::get('admin/config/edit','Admin\ConfigController@edit');
+	Route::post('admin/config/update','Admin\ConfigController@update');
 
+	// 后台热图管理
+	Route::resource('/admin/heatmap', 'Admin\HeatmapController');
+	
 
-
+	// 前台文章评论 comment
+	Route::resource('/home/comment', 'Home\CommentController');
+	// 前台热点图详情
+	Route::resource('/home/heatmap', 'Home\HeatmapController');
 
 
 
@@ -78,8 +87,8 @@ Route::get('/', function () {
 
 // 前台首页
 Route::get('/home', 'Home\IndexController@index');
-
-Route::get('/home/user/login','Home\LoginController@login');// 前台登录
+// 前台登录
+Route::get('/home/user/login','Home\LoginController@login');
 Route::get('kit/captcha/{tmp}', 'Home\LoginController@captcha');
 
 Route::post('/home/login/checkup','Home\LoginController@checkup');
@@ -104,7 +113,12 @@ Route::get('/home/user/message/{id}','Home\MyController@message');
 Route::post('/home/login/uploads','Home\LoginController@uploads');
 
 
-
+//标签详情文
+Route::get('/home/label/index/{id}','Home\LabelController@label');
+// 文章详情22
+Route::get('/home/navigation/navigation/{id}','Home\NavigationController@navigation');
+// 签到
+Route::get('/home/qiandao','Home\MyController@qiandao');
 
 
 
@@ -138,5 +152,10 @@ Route::post('/admin/login/uploads','Admin\LoginController@uploads');
 Route::get('/home/article/show/{id}','Home\ArticleController@show');
 // 前台导航
 Route::get('/home/navigation/show/{id}','Home\NavigationController@show');
+// 前台注册
+Route::post('/home/user/reg/update','Home\RegisterController@update');
+Route::get('/home/reg','Home\RegisterController@index');
+Route::get('/home/reg/up/{id}/{token}','Home\RegisterController@up');
+Route::get('/home/reg/checkusername','Home\RegisterController@checkusername');
 
 

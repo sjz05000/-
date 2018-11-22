@@ -60,6 +60,7 @@ class BannerController extends Controller
         $this->validate($request, [
             'burl' => 'required|unique:dy-banner',
             'bpic'  => 'required|image'
+
         ],[
             'burl.required' => '链接地址必填',
             'burl.unique' => '链接地址已存在',

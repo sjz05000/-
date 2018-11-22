@@ -22,16 +22,20 @@
                         <input type="color" name="labelcolor" value="{{$label->labelcolor}}" class="small">
                     </div>
                 </div>
-                <div class="mws-form-row">
+<!--                 <div class="mws-form-row">
                     <label class="mws-form-label">包含文章数量</label>
                     <div class="mws-form-item">
-                        <input type="text" name="articlecount" value="{{$label->articlecount}}" class="medium">
+                        <input type="text" name="articlecount" value="$label->articlecount" class="medium">
                     </div>
-                </div>
+                </div> -->
                  <div class="mws-form-row">
                     <label class="mws-form-label">包含文章编号</label>
-                    <div class="mws-form-item">
-                        <input type="text" name="articlenumber" value="{{$label->articlenumber}}" class="medium">
+                    <div class="mws-form-item clearfix">
+                        <ul class="mws-form-list inline">
+                            @foreach($common_article_data as $k=>$v)
+                            <li><input type="checkbox" name="articlenumber[]" value="{{$v->id}}" > <label>{{$v->title}}</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                            @endforeach
+                        </ul>
                     </div>
                 </div>
             </div>

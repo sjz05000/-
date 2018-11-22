@@ -1,5 +1,5 @@
 
-7<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
@@ -7,9 +7,11 @@
   <meta name="keywords" content="{{session('config')['keywords']}}" />
   <meta name="description" content="{{session('config')['content']}}">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"> 
+  <meta name="csrf-token" content="{{ csrf_token() }}">
   <link rel="stylesheet" href="/h/res/layui/css/layui.css">
   <link rel="stylesheet" href="/h/res/css/global.css">
 </head>
+<script type="text/javascript" src="/d/js/libs/jquery-1.8.3.min.js"></script>
 <body>
 <div class="fly-header layui-bg-black">
   <div class="layui-container">
@@ -29,6 +31,7 @@
     </ul>
     
     <ul class="layui-nav fly-nav-user">
+      
       @if(empty(session('home')))
       <!-- 未登入的状态 -->
       <li class="layui-nav-item">
@@ -90,7 +93,7 @@
 </style>
 <div id="shouye-nav">
 <ul class="layui-nav" lay-filter="" style="padding-left:170px; background-color: #fff; color: #000; border-radius: 2px; font-size: 0; box-sizing: border-box;">
-  <li class="layui-nav-item layui-this"><a href="http://www.dongyu.com/home">首页</a></li>
+  <li class="layui-nav-item"><a href="/home">首页</a></li>
   @foreach($common_navigation_data as $k=>$v)
   <li class="layui-nav-item">
     <a href="/home/navigation/show/{{$v->id}}">{{$v->navname}}</a>

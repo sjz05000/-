@@ -50,5 +50,10 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('App\Model\Article','dy-collect','uid','tid');
     }
-    
+    // // 配置用户和文章的一对多关系  发布
+    //  //一对多
+    // public function usera()
+    // {
+    //     return $this->hasMany('App\Model','uid');
+    // }
 }

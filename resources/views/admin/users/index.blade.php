@@ -23,7 +23,7 @@
                     </label>
                     <input type="submit" value="提交" class="btn btn-success btn-small">
                 </div>
-            </form>
+            </form> 
             <div style="overflow: scroll;width: 100%;height: 100%;">
             <table class="mws-datatable-fn mws-table dataTable" id="DataTables_Table_1" aria-describedby="DataTables_Table_1_info">
                 <thead>
@@ -55,9 +55,6 @@
                             <td>{{ $v->username }}</td>
                             <!-- <td>{{ $v->userinfo->photo }}</td> -->
                             <td align="center"><div style="width:60px;height:50px;"><img src="{{ $v->userinfo->photo }}"></div></td>
-
-
-
                             @if( $v->userinfo->sex == 1)
                             <td><span>女</span></td>
                             @elseif($v->userinfo->sex == 2)

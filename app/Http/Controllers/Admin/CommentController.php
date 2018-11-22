@@ -21,6 +21,10 @@ class CommentController extends Controller
               echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
         }
     }
+    public static function getComment()
+    {
+        return Comment::all();
+    }
     /**
      * Display a listing of the resource.
      *

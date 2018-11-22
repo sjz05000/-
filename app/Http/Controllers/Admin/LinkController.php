@@ -10,6 +10,20 @@ use App\Model\Link;
 
 class LinkController extends Controller
 {
+
+    //构造方法 为了网站安全 防止地址栏直接访问后台模块
+    public  function __construct()
+    {
+        if(!session('admin')){
+              echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
+        }
+    }
+    // 共享友情链接
+    public static function getLink()
+    {
+        $data = Link::all();
+        return $data;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -17,13 +31,6 @@ class LinkController extends Controller
      */
     public function index()
     {
-        //构造方法 为了网站安全 防止地址栏直接访问后台模块
-        public function __construct()
-        {
-            if(!session('admin')){
-                  echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
-            }
-        }
         // 获取数据
         $data = Link::paginate(6);
         // 加载页面
