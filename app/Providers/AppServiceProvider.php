@@ -11,7 +11,8 @@ use App\Http\Controllers\Home\HeatmapController;
 use App\Http\Controllers\Admin\AdvertisementsController;
 use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Home\UsersController;
-
+use App\Http\Controllers\Admin\LabelController;
+use App\Http\Controllers\Admin\CommentController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -38,6 +39,10 @@ class AppServiceProvider extends ServiceProvider
         view()->share('common_article_data',ArticleController::getArticle());
         // 用户
         view()->share('common_user_data',UsersController::getUser());
+        // 标签
+        view()->share('common_label_data',LabelController::getLabel());
+        // 评论表
+        view()->share('common_comment_data',CommentController::getComment());
     }
 
     /**

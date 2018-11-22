@@ -94,6 +94,7 @@ class HeatmapController extends Controller
                 DB::rollBack();
                 return back()->with('error', '添加失败!');
             }
+
     }
 
     /**
@@ -148,6 +149,7 @@ class HeatmapController extends Controller
             'hpic.image' => '图片格式不对',
             'path.required' => '来源必填',
             'auth.required' => '作者必填',
+
         ]);
         $heatmap = Heatmap::find($id);
         // 创建文件上传对象
@@ -198,5 +200,6 @@ class HeatmapController extends Controller
         }else{
             return back()->with('error', '删除失败!');
         }
+
     }
 }

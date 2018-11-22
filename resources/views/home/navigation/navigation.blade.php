@@ -7,7 +7,7 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md8 content detail">
 <!-- 文章开始 -->
-@foreach($data->Article as $k=>$v)
+@foreach($one_article as $k=>$v)
     <div class="fly-panel detail-box">
         <h1 style="text-align:center;color:orange;">{{$v->title}}</h1>
         <div class="detail-body photos">
@@ -24,6 +24,7 @@
         <fieldset class="layui-elem-field layui-field-title" style="text-align: center;">
           <legend>文章评论</legend>
         </fieldset>
+        
         @foreach($comment_article as $k=>$v)
             @foreach($v->user as $kk=>$vv)
             <ul class="jieda" id="jieda">
@@ -83,7 +84,6 @@
             </ul>
             @endforeach
         @endforeach
-
         <div class="layui-form layui-form-pane">
           <form action="" method="post">
             {{csrf_field()}}
@@ -98,6 +98,7 @@
             </div>
           </form>
         </div>
+
     </div>
  <!-- 回帖结束 -->
      </div>

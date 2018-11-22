@@ -20,6 +20,11 @@ class LabelController extends Controller
               echo '<script>alert("请先登录");window.location.href="/admin/login";</script>';
         }
     }
+    // 分享前台数据
+    public static function getLabel()
+    {
+        return Label::all();
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,23 +66,32 @@ class LabelController extends Controller
      */
     public function store(LabelStoreRequest $request)
     {
-                // 开启事务 作为回滚点
+        // 开启事务 作为回滚点
         DB::beginTransaction();
+
+        $some = $request->all();
+        // dump($some);
+        $abc = array_pop($some);
+        $articlecount = count($abc);
+        // dump($articlecount);
+
+        $articlenumber = implode(",",$abc).',';
+        // dump($articlenumber);
 
         // 验证表单在UsersStoreRequest中
         // 获取数据 进行添加
         $label = new Label;
         $label->labelname=$request->input('labelname');
         $label->labelcolor=$request->input('labelcolor');
-        $label->articlecount = $request->input('articlecount');
-        $label->articlenumber = $request->input('articlenumber');
+        $label->articlenumber = $request->input('articlenumber[]');
+        $label->articlecount = $articlecount;
+        $label->articlenumber = $articlenumber;
+        dump($request->all());
         $res1 = $label->save();//bool
-        // $id = $user->id;//获取最后插入的id号
-        // $userdetail = new Userdetail;
-        // $userdetail->uid = $id;
-        // $userdetail->email = $request->input('email');
-        // $res2 = $userdetail->save();
-        // && $res2
+        // $labelnumber = [];
+        // $number = $request->input('articlenumber');
+        // $labelnumber[] = .$number;
+        // $label->articlenumber = $labelnumber[];
 
         // 逻辑判断
         if ($res1) {
@@ -129,30 +143,44 @@ class LabelController extends Controller
 
         // 开启事务 作为回滚点
         DB::beginTransaction();
-        // 验证表单在UsersStoreRequest中
+        // // 验证表单在UsersStoreRequest中
         $this->validate($request, [
             'labelname' => 'required',   
             'labelcolor' => 'required|regex:/^#{1}[\w]{6}$/',
-            'articlenumber' => 'regex:/^(.*?),{1}$/',
-
         ],[
             'label.required' => '标签名必填',
             'labelcolor.required' => '标签显示背景色必填',
             'labelcolor.regex' => '颜色格式错误',
-            'articlenumber.regex' => '文章编号格式错误',
         ]);
+
+        $some = $request->all();
+        // dump($some);
+        $a = array_pop($some);
+        $articlecount = count($a);
+        dump($articlecount);
+
+        $articlenumber = implode(",", $a).',';
+        dump($articlenumber);
 
 
         // 获取数据 进行添加
         $label = Label::find($id);
         $label->labelname=$request->input('labelname');
         $label->labelcolor=$request->input('labelcolor');
-        $label->articlecount = $request->input('articlecount');
-        $label->articlenumber = $request->input('articlenumber');
+
+        // $label->articlecount = $request->input('articlecount');
+        $label->articlenumber = $request->input('articlenumber[]');
+        
+
+        $label->articlecount = $articlecount;
+        $label->articlenumber = $articlenumber;
+
         $res1 = $label->save();//bool
 
-        // $some = $request->all();
-        // dump($some);
+
+        // $somes = $request->all();
+        // dump($somes);
+        // dump($label);
         // die;
         
         // 逻辑判断

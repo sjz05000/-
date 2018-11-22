@@ -56,16 +56,16 @@ Route::get('/', function () {
 
 	// 后台热图管理
 	Route::resource('/admin/heatmap', 'Admin\HeatmapController');
-	
-
 	// 前台文章评论 comment
 	Route::resource('/home/comment', 'Home\CommentController');
 	// 前台热点图详情
 	Route::resource('/home/heatmap', 'Home\HeatmapController');
+	// 前台文章评论 comment
+	Route::resource('/home/comment', 'Home\CommentController');
 	// 前台收藏与发布的文章删除
-	Route::get('/home/article/{tid}','Home\ArticleController@delete');
-	Route::get('/home/articlel/{uid}/{tid}','Home\ArticleController@deletel');
-
+	Route::get('/home/article/delete/{tid}','Home\ArticleController@delete');
+	Route::get('/home/articlel/delete1/{uid}/{tid}','Home\ArticleController@deletel');
+	
 
 
 
@@ -121,6 +121,22 @@ Route::post('/home/login/uploads','Home\LoginController@uploads');
 
 
 
+//标签详情文
+Route::get('/home/label/index/{id}','Home\LabelController@label');
+// 文章详情22
+Route::get('/home/navigation/navigation/{id}','Home\NavigationController@navigation');
+// 签到
+Route::get('/home/qiandao','Home\MyController@qiandao');
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -143,8 +159,6 @@ Route::get('/admin/login/checkdown','Admin\LoginController@checkdown');
 // 后台修改密码
 Route::get('/admin/login/passwords/{id}','Admin\LoginController@passwords');
 Route::post('/admin/login/update/{id}','Admin\LoginController@update');
-// 后台修改头像
-Route::post('/admin/login/uploads','Admin\LoginController@uploads');
 // 前台文章详情
 Route::get('/home/article/show/{id}','Home\ArticleController@show');
 // 前台导航
@@ -155,4 +169,11 @@ Route::get('/home/reg','Home\RegisterController@index');
 Route::get('/home/reg/up/{id}/{token}','Home\RegisterController@up');
 Route::get('/home/reg/checkusername','Home\RegisterController@checkusername');
 
+
+
+// 前台类别路由
+Route::get('/home/cate/{id}','Home\CateController@show');
+// 前台帖子路由
+Route::get('/home/article/create','Home\ArticleController@create');
+Route::post('/home/article/store','Home\ArticleController@store');
 

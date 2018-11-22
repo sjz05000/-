@@ -164,7 +164,7 @@
                         <ul class="closed">
                             <li><a href="/admin/users">用户列表</a></li>
                             <li><a href="/admin/users/create">用户添加</a></li>
-                            <li><a href="/admin/users/????">回收站</a></li>
+                            <!-- <li><a href="/admin/users/????">回收站</a></li> -->
                         </ul>
                     </li>
                     
@@ -194,7 +194,7 @@
                         <ul class="closed">
                             <li><a href="/admin/label/create">标签添加</a></li>
                             <li><a href="/admin/label">标签列表</a></li>                 
-                            <li><a href="/admin/label/????">回收站</a></li>
+                            <!-- <li><a href="/admin/label/????">回收站</a></li> -->
                         </ul>
                     </li>
                     <li class="active">

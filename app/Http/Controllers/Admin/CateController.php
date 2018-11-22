@@ -19,6 +19,13 @@ class CateController extends Controller
         }
     }
     /**
+     * 获取前台分类数据
+     */
+    public static function getCates()
+    {
+      return Cate::all();
+    }
+    /**
      * 前台分类
      */
     public  static function getPidCates($pid = 0)

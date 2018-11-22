@@ -27,7 +27,6 @@ class LabelStoreRequest extends Request
         return [
             'labelname' => 'required',   
             'labelcolor' => 'required|regex:/^#{1}[\w]{6}$/',
-            // 'articlenumber' => 'required',
         ];
     }
     

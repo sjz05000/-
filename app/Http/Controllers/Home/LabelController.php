@@ -7,35 +7,45 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Model\Article;
+use App\Model\Label;
 use DB;
-use App\User;
-use App\Model\Userdetail;
 
-class ArticleController extends Controller
+class LabelController extends Controller
 {
-    /**
-     * 删除发布与收藏的文章 
-     */
-    public function delete($tid=0)
-    {
-        $flight =Article::find($tid);
-        $flight->delete();
-        return back();
-    }
-    public function deletel($uid,$tid)
-    {
-        $res = DB::table('dy-collect')->where('uid', $uid)->orWhere('tid',$tid)->delete();
-       return back();
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($id)
     {
-        //
+        
+        return view('home.label.index',['id'=>$id]);
+    }
+    public function label($id)
+    {
+        
+
+
+        $label = Label::find($id);
+        // dump($label->articlenumber);
+        $labelaid = $label->articlenumber;
+        $labelaid = rtrim($labelaid ,',');
+        $arrlabelaid = explode(',', $labelaid);
+        // dump($arrlabelaid);
+        
+        // dump($article);
+        foreach ($arrlabelaid as $ka => $va) {
+            $article[] = DB::table('dy-articles')->where('id','=',$va)->get();
+            // $aid[] = $va->id;
+        }
+        // dump($article);
+        // $articleid = array_unique($id); 
+        // dump($aid);
+        // $aid = array_intersect($arrlabelaid,$aid);
+        // dump($aid);,'aid'=>$aid
+
+        return view('home.label.index',['id'=>$id,'arrlabelaid'=>$arrlabelaid,'article'=>$article]); 
     }
 
     /**
@@ -45,8 +55,7 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        //加载模板
-        return view('home.article.create');
+        //
     }
 
     /**
@@ -57,29 +66,7 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-
-        if(session('home')){
-            // 获取数据
-            $title = $request->input('title','');
-            $content = $request->input('content','');
-            // 接收表单数据
-            $article = new Article;
-            $article->uid = session('homeinfo')['id'];
-            $article->title = $title;
-            $article->content = $content;
-            $res = $article->save();
-            $userdetail = Userdetail::find(session('homeinfo')['id']);
-            $userdetail->integral += 20;
-            $res2 = $userdetail->save();
-            if($res&&$res2){
-                echo '发表成功';
-            }else{
-                echo '发表失败';
-            }
-        }else{
-            echo 'error';
-        }
-      
+        //
     }
 
     /**
@@ -90,9 +77,7 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        // 加载页面
-        $data = Article::find($id);
-        return view('home.article.show',['data'=>$data,'id'=>$id]);
+        //
     }
 
     /**
@@ -126,6 +111,6 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-
+        //
     }
 }

@@ -5,62 +5,37 @@
 <link rel="stylesheet" type="text/css" href="/h/ad/css/ad.css">
     <div class="layui-container">
       <div class="layui-row layui-col-space15">
-    
-
     <div class="layui-col-md8">
-    <!-- 轮播图 开始 -->
-        <center>
-        <link rel="stylesheet" href="/h/banner/css/style.css">
-        <div class="demo">
-           <!-- <a class="control prev"></a><a class="control next abs"></a>    --><!--自定义按钮，移动端可不写!-->
-          <div class="slider" style="margin:20px; border: 2px solid black">  <!--主体结构，请用此类名调用插件，此类名可自定义-->
-            <ul>
-              @foreach($common_banner_data as $k=>$v)
-               <li><img style="width: 90%;height: 100%;" src="{{ $v->bpic }}"></li>
-              @endforeach 
-            </ul>
-          </div>
-        </div>
-      </center>
-        <script src="/h/banner/js/jquery.min.js"></script>
-        <script src="/h/banner/js/YuxiSlider.jQuery.min.js"></script>
-        <script>
-        $(".slider").YuxiSlider({
-          width:700, //容器宽度
-          height:400, //容器高度
-          control:$('.control'), //绑定控制按钮
-          during:3500, //间隔4秒自动滑动
-          speed:800, //移动速度0.8秒
-          mousewheel:true, //是否开启鼠标滚轮控制
-          direkey:false //是否开启左右箭头方向控制
-        });
-        </script>
-        </center>
-        <!-- 轮播图 结束 -->  
+
       <div class="fly-panel">
         <div class="fly-panel-title fly-filter">
-          <a>置顶</a>
-          <a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin" style="color: #FF5722;">去签到</a>
+          <!-- @foreach($common_label_data as $kklabel=>$vvlabel) -->
+          <!-- @if( $vvlabel->id === 6 ) {{$id or ''}}    -->
+          <a>热门标签 / {{$vvlabel->labelname}}（{{$vvlabel->articlecount}})</a>
+          <!-- @endif -->
+          <!-- @endforeach -->
         </div>
         <ul class="fly-list">
-          
+        @foreach($article as $klabelarticle=>$vlabelarticle)
+        @foreach($vlabelarticle as $kaid=>$vaid)
+          <!-- if( array_intersect($aid,$arrlabelaid) )  -->
           <li>
             <a href="user/home.html" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
               <a class="layui-badge">动态</a>
-              <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
+              <a href="http://www.dongyu.com/home/navigation/navigation/{{$vaid->id}}">{{ $vaid->title }}</a>
             </h2>
             <div class="fly-list-info">
               <a href="user/home.html" link>
-                <cite>贤心</cite>
+                <cite>{{ $vaid->auth }}</cite>
                 <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                 <i class="layui-badge fly-badge-vip">VIP3</i>
               </a>
-              <span>刚刚</span>
+              <span>{{ $vaid->created_at }}</span>
               
-              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>
+              <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> {{ $vaid->zan }} </span>
               <span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>
               <span class="fly-list-nums"> 
                 <i class="iconfont icon-pinglun1" title="回答"></i> 66
@@ -73,7 +48,9 @@
               -->
             </div>
           </li>
-  
+          <!-- endif -->
+          @endforeach
+        @endforeach
         </ul>
       </div>
 
@@ -115,14 +92,12 @@
         </div>
 
         <ul class="fly-list">  
-
           <li>
             <a href="user/home.html" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
             </a>
             <h2>
               <a class="layui-badge">分享</a>
-
               <a href="jie/detail.html">基于 layui 的极简社区页面模版</a>
             </h2>
             <div class="fly-list-info">
@@ -145,7 +120,6 @@
               <!--<span class="layui-badge layui-bg-red">精帖</span>-->
             </div>
           </li>
-
           <li>
             <a href="user/home.html" class="fly-avatar">
               <img src="https://tva1.sinaimg.cn/crop.0.0.118.118.180/5db11ff4gw1e77d3nqrv8j203b03cweg.jpg" alt="贤心">
@@ -157,15 +131,15 @@
             <div class="fly-list-info">
               <a href="user/home.html" link>
                 <cite>贤心</cite>
-
-                <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
+                <!--
+                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                 <i class="layui-badge fly-badge-vip">VIP3</i>
+                -->
               </a>
               <span>刚刚</span>
               
               <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>
-
-              <span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>
+              <!--<span class="layui-badge fly-badge-accept layui-hide-xs">已结</span>-->
               <span class="fly-list-nums"> 
                 <i class="iconfont icon-pinglun1" title="回答"></i> 66
               </span>
@@ -199,7 +173,6 @@
               </span>
             </div>
             <div class="fly-list-badge">
-
               <span class="layui-badge layui-bg-red">精帖</span>
             </div>
           </li>
@@ -242,7 +215,8 @@
       </div>
     </div>
 
-    
+
+
     <div class="layui-col-md4">
       <!-- 温馨通道 -->
       <div class="fly-panel">
@@ -251,21 +225,21 @@
              @foreach($common_cates_data as $k=>$v)
             <li class="line05 line07" style="list-style:none">
                 <h3 style="display: inline-block;">
-                    <a href="/home/cate/{{$v->id}}" target="_blank"><font color="#ec8a10">{{$v->cname}}</font></a>
+                    <a href="/column/21" target="_blank"><font color="#ec8a10">{{$v->cname}}</font></a>
                 </h3>
                 <span style="display: inline-block;margin-left: 8px;" class="layui-breadcrumb" lay-separator="/">
                     @foreach($v['sub'] as $kk=>$vv)
-                    <a href="/home/cate/{{$vv->id}}" target="_blank">{{$vv->cname}}</a>
+                    <a href="/forum/{{$vv->cname}}" target="_blank">{{$vv->cname}}</a>
                     @endforeach
                     @foreach($vv['sub'] as $kkk=>$vvv)
-                    <a href="/home/cate/{{$vvv->id}}" target="_blank">{{$vvv->cname}}</a>
+                    <a href="/forum/{{$vvv->cname}}" target="_blank">{{$vvv->cname}}</a>
                     @endforeach
                 </span>
             </li>
             @endforeach       
         </ul>
       </div>
-      <!-- 温馨通道结束 -->
+      
       <div class="fly-panel">
         <h3 class="fly-panel-title">热门标签</h3>
         <ul class="fly-panel-main fly-list-static">
@@ -276,6 +250,7 @@
             @endforeach       
         </ul>
       </div>
+
         <!-- qd -->
       <div class="fly-panel fly-signin">
         <div class="fly-panel-title">
@@ -287,11 +262,10 @@
           <span class="fly-signin-days">已连续签到<cite>16</cite>天</span>
         </div>
         <div class="fly-panel-main fly-signin-main">
-          <a class="layui-btn layui-btn-danger" href="javascript:;" id="qiandao">今日签到
+          <a class="layui-btn layui-btn-danger" href="/home/qiandao">今日签到
             <!-- <input   type="submit" name="" value="">/session('homeinfo')['id'] -->
             <!-- <button class="layui-btn layui-btn-danger" >今日签到</button> -->
           </a>
-
           <span>可获得<cite>5+</cite>经验</span>
           <!-- 已签到状态 -->
           <!--
@@ -300,7 +274,8 @@
           -->
         </div>
       </div>
-<div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
+
+      <div class="fly-panel fly-rank fly-rank-reply" id="LAY_replyRank">
         <h3 class="fly-panel-title">活跃用户</h3>
         <dl style="height: 300px;">
           <!-- <form action="/home/user" method="get"> -->
@@ -331,34 +306,7 @@
           <!-- </form> -->
         </dl>
       </div>
-      
-     <dl class="fly-panel fly-list-one">
-        <dt class="fly-panel-title">本周热议</dt>
-        @foreach($article11 as $kq=>$vq)
-        <dd>
-          <a href="/home/article/show/{{ $vq->id }}">{{ $vq->title }}</a>
-
-        </dd>
-        @endforeach
-        <!-- 无数据时 -->
-        <!--
-        <div class="fly-none">没有相关数据</div>
-        -->
-      </dl>
-
-      <dl class="fly-panel fly-list-one">
-        <dt class="fly-panel-title">24小时热议</dt>
-        @foreach($article as $kr=>$vr )
-        <dd>
-          <a href="/home/article/show/{{ $vr->id }}">{{ $vr->title }}</a>
-        </dd>
-        @endforeach
-        <!-- 无数据时 -->
-        <!--
-        <div class="fly-none">没有相关数据</div>
-        -->
-      </dl>
-
+     
       <div class="fly-panel">
         <div class="fly-panel-title">
           广告区域
@@ -366,10 +314,7 @@
           <!-- 广告开始 -->
           <ul id="ad_ul">
             @foreach($common_advertisements_data as $k=>$v)
-
-            @if($v->status == 1)
-            <li><a href="http://{{$v->url}}"><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></a></li>
-            @endif
+            <li><img src="{{$v->adfile}}" title="联系电话:{{$v->adphone}}"></li>
             @endforeach
           </ul>
           <script type="text/javascript" src="/h/ad/jquery-1.8.3.min.js"></script>
@@ -384,32 +329,7 @@
           </script>
           <!-- 广告结束 -->
       </div>
-      <script type="text/javascript">
-        $('#qiandao').click(function(){
-          // 发送ajax
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-             }); 
-          $.ajax({
-          url: "/home/qiandao",
-          type: 'get',
-          data:{},
-          success: function(data){
-              if(data=='error'){
-                layer.alert('您还未登陆请登录');
-              }else{
-                layer.alert(data);
-              }
-            },
-            dataType: 'html',
-            async:false,
-          });
-   
-        });
       
-      </script>
       <div class="fly-panel fly-link">
         <h3 class="fly-panel-title">友情链接</h3>
         <dl class="fly-panel-main">

@@ -60,11 +60,14 @@
             <li>
               <a class="jie-title" href="/home/article/show/{{ $vc->id }}" target="_blank">{{ $vc->title }}</a>
               <i>{{ $vc->created_at }}</i>
-              <a class="mine-edit" href="/home/article/{{$vc->id}}">删除</a>
+              <a class="mine-edit" href="/home/article/delete/{{$vc->id}}">删除</a>
               <!-- <em>10答</em> -->
             </li>
             @endforeach
+          
+
           </ul>
+
           <div id="LAY_page"></div>
         </div>
         <div class="layui-tab-item">
@@ -73,9 +76,10 @@
             <li>
               <a class="jie-title" href="/home/article/show/{{ $vu->id }}" target="_blank">{{ $vu->title }}</a>
               <i>{{ $vu->created_at }}收藏</i> 
-              <a class="mine-edit" href="/home/articlel/{{$vu->uid}}/{{$vu->id}}">删除</a>
+              <a class="mine-edit" href="/home/articlel/delete1/{{$vu->uid}}/{{$vu->id}}">删除</a>
             </li>
             @endforeach
+
           </ul>
           <div id="LAY_page1"></div>
         </div>

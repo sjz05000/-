@@ -49,8 +49,9 @@
   <p class="fly-home-sign">{{$userdetail->email}}</p>
 
   <div class="fly-sns" data-user="">
-    <a href="javascript:;" class="layui-btn layui-btn-primary fly-imActive" data-type="addFriend">加为好友</a>
-    <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">发起会话</a>
+    <a href="javascript:;" class="layui-btn layui-btn-primary fly-imActive" data-type="addFriend">成为粉丝</a>
+    <a href="javascript:;" class="layui-btn layui-btn-normal fly-imActive" data-type="chat">给 {{ $user->username }} 留言</a>
+
   </div>
 
 </div>
@@ -59,11 +60,8 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md6 fly-home-jie">
       <div class="fly-panel">
-        <h3 class="fly-panel-title">{{ $user->username }} 最近的提问</h3>
+        <h3 class="fly-panel-title">{{ $user->username }} 发表的文章</h3>
         <ul class="jie-row">
-
-          
-
           @foreach( $common_article_data as $karticles=>$varticles)
             @if( $varticles->uid == $user->id )
             <li>
@@ -87,32 +85,26 @@
     
     <div class="layui-col-md6 fly-home-da">
       <div class="fly-panel">
-        <h3 class="fly-panel-title">贤心 最近的回答</h3>
+        <h3 class="fly-panel-title">{{ $user->username }} 最近的回答</h3>
         <ul class="home-jieda">
+          @foreach($common_comment_data as $kcomment=>$vcomment)
+          @if($vcomment->uid == $user->id )
           <li>
-          <p>
-          <span>1分钟前</span>
-          在<a href="" target="_blank">tips能同时渲染多个吗?</a>中回答：
-          </p>
-          <div class="home-dacontent">
-            尝试给layer.photos加上这个属性试试：
-<pre>
-full: true         
-</pre>
-            文档没有提及
-          </div>
-        </li>
-        <li>
-          <p>
-          <span>5分钟前</span>
-          在<a href="" target="_blank">在Fly社区用的是什么系统啊?</a>中回答：
-          </p>
-          <div class="home-dacontent">
-            Fly社区采用的是NodeJS。分享出来的只是前端模版
-          </div>
-        </li>
-        
-          <!-- <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><span>没有回答任何问题</span></div> -->
+            <p>
+            <span>{{$vcomment->created_at}}</span>
+            在<a href="" target="_blank">{{$vcomment->aid}}</a>中回答：
+            </p>
+            <div class="home-dacontent">
+              {{$vcomment->content}}
+            </div>
+          </li>
+          @endif
+          @endforeach
+
+          @if( $commentuid === false ) 
+            <div class="fly-none" style="min-height: 50px; padding:30px 0; height:auto;"><span>没有回答任何问题</span></div>
+          @endif
+
         </ul>
       </div>
     </div>

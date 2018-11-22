@@ -28,6 +28,7 @@
                         {{csrf_field()}}  {{method_field('DELETE')}}
                         <input type="submit" onclick="return confirm('确定要删除吗?')" class="btn btn-danger" value="删除">
                       </form>
+
           					</td>
           				</tr>
         			@endforeach
