@@ -25,13 +25,14 @@ class IndexController extends Controller
         // 查询数据
         // 24小时热议
         $time = date('Y-m-d ',time());
-        $time1 = date('Y-m-d ',(time()+60*60*24));
+        $time1 = date('Y-m-d H:i:s',(time()+60*60*24));
         $comment = Comment::orderBy('zan', 'desc')->paginate(10);
         $temp = [];
         foreach($comment as $k=>$v){
             $temp[] = $v->aid;
         }
         $article = Article::whereIn('id',$temp)->whereBetween('created_at', [$time,$time1])->get();
+        
         // 本周热议
         $time2 = '7'-date('w',time());
         $time3 = date('Y-m-d',time()+60*60*24*$time2);     // 最大不超

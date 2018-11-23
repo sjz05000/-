@@ -71,12 +71,7 @@
                     <i class="iconfont icon-svgmoban53"></i>
                     <a href="#submit">回复</a>
                   </span>
-                  <div class="jieda-admin">
-                    @if ( session('homeinfo')['username'] == $vv->username )
-                    <span type="del">删除</span>
-                    @endif
-                    <!-- <span class="jieda-accept" type="accept">采纳</span> -->
-                  </div>
+                  
                 </div>
              </li>
                <!-- 无数据时 -->

@@ -181,7 +181,8 @@
               </div>
             </div>
             <div class="layui-form-item">
-              <button class="layui-btn" key="set-mine" lay-filter="*" lay-submit>确认修改</button>
+              <a href="" class="layui-btn">确认修改</a>
+              <!-- <button  key="set-mine" lay-filter="*" lay-submit></button> -->
             </div>
           </form>
         </div>

@@ -157,10 +157,10 @@ class LabelController extends Controller
         // dump($some);
         $a = array_pop($some);
         $articlecount = count($a);
-        dump($articlecount);
+        // dump($articlecount);
 
         $articlenumber = implode(",", $a).',';
-        dump($articlenumber);
+        // dump($articlenumber);
 
 
         // 获取数据 进行添加
